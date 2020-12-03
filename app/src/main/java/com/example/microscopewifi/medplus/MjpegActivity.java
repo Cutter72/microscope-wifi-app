@@ -434,177 +434,177 @@ public class MjpegActivity extends Activity {
 //        }
 //    }
 
-//    @SuppressLint({"StaticFieldLeak"})
-//    /* renamed from: MjpegActivity$m */
-//    public class AsyncTaskC0774m extends AsyncTask<String, Void, C0815f> {
-//
-//        /* renamed from: MjpegActivity$m$a */
-//        class C0775a extends Thread {
-//            C0775a() {
-//            }
-//
-//            public void run() {
-//                SystemClock.sleep(5000);
-//                if (MjpegActivity.this.f1958G != null && MjpegActivity.this.f1965N) {
-//                    new AsyncTaskC0774m().execute(MjpegActivity.this.f1959H);
-//                    MjpegActivity.this.f1965N = false;
-//                }
-//            }
-//        }
-//
-//        public AsyncTaskC0774m() {
-//        }
-//
-//        /* access modifiers changed from: protected */
-//        /* JADX WARNING: Removed duplicated region for block: B:15:0x00b2  */
-//        /* JADX WARNING: Removed duplicated region for block: B:34:0x013b A[SYNTHETIC, Splitter:B:34:0x013b] */
-//        /* renamed from: a */
-//        public C0815f doInBackground(String... strArr) {
-//            HttpURLConnection httpURLConnection;
-//            String str;
-//            StringBuilder sb = new StringBuilder();
-//            int i = 0;
-//            StringBuilder sb2;
-//            String num;
-//            InputStream inputStream = null;
-//            if (MjpegActivity.this.f1952A) {
-//                MjpegActivity.this.f1952A = false;
-//                HttpGet httpGet = new HttpGet();
-//                if (MjpegActivity.this.f1995s == 1) {
-//                    sb2 = new StringBuilder();
-//                    sb2.append("http://10.10.1.1/apply.cgi?submit_button=wizardvideo&video_idx=");
-//                    sb2.append(Integer.toString(MjpegActivity.this.f1996t));
-//                    sb2.append("&video_frame=30&action=video_idx&video_idx_sel=");
-//                    sb2.append(Integer.toString(MjpegActivity.this.f1996t));
-//                    num = "&video_frame_sel=30";
-//                } else if (MjpegActivity.this.f1995s == 2) {
-//                    sb2 = new StringBuilder();
-//                    sb2.append("http://10.10.1.1/apply.cgi?submit_button=wizardvideo&video_idx=&video_frame=");
-//                    sb2.append(Integer.toString(MjpegActivity.this.f1997u));
-//                    sb2.append("&action=video_frame&video_idx_sel=");
-//                    sb2.append(Integer.toString(MjpegActivity.this.f1996t));
-//                    sb2.append("&video_frame_sel=");
-//                    num = Integer.toString(MjpegActivity.this.f1997u);
-//                } else {
-//                    if (MjpegActivity.this.f1995s == 4) {
-//                        MjpegActivity.this.f1953B = true;
-//                    }
-//                    str = null;
-//                    DefaultHttpClient defaultHttpClient = new DefaultHttpClient();
-//                    if (!MjpegActivity.this.f1953B) {
-//                        for (int i2 = 0; i2 < 2; i2++) {
-//                            if (i2 == 0) {
-//                                sb = new StringBuilder();
-//                                sb.append("http://10.10.1.1:8899/?action=command&dest=0&plugin=0&id=");
-//                                sb.append(Integer.toString(MjpegActivity.this.f1954C));
-//                                sb.append("&group=01&value=");
-//                                i = MjpegActivity.this.f1955D;
-//                            } else {
-//                                if (i2 == 1) {
-//                                    sb = new StringBuilder();
-//                                    sb.append("http://10.10.1.1:8899/?action=command&dest=0&plugin=0&id=");
-//                                    sb.append(Integer.toString(MjpegActivity.this.f1956E));
-//                                    sb.append("&group=01&value=");
-//                                    i = MjpegActivity.this.f1957F;
-//                                }
-//                                try {
-//                                    httpGet.setURI(new URI(str));
-//                                } catch (URISyntaxException e) {
-//                                    e.printStackTrace();
-//                                }
-//                                httpGet.addHeader(BasicScheme.authenticate(new UsernamePasswordCredentials("admin", "admin"), "UTF-8", false));
-//                                try {
-//                                    EntityUtils.toString(defaultHttpClient.execute(httpGet).getEntity());
-//                                } catch (IOException e) {
-//                                    e.printStackTrace();
-//                                }
-//                            }
-//                            sb.append(Integer.toString(i));
-//                            str = sb.toString();
-//                            try {
-//                                httpGet.setURI(new URI(str));
-//                            } catch (URISyntaxException e) {
-//                                e.printStackTrace();
-//                            }
-//                            httpGet.addHeader(BasicScheme.authenticate(new UsernamePasswordCredentials("admin", "admin"), "UTF-8", false));
-//                            try {
-//                                EntityUtils.toString(defaultHttpClient.execute(httpGet).getEntity());
-//                            } catch (IOException e2) {
-//                                e2.printStackTrace();
-//                            }
-//                        }
-//                        MjpegActivity.this.f1953B = false;
-//                    } else {
-//                        try {
-//                            httpGet.setURI(new URI(str));
-//                        } catch (URISyntaxException e3) {
-//                            e3.printStackTrace();
-//                        }
-//                        httpGet.addHeader(BasicScheme.authenticate(new UsernamePasswordCredentials("admin", "admin"), "UTF-8", false));
-//                        try {
-//                            EntityUtils.toString(defaultHttpClient.execute(httpGet).getEntity());
-//                        } catch (IOException e4) {
-//                            e4.printStackTrace();
-//                        }
-//                    }
-//                    new C0775a().start();
-//                    return null;
-//                }
-//                sb2.append(num);
-//                str = sb2.toString();
-//                DefaultHttpClient defaultHttpClient2 = new DefaultHttpClient();
-//                if (!MjpegActivity.this.f1953B) {
-//                }
-//                new C0775a().start();
-//                return null;
-//            }
-//            try {
-//                httpURLConnection = (HttpURLConnection) new URL(strArr[0]).openConnection();
-//            } catch (IOException e5) {
-//                e5.printStackTrace();
-//                httpURLConnection = null;
-//            }
-//            try {
-//                httpURLConnection.setRequestMethod("GET");
-//            } catch (ProtocolException e6) {
-//                e6.printStackTrace();
-//            }
-//            httpURLConnection.setConnectTimeout(5000);
-//            httpURLConnection.setDoInput(true);
-//            httpURLConnection.setDoOutput(false);
-//            httpURLConnection.setUseCaches(false);
-//            try {
-//                httpURLConnection.connect();
-//            } catch (IOException e7) {
-//                e7.printStackTrace();
-//            }
-//            try {
-//                inputStream = httpURLConnection.getInputStream();
-//            } catch (IOException e8) {
-//                e8.printStackTrace();
-//            }
-//            return new C0815f(inputStream);
-//        }
-//
-//        /* access modifiers changed from: protected */
-//        /* renamed from: a */
-//        public void onPostExecute(C0815f fVar) {
-//            MjpegView mjpegView;
-//            int i;
-//            MjpegActivity.this.f1958G.setSource(fVar);
-//            if (fVar != null) {
-//                fVar.mo6141a(2);
-//            }
-//            if (!MjpegActivity.this.f1964M) {
-//                mjpegView = MjpegActivity.this.f1958G;
-//                i = 4;
-//            } else {
-//                mjpegView = MjpegActivity.this.f1958G;
-//                i = 8;
-//            }
-//            mjpegView.setDisplayMode(i);
-//        }
-//    }
+    @SuppressLint({"StaticFieldLeak"})
+    /* renamed from: MjpegActivity$m */
+    public class AsyncTaskC0774m extends AsyncTask<String, Void, C0815f> {
+
+        /* renamed from: MjpegActivity$m$a */
+        class C0775a extends Thread {
+            C0775a() {
+            }
+
+            public void run() {
+                SystemClock.sleep(5000);
+                if (MjpegActivity.this.f1958G != null && MjpegActivity.this.f1965N) {
+                    new AsyncTaskC0774m().execute(MjpegActivity.this.f1959H);
+                    MjpegActivity.this.f1965N = false;
+                }
+            }
+        }
+
+        public AsyncTaskC0774m() {
+        }
+
+        /* access modifiers changed from: protected */
+        /* JADX WARNING: Removed duplicated region for block: B:15:0x00b2  */
+        /* JADX WARNING: Removed duplicated region for block: B:34:0x013b A[SYNTHETIC, Splitter:B:34:0x013b] */
+        /* renamed from: a */
+        public C0815f doInBackground(String... strArr) {
+            HttpURLConnection httpURLConnection;
+            String str;
+            StringBuilder sb = new StringBuilder();
+            int i = 0;
+            StringBuilder sb2;
+            String num;
+            InputStream inputStream = null;
+            if (MjpegActivity.this.f1952A) {
+                MjpegActivity.this.f1952A = false;
+                HttpGet httpGet = new HttpGet();
+                if (MjpegActivity.this.f1995s == 1) {
+                    sb2 = new StringBuilder();
+                    sb2.append("http://10.10.1.1/apply.cgi?submit_button=wizardvideo&video_idx=");
+                    sb2.append(Integer.toString(MjpegActivity.this.f1996t));
+                    sb2.append("&video_frame=30&action=video_idx&video_idx_sel=");
+                    sb2.append(Integer.toString(MjpegActivity.this.f1996t));
+                    num = "&video_frame_sel=30";
+                } else if (MjpegActivity.this.f1995s == 2) {
+                    sb2 = new StringBuilder();
+                    sb2.append("http://10.10.1.1/apply.cgi?submit_button=wizardvideo&video_idx=&video_frame=");
+                    sb2.append(Integer.toString(MjpegActivity.this.f1997u));
+                    sb2.append("&action=video_frame&video_idx_sel=");
+                    sb2.append(Integer.toString(MjpegActivity.this.f1996t));
+                    sb2.append("&video_frame_sel=");
+                    num = Integer.toString(MjpegActivity.this.f1997u);
+                } else {
+                    if (MjpegActivity.this.f1995s == 4) {
+                        MjpegActivity.this.f1953B = true;
+                    }
+                    str = null;
+                    DefaultHttpClient defaultHttpClient = new DefaultHttpClient();
+                    if (!MjpegActivity.this.f1953B) {
+                        for (int i2 = 0; i2 < 2; i2++) {
+                            if (i2 == 0) {
+                                sb = new StringBuilder();
+                                sb.append("http://10.10.1.1:8899/?action=command&dest=0&plugin=0&id=");
+                                sb.append(Integer.toString(MjpegActivity.this.f1954C));
+                                sb.append("&group=01&value=");
+                                i = MjpegActivity.this.f1955D;
+                            } else {
+                                if (i2 == 1) {
+                                    sb = new StringBuilder();
+                                    sb.append("http://10.10.1.1:8899/?action=command&dest=0&plugin=0&id=");
+                                    sb.append(Integer.toString(MjpegActivity.this.f1956E));
+                                    sb.append("&group=01&value=");
+                                    i = MjpegActivity.this.f1957F;
+                                }
+                                try {
+                                    httpGet.setURI(new URI(str));
+                                } catch (URISyntaxException e) {
+                                    e.printStackTrace();
+                                }
+                                httpGet.addHeader(BasicScheme.authenticate(new UsernamePasswordCredentials("admin", "admin"), "UTF-8", false));
+                                try {
+                                    EntityUtils.toString(defaultHttpClient.execute(httpGet).getEntity());
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                            sb.append(Integer.toString(i));
+                            str = sb.toString();
+                            try {
+                                httpGet.setURI(new URI(str));
+                            } catch (URISyntaxException e) {
+                                e.printStackTrace();
+                            }
+                            httpGet.addHeader(BasicScheme.authenticate(new UsernamePasswordCredentials("admin", "admin"), "UTF-8", false));
+                            try {
+                                EntityUtils.toString(defaultHttpClient.execute(httpGet).getEntity());
+                            } catch (IOException e2) {
+                                e2.printStackTrace();
+                            }
+                        }
+                        MjpegActivity.this.f1953B = false;
+                    } else {
+                        try {
+                            httpGet.setURI(new URI(str));
+                        } catch (URISyntaxException e3) {
+                            e3.printStackTrace();
+                        }
+                        httpGet.addHeader(BasicScheme.authenticate(new UsernamePasswordCredentials("admin", "admin"), "UTF-8", false));
+                        try {
+                            EntityUtils.toString(defaultHttpClient.execute(httpGet).getEntity());
+                        } catch (IOException e4) {
+                            e4.printStackTrace();
+                        }
+                    }
+                    new C0775a().start();
+                    return null;
+                }
+                sb2.append(num);
+                str = sb2.toString();
+                DefaultHttpClient defaultHttpClient2 = new DefaultHttpClient();
+                if (!MjpegActivity.this.f1953B) {
+                }
+                new C0775a().start();
+                return null;
+            }
+            try {
+                httpURLConnection = (HttpURLConnection) new URL(strArr[0]).openConnection();
+            } catch (IOException e5) {
+                e5.printStackTrace();
+                httpURLConnection = null;
+            }
+            try {
+                httpURLConnection.setRequestMethod("GET");
+            } catch (ProtocolException e6) {
+                e6.printStackTrace();
+            }
+            httpURLConnection.setConnectTimeout(5000);
+            httpURLConnection.setDoInput(true);
+            httpURLConnection.setDoOutput(false);
+            httpURLConnection.setUseCaches(false);
+            try {
+                httpURLConnection.connect();
+            } catch (IOException e7) {
+                e7.printStackTrace();
+            }
+            try {
+                inputStream = httpURLConnection.getInputStream();
+            } catch (IOException e8) {
+                e8.printStackTrace();
+            }
+            return new C0815f(inputStream);
+        }
+
+        /* access modifiers changed from: protected */
+        /* renamed from: a */
+        public void onPostExecute(C0815f fVar) {
+            MjpegView mjpegView;
+            int i;
+            MjpegActivity.this.f1958G.setSource(fVar);
+            if (fVar != null) {
+                fVar.mo6141a(2);
+            }
+            if (!MjpegActivity.this.f1964M) {
+                mjpegView = MjpegActivity.this.f1958G;
+                i = 4;
+            } else {
+                mjpegView = MjpegActivity.this.f1958G;
+                i = 8;
+            }
+            mjpegView.setDisplayMode(i);
+        }
+    }
 
     /* renamed from: MjpegActivity$n */
 //    class C0776n implements AdapterView.OnItemClickListener {
@@ -752,89 +752,89 @@ public class MjpegActivity extends Activity {
     /* JADX WARNING: Removed duplicated region for block: B:18:0x002e  */
     /* JADX WARNING: Removed duplicated region for block: B:24:0x003d A[SYNTHETIC, Splitter:B:24:0x003d] */
     /* renamed from: a */
-    private String m2616a(InputStream inputStream) {
-        Throwable th;
-        IOException e;
-        StringBuilder sb = new StringBuilder();
-        BufferedReader bufferedReader = null;
-        try {
-            BufferedReader bufferedReader2 = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"));
-            while (true) {
-                try {
-                    String readLine = bufferedReader2.readLine();
-                    if (readLine != null) {
-                        sb.append(readLine);
-                    } else {
-                        break;
-                    }
-                } catch (IOException e3) {
-                    e = e3;
-                    bufferedReader = bufferedReader2;
-                    try {
-                        e.printStackTrace();
-                        if (bufferedReader != null) {
-                        }
-                        return sb.toString();
-                    } catch (Throwable th2) {
-                        th = th2;
-                        if (bufferedReader != null) {
-                            try {
-                                bufferedReader.close();
-                            } catch (IOException e4) {
-                                e4.printStackTrace();
-                            }
-                        }
-                        try {
-                            throw th;
-                        } catch (Throwable throwable) {
-                            throwable.printStackTrace();
-                        }
-                    }
-                } catch (Throwable th3) {
-                    th = th3;
-                    bufferedReader = bufferedReader2;
-                    if (bufferedReader != null) {
-                    }
-                    try {
-                        throw th;
-                    } catch (Throwable throwable) {
-                        throwable.printStackTrace();
-                    }
-                }
-            }
-            bufferedReader2.close();
-        } catch (IOException e5) {
-            e = e5;
-            e.printStackTrace();
-            if (bufferedReader != null) {
-                try {
-                    bufferedReader.close();
-                } catch (IOException ioException) {
-                    ioException.printStackTrace();
-                }
-            }
-            return sb.toString();
-        }
-        return sb.toString();
-    }
+//    private String m2616a(InputStream inputStream) {
+//        Throwable th;
+//        IOException e;
+//        StringBuilder sb = new StringBuilder();
+//        BufferedReader bufferedReader = null;
+//        try {
+//            BufferedReader bufferedReader2 = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"));
+//            while (true) {
+//                try {
+//                    String readLine = bufferedReader2.readLine();
+//                    if (readLine != null) {
+//                        sb.append(readLine);
+//                    } else {
+//                        break;
+//                    }
+//                } catch (IOException e3) {
+//                    e = e3;
+//                    bufferedReader = bufferedReader2;
+//                    try {
+//                        e.printStackTrace();
+//                        if (bufferedReader != null) {
+//                        }
+//                        return sb.toString();
+//                    } catch (Throwable th2) {
+//                        th = th2;
+//                        if (bufferedReader != null) {
+//                            try {
+//                                bufferedReader.close();
+//                            } catch (IOException e4) {
+//                                e4.printStackTrace();
+//                            }
+//                        }
+//                        try {
+//                            throw th;
+//                        } catch (Throwable throwable) {
+//                            throwable.printStackTrace();
+//                        }
+//                    }
+//                } catch (Throwable th3) {
+//                    th = th3;
+//                    bufferedReader = bufferedReader2;
+//                    if (bufferedReader != null) {
+//                    }
+//                    try {
+//                        throw th;
+//                    } catch (Throwable throwable) {
+//                        throwable.printStackTrace();
+//                    }
+//                }
+//            }
+//            bufferedReader2.close();
+//        } catch (IOException e5) {
+//            e = e5;
+//            e.printStackTrace();
+//            if (bufferedReader != null) {
+//                try {
+//                    bufferedReader.close();
+//                } catch (IOException ioException) {
+//                    ioException.printStackTrace();
+//                }
+//            }
+//            return sb.toString();
+//        }
+//        return sb.toString();
+//    }
 
     /* renamed from: a */
-    private List<Integer> m2617a(Integer[] numArr) {
-        ArrayList arrayList = new ArrayList();
-        for (Integer num : numArr) {
-            arrayList.add(num);
-        }
-        return arrayList;
-    }
+//    private List<Integer> m2617a(Integer[] numArr) {
+//        ArrayList arrayList = new ArrayList();
+//        for (Integer num : numArr) {
+//            arrayList.add(num);
+//        }
+//        return arrayList;
+//    }
 
     /* renamed from: a */
-    private List<String> m2618a(String[] strArr) {
-        ArrayList arrayList = new ArrayList();
-        for (String str : strArr) {
-            arrayList.add(str);
-        }
-        return arrayList;
-    }
+//    private List<String> m2618a(String[] strArr) {
+//        ArrayList arrayList = new ArrayList();
+//        for (String str : strArr) {
+//            arrayList.add(str);
+//        }
+//        return arrayList;
+//    }
 
     /* access modifiers changed from: private */
     /* renamed from: a */
@@ -905,14 +905,14 @@ public class MjpegActivity extends Activity {
 //    }
 
     /* renamed from: a */
-//    public void mo6009a() {
-//        MjpegView mjpegView = (MjpegView) findViewById(R.id.MjpegV);
-//        this.f1958G = mjpegView;
-//        if (mjpegView != null) {
-//            mjpegView.mo6047a(640, 480);
-//        }
-//        new AsyncTaskC0774m().execute(this.f1959H);
-//    }
+    public void mo6009a() {
+        MjpegView mjpegView = (MjpegView) findViewById(R.id.MjpegV);
+        this.f1958G = mjpegView;
+        if (mjpegView != null) {
+            mjpegView.mo6047a(640, 480);
+        }
+        new AsyncTaskC0774m().execute(this.f1959H);
+    }
 
     /* renamed from: b */
 //    public String mo6010b(String str) {
@@ -1008,28 +1008,28 @@ public class MjpegActivity extends Activity {
         getWindow().setFlags(1024, 1024);
         setRequestedOrientation(0);
         setContentView(R.layout.activity_mjpeg);
-//        SharedPreferences sharedPreferences = getSharedPreferences("HiviewPlus3Preferences", 0);
-//        this.f1990n = sharedPreferences;
-//        this.f1993q = sharedPreferences.getInt("bRename", 0);
-//        this.f1998v = this.f1990n.getString("currentunit", "mm");
-//        this.f1999w = this.f1990n.getInt("currentdecimal", 2);
-//        this.f2000x = this.f1990n.getInt("currentcolor", -65536);
-//        this.f2001y = this.f1990n.getInt("currentfontsize", 25);
-//        this.f2002z = this.f1990n.getInt("currentlinesize", 2);
-//        this.f1978b = getIntent().getIntExtra("userid", 0);
-//        this.f1979c = getIntent().getStringExtra("name");
-//        this.f1980d = getIntent().getStringExtra("age");
-//        this.f1981e = getIntent().getStringExtra("mobile");
-//        this.f1982f = getIntent().getStringExtra("email");
-//        this.f1983g = getIntent().getStringExtra("userimg");
-//        this.f1984h = getIntent().getStringExtra("usertime");
-//        this.f1985i = getIntent().getStringExtra("usersex");
-//        this.f1986j = getIntent().getStringExtra("usernote");
-//        this.f1987k = getIntent().getIntExtra("playmode", 0);
-//        SoundPool a = m2614a(6);
-//        this.f1973V = a;
+        SharedPreferences sharedPreferences = getSharedPreferences("HiviewPlus3Preferences", 0);
+        this.f1990n = sharedPreferences;
+        this.f1993q = sharedPreferences.getInt("bRename", 0);
+        this.f1998v = this.f1990n.getString("currentunit", "mm");
+        this.f1999w = this.f1990n.getInt("currentdecimal", 2);
+        this.f2000x = this.f1990n.getInt("currentcolor", -65536);
+        this.f2001y = this.f1990n.getInt("currentfontsize", 25);
+        this.f2002z = this.f1990n.getInt("currentlinesize", 2);
+        this.f1978b = getIntent().getIntExtra("userid", 0);
+        this.f1979c = getIntent().getStringExtra("name");
+        this.f1980d = getIntent().getStringExtra("age");
+        this.f1981e = getIntent().getStringExtra("mobile");
+        this.f1982f = getIntent().getStringExtra("email");
+        this.f1983g = getIntent().getStringExtra("userimg");
+        this.f1984h = getIntent().getStringExtra("usertime");
+        this.f1985i = getIntent().getStringExtra("usersex");
+        this.f1986j = getIntent().getStringExtra("usernote");
+        this.f1987k = getIntent().getIntExtra("playmode", 0);
+        SoundPool a = m2614a(6);
+        this.f1973V = a;
 //        this.f1972U = a.load(this, 2131623936, 1);
-//        getWindow().getDecorView().getWindowVisibleDisplayFrame(new Rect());
+        getWindow().getDecorView().getWindowVisibleDisplayFrame(new Rect());
 //        ImageButton imageButton = new ImageButton(this);
 //        this.f1988l = imageButton;
 //        imageButton.setImageDrawable(getResources().getDrawable(2131165325, getApplicationContext().getTheme()));
@@ -1068,7 +1068,7 @@ public class MjpegActivity extends Activity {
 //            imageButton5.setVisibility(4);
 //        }
 //        imageButton5.setOnClickListener(new View$OnClickListenerC0770i());
-//        mo6009a();
+        mo6009a();
 //        SharedPreferences.Editor edit = getSharedPreferences("HiviewPlus3Preferences", 0).edit();
 //        edit.putString("nMagSet", String.valueOf(0) + "-" + String.valueOf(0));
 //        edit.apply();
@@ -1105,7 +1105,7 @@ public class MjpegActivity extends Activity {
     }
 
     public void onRestart() {
-//        mo6009a();
+        mo6009a();
         super.onRestart();
     }
 
