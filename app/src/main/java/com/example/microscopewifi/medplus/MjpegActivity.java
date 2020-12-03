@@ -1083,7 +1083,7 @@ public class MjpegActivity extends Activity {
 
     public void onDestroy() {
         this.f1989m = false;
-        this.f1973V.release();
+//        this.f1973V.release();
         super.onDestroy();
     }
 
