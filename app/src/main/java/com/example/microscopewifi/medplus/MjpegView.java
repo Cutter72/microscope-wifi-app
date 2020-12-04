@@ -439,13 +439,13 @@ public class MjpegView extends SurfaceView implements SurfaceHolder.Callback {
     }
 
     /* renamed from: a */
-    public void mo6046a() {
-        Iterator<C0820j> it = this.f2022B.iterator();
-        while (it.hasNext()) {
-            it.next();
-            it.remove();
-        }
-    }
+//    public void mo6046a() {
+//        Iterator<C0820j> it = this.f2022B.iterator();
+//        while (it.hasNext()) {
+//            it.next();
+//            it.remove();
+//        }
+//    }
 
     /* renamed from: a */
     public void mo6047a(int i, int i2) {
@@ -1033,7 +1033,7 @@ public class MjpegView extends SurfaceView implements SurfaceHolder.Callback {
                                 i7 = mjpegView.f2031K;
                             }
                         }
-                        canvas.drawLine((float) i7, (float) rect.top, (float) i7, (float) rect.bottom, paint2);
+//                        canvas.drawLine((float) i7, (float) rect.top, (float) i7, (float) rect.bottom, paint2);
                     }
                     paint3 = paint;
                 }
@@ -1079,50 +1079,50 @@ public class MjpegView extends SurfaceView implements SurfaceHolder.Callback {
     }
 
     /* renamed from: a */
-    public void mo6050a(Point point, int i, int i2, String str, String str2) {
-        Point point2;
-        this.f2056s = mo6054c();
-        this.f2057t = i2;
-        this.f2023C = str;
-        if (str2 != null && str2.length() > 0) {
-            this.f2024D = Float.parseFloat(str2);
-        }
-        if (i == 1) {
-            this.f2025E = point;
-            Point point3 = this.f2026F;
-            point3.y = 0;
-            point3.x = 0;
-            Point point4 = this.f2027G;
-            point4.y = 0;
-            point4.x = 0;
-        } else if (i == 2) {
-            this.f2026F = point;
-            point2 = this.f2027G;
-            point2.y = 0;
-            point2.x = 0;
-        } else if (i == 3) {
-            this.f2027G = point;
-        } else if (i == 4) {
-            this.f2028H = point;
-            return;
-        } else {
-            return;
-        }
-        point2 = this.f2028H;
-        point2.y = 0;
-        point2.x = 0;
-    }
-
-    /* renamed from: a */
-    public void mo6051a(String str, int i, int i2, int i3, int i4, int i5, int i6) {
-        this.f2058u = str;
-        this.f2059v = i;
-        this.f2060w = i2;
-        this.f2061x = i3;
-        this.f2062y = i4;
-        this.f2063z = i5;
-        this.f2021A = i6;
-    }
+//    public void mo6050a(Point point, int i, int i2, String str, String str2) {
+//        Point point2;
+//        this.f2056s = mo6054c();
+//        this.f2057t = i2;
+//        this.f2023C = str;
+//        if (str2 != null && str2.length() > 0) {
+//            this.f2024D = Float.parseFloat(str2);
+//        }
+//        if (i == 1) {
+//            this.f2025E = point;
+//            Point point3 = this.f2026F;
+//            point3.y = 0;
+//            point3.x = 0;
+//            Point point4 = this.f2027G;
+//            point4.y = 0;
+//            point4.x = 0;
+//        } else if (i == 2) {
+//            this.f2026F = point;
+//            point2 = this.f2027G;
+//            point2.y = 0;
+//            point2.x = 0;
+//        } else if (i == 3) {
+//            this.f2027G = point;
+//        } else if (i == 4) {
+//            this.f2028H = point;
+//            return;
+//        } else {
+//            return;
+//        }
+//        point2 = this.f2028H;
+//        point2.y = 0;
+//        point2.x = 0;
+//    }
+//
+//    /* renamed from: a */
+//    public void mo6051a(String str, int i, int i2, int i3, int i4, int i5, int i6) {
+//        this.f2058u = str;
+//        this.f2059v = i;
+//        this.f2060w = i2;
+//        this.f2061x = i3;
+//        this.f2062y = i4;
+//        this.f2063z = i5;
+//        this.f2021A = i6;
+//    }
 
     /* renamed from: b */
     public final void mo6052b(Paint paint, Rect rect, Canvas canvas, float f, float f2) {

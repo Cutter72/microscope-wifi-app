@@ -212,6 +212,11 @@ public class MjpegActivity extends Activity {
     /* renamed from: z */
     public int f2002z = 2;
 
+    public void onClickTakePicture(View view) {
+        //todo implement picture save
+        Toast.makeText(this, "Picture taken", Toast.LENGTH_SHORT).show();
+    }
+
 //    /* renamed from: MjpegActivity$a */
 //    class DialogInterface$OnClickListenerC0762a implements DialogInterface.OnClickListener {
 //        DialogInterface$OnClickListenerC0762a(MjpegActivity mjpegActivity) {
