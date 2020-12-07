@@ -167,32 +167,6 @@ public class MjpegView extends SurfaceView implements SurfaceHolder.Callback {
             this.f2064b = surfaceHolder;
         }
 
-        /* renamed from: a */
-        private void saveImage(Bitmap bitmap) {
-            String fileName = new SimpleDateFormat("yyyyMMddhhmmss", Locale.getDefault()).format(new Date());
-            MjpegView mjpegView = MjpegView.this;
-            if (mjpegView.f2057t == 0) {
-                FileCreation.saveImage(bitmap, mjpegView.filePath, fileName);
-            } else {
-                Rect rect = new Rect(0, 0, bitmap.getWidth(), bitmap.getHeight());
-                Bitmap createBitmap = Bitmap.createBitmap(MjpegView.this.pixelWidth, MjpegView.this.pixelHeight, Bitmap.Config.ARGB_8888);
-                Canvas canvas = new Canvas(createBitmap);
-                Paint paint = new Paint();
-                Matrix matrix = new Matrix();
-                matrix.setScale(1.0f, 1.0f);
-                canvas.drawBitmap(bitmap, matrix, paint);
-                MjpegView.this.mo6052b(paint, rect, canvas, MjpegView.this.f2037Q / ((float) bitmap.getWidth()), MjpegView.this.f2038R / ((float) bitmap.getHeight()));
-                canvas.save();
-                canvas.restore();
-                FileCreation.saveImage(createBitmap, MjpegView.this.filePath, fileName);
-            }
-            String str = MjpegView.this.filePath + fileName;
-            ContentValues contentValues = new ContentValues();
-            contentValues.put("mime_type", "image/jpeg");
-            contentValues.put("_data", str);
-            MjpegView.this.context.getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, contentValues);
-        }
-
         /* renamed from: b */
         private Rect m2711b(int i, int i2) {
             Rect rect;
@@ -436,15 +410,6 @@ public class MjpegView extends SurfaceView implements SurfaceHolder.Callback {
         }
         return new Point((int) (((double) f) + 0.5d), (int) (((double) f2) + 0.5d));
     }
-
-    /* renamed from: a */
-//    public void mo6046a() {
-//        Iterator<C0820j> it = this.f2022B.iterator();
-//        while (it.hasNext()) {
-//            it.next();
-//            it.remove();
-//        }
-//    }
 
     /* renamed from: a */
     public void setResolution(int i, int i2) {
@@ -1032,7 +997,6 @@ public class MjpegView extends SurfaceView implements SurfaceHolder.Callback {
                                 i7 = mjpegView.f2031K;
                             }
                         }
-//                        canvas.drawLine((float) i7, (float) rect.top, (float) i7, (float) rect.bottom, paint2);
                     }
                     paint3 = paint;
                 }
@@ -1077,260 +1041,9 @@ public class MjpegView extends SurfaceView implements SurfaceHolder.Callback {
         }
     }
 
-    /* renamed from: a */
-//    public void mo6050a(Point point, int i, int i2, String str, String str2) {
-//        Point point2;
-//        this.f2056s = mo6054c();
-//        this.f2057t = i2;
-//        this.f2023C = str;
-//        if (str2 != null && str2.length() > 0) {
-//            this.f2024D = Float.parseFloat(str2);
-//        }
-//        if (i == 1) {
-//            this.f2025E = point;
-//            Point point3 = this.f2026F;
-//            point3.y = 0;
-//            point3.x = 0;
-//            Point point4 = this.f2027G;
-//            point4.y = 0;
-//            point4.x = 0;
-//        } else if (i == 2) {
-//            this.f2026F = point;
-//            point2 = this.f2027G;
-//            point2.y = 0;
-//            point2.x = 0;
-//        } else if (i == 3) {
-//            this.f2027G = point;
-//        } else if (i == 4) {
-//            this.f2028H = point;
-//            return;
-//        } else {
-//            return;
-//        }
-//        point2 = this.f2028H;
-//        point2.y = 0;
-//        point2.x = 0;
-//    }
-//
-//    /* renamed from: a */
-//    public void mo6051a(String str, int i, int i2, int i3, int i4, int i5, int i6) {
-//        this.f2058u = str;
-//        this.f2059v = i;
-//        this.f2060w = i2;
-//        this.f2061x = i3;
-//        this.f2062y = i4;
-//        this.f2063z = i5;
-//        this.f2021A = i6;
-//    }
-
-    /* renamed from: b */
-    public final void mo6052b(Paint paint, Rect rect, Canvas canvas, float f, float f2) {
-        int i;
-        int i2;
-        double d;
-        double d2;
-        String format = null;
-        float f3 = 0;
-        Point point = null;
-        double d3;
-        double d4;
-        String format2 = null;
-        int size = this.f2022B.size();
-        int i3 = 0;
-        int i4 = 0;
-        while (i4 < size) {
-            C0820j jVar = this.f2022B.get(i4);
-            int i5 = jVar.f2268b;
-            double d5 = 0.0d;
-            if (i5 == 1) {
-                paint.setColor(jVar.f2270d);
-                paint.setStrokeWidth((float) jVar.f2272f);
-                i2 = 2;
-                canvas.drawLine(((float) (jVar.f2267a.get(i3).x - this.f2035O)) / f, ((float) (jVar.f2267a.get(i3).y - this.f2036P)) / f2, ((float) (jVar.f2267a.get(1).x - this.f2035O)) / f, ((float) (jVar.f2267a.get(1).y - this.f2036P)) / f2, paint);
-                paint.setColor(jVar.f2270d);
-                paint.setTextSize((float) jVar.f2271e);
-                double sqrt = (Math.sqrt(Math.pow((double) (jVar.f2267a.get(1).y - jVar.f2267a.get(i3).y), 2.0d) + Math.pow((double) (jVar.f2267a.get(1).x - jVar.f2267a.get(i3).x), 2.0d)) * this.f2056s) / ((double) this.f2024D);
-                int i6 = jVar.f2269c;
-                if (i6 == 2) {
-                    d5 = ((double) Math.round(sqrt * 100.0d)) / 100.0d;
-                } else if (i6 == 3) {
-                    d5 = ((double) Math.round(sqrt * 1000.0d)) / 1000.0d;
-                } else if (i6 == 4) {
-                    d5 = ((double) Math.round(sqrt * 10000.0d)) / 10000.0d;
-                } else if (i6 == 5) {
-                    d5 = ((double) Math.round(sqrt * 100000.0d)) / 100000.0d;
-                }
-                Object[] objArr = new Object[2];
-                objArr[i3] = Double.toString(d5);
-                objArr[1] = this.f2058u;
-                format2 = String.format("L:%s%s", objArr);
-            } else {
-                i2 = 2;
-                if (i5 == 2) {
-                    paint.setColor(jVar.f2270d);
-                    paint.setStrokeWidth((float) jVar.f2272f);
-                    canvas.drawLine(((float) (jVar.f2267a.get(i3).x - this.f2035O)) / f, ((float) (jVar.f2267a.get(i3).y - this.f2036P)) / f2, ((float) (jVar.f2267a.get(1).x - this.f2035O)) / f, ((float) (jVar.f2267a.get(1).y - this.f2036P)) / f2, paint);
-                    paint.setColor(jVar.f2270d);
-                    paint.setTextSize((float) jVar.f2271e);
-                    double sqrt2 = (Math.sqrt(Math.pow(((double) (jVar.f2267a.get(1).y - jVar.f2267a.get(i3).y)) * 1.0d, 2.0d) + Math.pow(((double) (jVar.f2267a.get(1).x - jVar.f2267a.get(i3).x)) * 1.0d, 2.0d)) * this.f2056s) / ((double) this.f2024D);
-                    int i7 = jVar.f2269c;
-                    if (i7 == 2) {
-                        d5 = ((double) Math.round(sqrt2 * 100.0d)) / 100.0d;
-                    } else if (i7 == 3) {
-                        d5 = ((double) Math.round(sqrt2 * 1000.0d)) / 1000.0d;
-                    } else if (i7 == 4) {
-                        d5 = ((double) Math.round(sqrt2 * 10000.0d)) / 10000.0d;
-                    } else if (i7 == 5) {
-                        d5 = ((double) Math.round(sqrt2 * 100000.0d)) / 100000.0d;
-                    }
-                    Object[] objArr2 = new Object[2];
-                    objArr2[i3] = Double.toString(d5);
-                    objArr2[1] = this.f2058u;
-                    format2 = String.format("L:%s%s", objArr2);
-                } else {
-                    if (i5 == 3) {
-                        paint.setColor(jVar.f2270d);
-                        paint.setStrokeWidth((float) jVar.f2272f);
-                        paint.setStyle(Paint.Style.STROKE);
-                        Point a = mo6045a(jVar.f2267a.get(i3), jVar.f2267a.get(1), jVar.f2267a.get(2));
-                        i = i4;
-                        double sqrt3 = Math.sqrt(Math.pow(((double) (a.y - jVar.f2267a.get(i3).y)) * 1.0d, 2.0d) + Math.pow(((double) (a.x - jVar.f2267a.get(i3).x)) * 1.0d, 2.0d));
-                        canvas.drawCircle(((float) (a.x - this.f2035O)) / f, ((float) (a.y - this.f2036P)) / f2, ((float) sqrt3) / f, paint);
-                        paint.setColor(jVar.f2270d);
-                        paint.setTextSize((float) jVar.f2271e);
-                        paint.setStyle(Paint.Style.FILL);
-                        double d6 = (sqrt3 * this.f2056s) / ((double) this.f2024D);
-                        double d7 = 3.141592653589793d * d6 * d6;
-                        double d8 = 6.283185307179586d * d6;
-                        int i8 = jVar.f2269c;
-                        if (i8 == 2) {
-                            d5 = ((double) Math.round(d6 * 100.0d)) / 100.0d;
-                            d4 = ((double) Math.round(d7 * 100.0d)) / 100.0d;
-                            d3 = ((double) Math.round(d8 * 100.0d)) / 100.0d;
-                        } else if (i8 == 3) {
-                            d5 = ((double) Math.round(d6 * 1000.0d)) / 1000.0d;
-                            d4 = ((double) Math.round(d7 * 1000.0d)) / 1000.0d;
-                            d3 = ((double) Math.round(d8 * 1000.0d)) / 1000.0d;
-                        } else if (i8 == 4) {
-                            d5 = ((double) Math.round(d6 * 10000.0d)) / 10000.0d;
-                            d4 = ((double) Math.round(d7 * 10000.0d)) / 10000.0d;
-                            d3 = ((double) Math.round(d8 * 10000.0d)) / 10000.0d;
-                        } else if (i8 == 5) {
-                            d5 = ((double) Math.round(d6 * 100000.0d)) / 100000.0d;
-                            d4 = ((double) Math.round(d7 * 100000.0d)) / 100000.0d;
-                            d3 = ((double) Math.round(d8 * 100000.0d)) / 100000.0d;
-                        } else {
-                            d4 = 0.0d;
-                            d3 = 0.0d;
-                        }
-                        String format3 = String.format("R:%s%s", Double.toString(d5), this.f2058u);
-                        String format4 = String.format("A:%s%s²", Double.toString(d4), this.f2058u);
-                        format = String.format("C:%s%s", Double.toString(d3), this.f2058u);
-                        canvas.drawText(format3, ((float) (jVar.f2267a.get(3).x - this.f2035O)) / f, ((float) (jVar.f2267a.get(3).y - this.f2036P)) / f2, paint);
-                        canvas.drawText(format4, ((float) (jVar.f2267a.get(3).x - this.f2035O)) / f, (((float) (jVar.f2267a.get(3).y - this.f2036P)) / f2) + ((float) jVar.f2271e), paint);
-                        f3 = ((float) (jVar.f2267a.get(3).x - this.f2035O)) / f;
-                        point = jVar.f2267a.get(3);
-                    } else {
-                        i = i4;
-                        if (i5 == 4) {
-                            paint.setColor(jVar.f2270d);
-                            paint.setStrokeWidth((float) jVar.f2272f);
-                            canvas.drawLine(((float) (jVar.f2267a.get(0).x - this.f2035O)) / f, ((float) (jVar.f2267a.get(0).y - this.f2036P)) / f2, ((float) (jVar.f2267a.get(1).x - this.f2035O)) / f, ((float) (jVar.f2267a.get(1).y - this.f2036P)) / f2, paint);
-                            canvas.drawLine(((float) (jVar.f2267a.get(1).x - this.f2035O)) / f, ((float) (jVar.f2267a.get(1).y - this.f2036P)) / f2, ((float) (jVar.f2267a.get(2).x - this.f2035O)) / f, ((float) (jVar.f2267a.get(2).y - this.f2036P)) / f2, paint);
-                            double a2 = (double) mo6044a(jVar.f2267a.get(0).x, jVar.f2267a.get(0).y, jVar.f2267a.get(1).x, jVar.f2267a.get(1).y, jVar.f2267a.get(1).x, jVar.f2267a.get(1).y, jVar.f2267a.get(2).x, jVar.f2267a.get(2).y);
-                            paint.setColor(jVar.f2270d);
-                            paint.setTextSize((float) jVar.f2271e);
-                            int i9 = jVar.f2269c;
-                            if (i9 == 2) {
-                                d5 = ((double) Math.round(a2 * 100.0d)) / 100.0d;
-                            } else if (i9 == 3) {
-                                d5 = ((double) Math.round(a2 * 1000.0d)) / 1000.0d;
-                            } else if (i9 == 4) {
-                                d5 = ((double) Math.round(a2 * 10000.0d)) / 10000.0d;
-                            } else if (i9 == 5) {
-                                d5 = ((double) Math.round(a2 * 100000.0d)) / 100000.0d;
-                            }
-                            canvas.drawText(Double.toString(d5) + "°", ((float) (jVar.f2267a.get(3).x - this.f2035O)) / f, ((float) (jVar.f2267a.get(3).y - this.f2036P)) / f2, paint);
-                        } else if (i5 == 5) {
-                            paint.setColor(jVar.f2270d);
-                            paint.setStrokeWidth((float) jVar.f2272f);
-                            paint.setStyle(Paint.Style.STROKE);
-                            canvas.drawRect(((float) (jVar.f2267a.get(0).x - this.f2035O)) / f, ((float) (jVar.f2267a.get(0).y - this.f2036P)) / f2, ((float) (jVar.f2267a.get(1).x - this.f2035O)) / f, ((float) (jVar.f2267a.get(1).y - this.f2036P)) / f2, paint);
-                            paint.setStyle(Paint.Style.FILL);
-                            paint.setColor(jVar.f2270d);
-                            paint.setTextSize((float) jVar.f2271e);
-                            double d9 = this.f2056s;
-                            float f4 = this.f2024D;
-                            double abs = (((double) Math.abs(jVar.f2267a.get(1).x - jVar.f2267a.get(0).x)) * d9) / ((double) f4);
-                            double abs2 = (((double) Math.abs(jVar.f2267a.get(1).y - jVar.f2267a.get(0).y)) * d9) / ((double) f4);
-                            double d10 = abs * abs2;
-                            int i10 = jVar.f2269c;
-                            if (i10 == 2) {
-                                d5 = ((double) Math.round(abs * 100.0d)) / 100.0d;
-                                d2 = ((double) Math.round(abs2 * 100.0d)) / 100.0d;
-                                d = ((double) Math.round(d10 * 100.0d)) / 100.0d;
-                            } else if (i10 == 3) {
-                                d5 = ((double) Math.round(abs * 1000.0d)) / 1000.0d;
-                                d2 = ((double) Math.round(abs2 * 1000.0d)) / 1000.0d;
-                                d = ((double) Math.round(d10 * 1000.0d)) / 1000.0d;
-                            } else if (i10 == 4) {
-                                d5 = ((double) Math.round(abs * 10000.0d)) / 10000.0d;
-                                d2 = ((double) Math.round(abs2 * 10000.0d)) / 10000.0d;
-                                d = ((double) Math.round(d10 * 10000.0d)) / 10000.0d;
-                            } else if (i10 == 5) {
-                                d5 = ((double) Math.round(abs * 100000.0d)) / 100000.0d;
-                                d2 = ((double) Math.round(abs2 * 100000.0d)) / 100000.0d;
-                                d = ((double) Math.round(d10 * 100000.0d)) / 100000.0d;
-                            } else {
-                                d2 = 0.0d;
-                                d = 0.0d;
-                            }
-                            String format5 = String.format("W:%s%s", Double.toString(d5), this.f2058u);
-                            String format6 = String.format("H:%s%s", Double.toString(d2), this.f2058u);
-                            format = String.format("A:%s%s²", Double.toString(d), this.f2058u);
-                            canvas.drawText(format5, ((float) (jVar.f2267a.get(2).x - this.f2035O)) / f, ((float) (jVar.f2267a.get(2).y - this.f2036P)) / f2, paint);
-                            canvas.drawText(format6, ((float) (jVar.f2267a.get(2).x - this.f2035O)) / f, (((float) (jVar.f2267a.get(2).y - this.f2036P)) / f2) + ((float) jVar.f2271e), paint);
-                            f3 = ((float) (jVar.f2267a.get(2).x - this.f2035O)) / f;
-                            point = jVar.f2267a.get(2);
-                        } else if (i5 == 6) {
-                            paint.setColor(jVar.f2270d);
-                            paint.setTextSize((float) jVar.f2271e);
-                            canvas.drawText(jVar.f2273g, ((float) (jVar.f2267a.get(0).x - this.f2035O)) / f, ((float) (jVar.f2267a.get(0).y - this.f2036P)) / f2, paint);
-                            i4 = i + 1;
-                            i3 = 0;
-                        }
-                        i4 = i + 1;
-                        i3 = 0;
-                    }
-                    canvas.drawText(format, f3, (((float) (point.y - this.f2036P)) / f2) + ((float) (jVar.f2271e * 2)), paint);
-                    i4 = i + 1;
-                    i3 = 0;
-                }
-            }
-            canvas.drawText(format2, ((float) (jVar.f2267a.get(i2).x - this.f2035O)) / f, ((float) (jVar.f2267a.get(i2).y - this.f2036P)) / f2, paint);
-            i = i4;
-            i4 = i + 1;
-            i3 = 0;
-        }
-    }
-
     /* renamed from: b */
     public boolean mo6053b() {
         return this.f2043f;
-    }
-
-    /* renamed from: c */
-    public double mo6054c() {
-        if (this.f2058u.equals("um")) {
-            return 379.187d;
-        }
-        if (this.f2058u.equals("mm")) {
-            return 0.379187d;
-        }
-        if (this.f2058u.equals("mil")) {
-            return 14.9286d;
-        }
-        return this.f2058u.equals("inch") ? 0.0149286d : 0.379187d;
     }
 
     /* renamed from: d */
@@ -1382,14 +1095,6 @@ public class MjpegView extends SurfaceView implements SurfaceHolder.Callback {
             }
             this.f2042e = null;
         }
-    }
-
-    public int getImageHeight() {
-        return this.pixelHeight;
-    }
-
-    public int getImageWidth() {
-        return this.pixelWidth;
     }
 
     public void setDisplayMode(int i) {
