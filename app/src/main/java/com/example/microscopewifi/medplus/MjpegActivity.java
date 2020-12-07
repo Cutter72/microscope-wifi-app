@@ -34,7 +34,10 @@ import java.net.ProtocolException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 @SuppressLint({"WrongConstant", "ResourceType"})
 public class MjpegActivity extends Activity {
@@ -194,8 +197,12 @@ public class MjpegActivity extends Activity {
 
     public void onClickTakePicture(View view) {
         //todo implement picture save
-        Toast.makeText(this, "Picture taken", Toast.LENGTH_SHORT).show();
         createFilePath();
+        String fileName = new SimpleDateFormat("yyyyMMddhhmmss", Locale.getDefault()).format(new Date());
+        System.out.println("filePath: " + mJpegViewInstance.filePath);
+        System.out.println("fileName: " + fileName);
+        FileCreation.saveImage(mJpegViewInstance.bitmapImage, mJpegViewInstance.filePath, fileName);
+        Toast.makeText(this, "Picture taken", Toast.LENGTH_SHORT).show();
     }
 
 //    /* renamed from: MjpegActivity$a */
@@ -935,7 +942,8 @@ public class MjpegActivity extends Activity {
 
     /* renamed from: c */
     public void createFilePath() {
-        String filePath = (Environment.getExternalStorageDirectory().getAbsolutePath() + "/MicroscopeWiFi/"); /*+ this.f1979c + this.f1980d + "/") + new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(new Date()) + "/";*/
+//        String filePath = (Environment.getExternalStorageDirectory().getAbsolutePath()+"/"); /*+ this.f1979c + this.f1980d + "/") + new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(new Date()) + "/";*/
+        String filePath = getExternalFilesDir(Environment.DIRECTORY_DCIM).getAbsolutePath() + "/";
         File file = new File(filePath);
         if (!file.exists()) {
             file.mkdir();

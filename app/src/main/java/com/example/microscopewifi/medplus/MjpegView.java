@@ -107,25 +107,25 @@ public class MjpegView extends SurfaceView implements SurfaceHolder.Callback {
     private boolean f2048k = false;
 
     /* renamed from: l */
-    private Bitmap bitmapImage = null;
+    public Bitmap bitmapImage = null;
 
     /* renamed from: m */
-    public int f2050m = 640;
+    public int pixelWidth2 = 1280;
 
     /* renamed from: n */
-    public int f2051n = 480;
+    public int pixelHeight2 = 1024;
 
     /* renamed from: o */
-    private int f2052o = 640;
+    private int pixelWidth = 1280;
 
     /* renamed from: p */
-    private int f2053p = 480;
+    private int pixelHeight = 1024;
 
     /* renamed from: q */
     private int f2054q = 0;
 
     /* renamed from: r */
-    private String filePath = null;
+    public String filePath = null;
 
     /* renamed from: s */
     double f2056s = 1.0d;
@@ -175,7 +175,7 @@ public class MjpegView extends SurfaceView implements SurfaceHolder.Callback {
                 FileCreation.saveImage(bitmap, mjpegView.filePath, fileName);
             } else {
                 Rect rect = new Rect(0, 0, bitmap.getWidth(), bitmap.getHeight());
-                Bitmap createBitmap = Bitmap.createBitmap(MjpegView.this.f2052o, MjpegView.this.f2053p, Bitmap.Config.ARGB_8888);
+                Bitmap createBitmap = Bitmap.createBitmap(MjpegView.this.pixelWidth, MjpegView.this.pixelHeight, Bitmap.Config.ARGB_8888);
                 Canvas canvas = new Canvas(createBitmap);
                 Paint paint = new Paint();
                 Matrix matrix = new Matrix();
@@ -276,15 +276,15 @@ public class MjpegView extends SurfaceView implements SurfaceHolder.Callback {
                     Canvas canvas = null;
                     try {
                         if (MjpegView.this.bitmapImage == null) {
-                            MjpegView.this.bitmapImage = Bitmap.createBitmap(MjpegView.this.f2050m, MjpegView.this.f2051n, Bitmap.Config.ARGB_8888);
+                            MjpegView.this.bitmapImage = Bitmap.createBitmap(MjpegView.this.pixelWidth2, MjpegView.this.pixelHeight2, Bitmap.Config.ARGB_8888);
                         }
                         MjpegView.this.bitmapImage = MjpegView.this.f2042e.mo6140a();
                         if (MjpegView.this.bitmapImage != null) {
-                            MjpegView.this.f2052o = MjpegView.this.bitmapImage.getWidth();
-                            MjpegView.this.f2053p = MjpegView.this.bitmapImage.getHeight();
+                            MjpegView.this.pixelWidth = MjpegView.this.bitmapImage.getWidth();
+                            MjpegView.this.pixelHeight = MjpegView.this.bitmapImage.getHeight();
                             if (MjpegView.this.f2054q == 1) {
                                 MjpegView.this.f2054q = 0;
-                                saveImage(MjpegView.this.bitmapImage);
+//                                saveImage(MjpegView.this.bitmapImage);
                             }
                             if (!this.f2065c) {
                                 this.f2065c = true;
@@ -295,7 +295,7 @@ public class MjpegView extends SurfaceView implements SurfaceHolder.Callback {
                                 synchronized (this.f2064b) {
                                     lockCanvas.drawColor(-16777216);
                                     lockCanvas.drawBitmap(MjpegView.this.bitmapImage, (Rect) null, this.f2066d, paint);
-                                    MjpegView.this.mo6049a(paint, this.f2066d, lockCanvas, MjpegView.this.f2037Q / ((float) MjpegView.this.f2052o), MjpegView.this.f2038R / ((float) MjpegView.this.f2053p));
+                                    MjpegView.this.mo6049a(paint, this.f2066d, lockCanvas, MjpegView.this.f2037Q / ((float) MjpegView.this.pixelWidth), MjpegView.this.f2038R / ((float) MjpegView.this.pixelHeight));
                                 }
                                 if (lockCanvas != null) {
                                     this.f2064b.unlockCanvasAndPost(lockCanvas);
@@ -448,8 +448,8 @@ public class MjpegView extends SurfaceView implements SurfaceHolder.Callback {
 
     /* renamed from: a */
     public void mo6047a(int i, int i2) {
-        this.f2050m = i;
-        this.f2051n = i2;
+        this.pixelWidth2 = i;
+        this.pixelHeight2 = i2;
     }
 
     /* renamed from: a */
@@ -1385,11 +1385,11 @@ public class MjpegView extends SurfaceView implements SurfaceHolder.Callback {
     }
 
     public int getImageHeight() {
-        return this.f2053p;
+        return this.pixelHeight;
     }
 
     public int getImageWidth() {
-        return this.f2052o;
+        return this.pixelWidth;
     }
 
     public void setDisplayMode(int i) {
