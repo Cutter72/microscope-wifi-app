@@ -5,7 +5,6 @@ import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.SharedPreferences;
 import android.graphics.Point;
-import android.graphics.Rect;
 import android.media.AudioAttributes;
 import android.media.SoundPool;
 import android.os.AsyncTask;
@@ -898,7 +897,7 @@ public class MjpegActivity extends Activity {
 //    }
 
     /* renamed from: a */
-    public void mo6009a() {
+    public void openMjpedViewStreaming() {
         MjpegView mjpegView = (MjpegView) findViewById(R.id.MjpegV);
         this.mJpegViewInstance = mjpegView;
         if (mjpegView != null) {
@@ -997,33 +996,33 @@ public class MjpegActivity extends Activity {
     @SuppressLint({"ClickableViewAccessibility", "RtlHardcoded", "WrongConstant"})
     protected void onCreate(Bundle bundle) {
         super.onCreate(bundle);
-        getWindow().setFlags(128, 128);
-        requestWindowFeature(1);
-        getWindow().setFlags(1024, 1024);
-        setRequestedOrientation(0);
+//        getWindow().setFlags(128, 128);
+//        requestWindowFeature(1);
+//        getWindow().setFlags(1024, 1024);
+//        setRequestedOrientation(0);
         setContentView(R.layout.activity_mjpeg);
-        SharedPreferences sharedPreferences = getSharedPreferences("HiviewPlus3Preferences", 0);
-        this.sharedPreferences = sharedPreferences;
-        this.f1993q = sharedPreferences.getInt("bRename", 0);
-        this.f1998v = this.sharedPreferences.getString("currentunit", "mm");
-        this.f1999w = this.sharedPreferences.getInt("currentdecimal", 2);
-        this.f2000x = this.sharedPreferences.getInt("currentcolor", -65536);
-        this.f2001y = this.sharedPreferences.getInt("currentfontsize", 25);
-        this.f2002z = this.sharedPreferences.getInt("currentlinesize", 2);
-        this.f1978b = getIntent().getIntExtra("userid", 0);
-        this.f1979c = getIntent().getStringExtra("name");
-        this.f1980d = getIntent().getStringExtra("age");
-        this.f1981e = getIntent().getStringExtra("mobile");
-        this.f1982f = getIntent().getStringExtra("email");
-        this.f1983g = getIntent().getStringExtra("userimg");
-        this.f1984h = getIntent().getStringExtra("usertime");
-        this.f1985i = getIntent().getStringExtra("usersex");
-        this.f1986j = getIntent().getStringExtra("usernote");
-        this.f1987k = getIntent().getIntExtra("playmode", 0);
-        SoundPool a = m2614a(6);
-        this.f1973V = a;
+//        SharedPreferences sharedPreferences = getSharedPreferences("HiviewPlus3Preferences", 0);
+//        this.sharedPreferences = sharedPreferences;
+//        this.f1993q = sharedPreferences.getInt("bRename", 0);
+//        this.f1998v = this.sharedPreferences.getString("currentunit", "mm");
+//        this.f1999w = this.sharedPreferences.getInt("currentdecimal", 2);
+//        this.f2000x = this.sharedPreferences.getInt("currentcolor", -65536);
+//        this.f2001y = this.sharedPreferences.getInt("currentfontsize", 25);
+//        this.f2002z = this.sharedPreferences.getInt("currentlinesize", 2);
+//        this.f1978b = getIntent().getIntExtra("userid", 0);
+//        this.f1979c = getIntent().getStringExtra("name");
+//        this.f1980d = getIntent().getStringExtra("age");
+//        this.f1981e = getIntent().getStringExtra("mobile");
+//        this.f1982f = getIntent().getStringExtra("email");
+//        this.f1983g = getIntent().getStringExtra("userimg");
+//        this.f1984h = getIntent().getStringExtra("usertime");
+//        this.f1985i = getIntent().getStringExtra("usersex");
+//        this.f1986j = getIntent().getStringExtra("usernote");
+//        this.f1987k = getIntent().getIntExtra("playmode", 0);
+//        SoundPool a = m2614a(6);
+//        this.f1973V = a;
 //        this.f1972U = a.load(this, 2131623936, 1);
-        getWindow().getDecorView().getWindowVisibleDisplayFrame(new Rect());
+//        getWindow().getDecorView().getWindowVisibleDisplayFrame(new Rect());
 //        ImageButton imageButton = new ImageButton(this);
 //        this.f1988l = imageButton;
 //        imageButton.setImageDrawable(getResources().getDrawable(2131165325, getApplicationContext().getTheme()));
@@ -1062,7 +1061,7 @@ public class MjpegActivity extends Activity {
 //            imageButton5.setVisibility(4);
 //        }
 //        imageButton5.setOnClickListener(new View$OnClickListenerC0770i());
-        mo6009a();
+        openMjpedViewStreaming();
 //        SharedPreferences.Editor edit = getSharedPreferences("HiviewPlus3Preferences", 0).edit();
 //        edit.putString("nMagSet", String.valueOf(0) + "-" + String.valueOf(0));
 //        edit.apply();
@@ -1099,7 +1098,7 @@ public class MjpegActivity extends Activity {
     }
 
     public void onRestart() {
-        mo6009a();
+        openMjpedViewStreaming();
         super.onRestart();
     }
 
