@@ -3,30 +3,18 @@ package com.example.microscopewifi.medplus;
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.res.Resources;
 import android.graphics.Point;
 import android.graphics.Rect;
 import android.media.AudioAttributes;
 import android.media.SoundPool;
-import android.net.wifi.WifiManager;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.SystemClock;
 import android.view.KeyEvent;
-import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.EditText;
-import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
@@ -38,23 +26,15 @@ import org.apache.http.impl.auth.BasicScheme;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
 
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.Authenticator;
 import java.net.HttpURLConnection;
-import java.net.PasswordAuthentication;
 import java.net.ProtocolException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 @SuppressLint({"WrongConstant", "ResourceType"})
 public class MjpegActivity extends Activity {
@@ -215,6 +195,7 @@ public class MjpegActivity extends Activity {
     public void onClickTakePicture(View view) {
         //todo implement picture save
         Toast.makeText(this, "Picture taken", Toast.LENGTH_SHORT).show();
+        createFilePath();
     }
 
 //    /* renamed from: MjpegActivity$a */
@@ -302,7 +283,7 @@ public class MjpegActivity extends Activity {
 //        public void onClick(View view) {
 //            MjpegActivity mjpegActivity = MjpegActivity.this;
 //            if (mjpegActivity.f1987k == 1) {
-//                mjpegActivity.mo6012c();
+//                mjpegActivity.createFilePath();
 //            } else {
 //                Toast.makeText(mjpegActivity.getApplicationContext(), MjpegActivity.this.getString(2131689587), 0).show();
 //            }
@@ -735,7 +716,7 @@ public class MjpegActivity extends Activity {
 //                    int a = MjpegActivity.this.mo6008a("http://admin:admin@10.10.1.1/updateNPNvram.cgi?camera_gpio_trigger");
 //                    if (MjpegActivity.this.f1974W != a) {
 //                        MjpegActivity.this.f1974W = a;
-//                        MjpegActivity.this.mo6012c();
+//                        MjpegActivity.this.createFilePath();
 //                    }
 //                } else {
 //                    MjpegActivity.this.f1989m = false;
@@ -953,15 +934,15 @@ public class MjpegActivity extends Activity {
 //    }
 
     /* renamed from: c */
-//    public void mo6012c() {
-//        String str = (Environment.getExternalStorageDirectory().getAbsolutePath() + "/MicFiMedical4/" + this.f1979c + this.f1980d + "/") + new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(new Date()) + "/";
-//        File file = new File(str);
-//        if (!file.exists()) {
-//            file.mkdir();
-//        }
+    public void createFilePath() {
+        String filePath = (Environment.getExternalStorageDirectory().getAbsolutePath() + "/MicroscopeWiFi/"); /*+ this.f1979c + this.f1980d + "/") + new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(new Date()) + "/";*/
+        File file = new File(filePath);
+        if (!file.exists()) {
+            file.mkdir();
+        }
 //        this.f1973V.play(this.f1972U, 1.0f, 1.0f, 0, 0, 1.0f);
-//        this.f1958G.mo6048a(1, str, "");
-//    }
+        this.f1958G.setFilePath(1, filePath, "");
+    }
 
     /* renamed from: d */
 //    public void mo6013d() {

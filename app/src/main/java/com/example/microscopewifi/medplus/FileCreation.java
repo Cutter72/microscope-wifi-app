@@ -7,9 +7,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 /* renamed from: com.italeco.micfimedplus.m */
-public class C0829m {
+public class FileCreation {
     /* renamed from: a */
-    public static void m2815a(Bitmap bitmap, String str, String str2) {
+    public static void saveImage(Bitmap bitmap, String str, String str2) {
         File file = new File(str);
         if (!file.exists()) {
             file.mkdir();

@@ -18,7 +18,6 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Iterator;
 import java.util.Locale;
 
 public class MjpegView extends SurfaceView implements SurfaceHolder.Callback {
@@ -108,7 +107,7 @@ public class MjpegView extends SurfaceView implements SurfaceHolder.Callback {
     private boolean f2048k = false;
 
     /* renamed from: l */
-    private Bitmap f2049l = null;
+    private Bitmap bitmapImage = null;
 
     /* renamed from: m */
     public int f2050m = 640;
@@ -126,7 +125,7 @@ public class MjpegView extends SurfaceView implements SurfaceHolder.Callback {
     private int f2054q = 0;
 
     /* renamed from: r */
-    private String f2055r = null;
+    private String filePath = null;
 
     /* renamed from: s */
     double f2056s = 1.0d;
@@ -169,11 +168,11 @@ public class MjpegView extends SurfaceView implements SurfaceHolder.Callback {
         }
 
         /* renamed from: a */
-        private void m2710a(Bitmap bitmap) {
-            String format = new SimpleDateFormat("yyyyMMddhhmmss", Locale.getDefault()).format(new Date());
+        private void saveImage(Bitmap bitmap) {
+            String fileName = new SimpleDateFormat("yyyyMMddhhmmss", Locale.getDefault()).format(new Date());
             MjpegView mjpegView = MjpegView.this;
             if (mjpegView.f2057t == 0) {
-                C0829m.m2815a(bitmap, mjpegView.f2055r, format);
+                FileCreation.saveImage(bitmap, mjpegView.filePath, fileName);
             } else {
                 Rect rect = new Rect(0, 0, bitmap.getWidth(), bitmap.getHeight());
                 Bitmap createBitmap = Bitmap.createBitmap(MjpegView.this.f2052o, MjpegView.this.f2053p, Bitmap.Config.ARGB_8888);
@@ -185,9 +184,9 @@ public class MjpegView extends SurfaceView implements SurfaceHolder.Callback {
                 MjpegView.this.mo6052b(paint, rect, canvas, MjpegView.this.f2037Q / ((float) bitmap.getWidth()), MjpegView.this.f2038R / ((float) bitmap.getHeight()));
                 canvas.save();
                 canvas.restore();
-                C0829m.m2815a(createBitmap, MjpegView.this.f2055r, format);
+                FileCreation.saveImage(createBitmap, MjpegView.this.filePath, fileName);
             }
-            String str = MjpegView.this.f2055r + format;
+            String str = MjpegView.this.filePath + fileName;
             ContentValues contentValues = new ContentValues();
             contentValues.put("mime_type", "image/jpeg");
             contentValues.put("_data", str);
@@ -276,26 +275,26 @@ public class MjpegView extends SurfaceView implements SurfaceHolder.Callback {
                 if (MjpegView.this.f2044g) {
                     Canvas canvas = null;
                     try {
-                        if (MjpegView.this.f2049l == null) {
-                            MjpegView.this.f2049l = Bitmap.createBitmap(MjpegView.this.f2050m, MjpegView.this.f2051n, Bitmap.Config.ARGB_8888);
+                        if (MjpegView.this.bitmapImage == null) {
+                            MjpegView.this.bitmapImage = Bitmap.createBitmap(MjpegView.this.f2050m, MjpegView.this.f2051n, Bitmap.Config.ARGB_8888);
                         }
-                        MjpegView.this.f2049l = MjpegView.this.f2042e.mo6140a();
-                        if (MjpegView.this.f2049l != null) {
-                            MjpegView.this.f2052o = MjpegView.this.f2049l.getWidth();
-                            MjpegView.this.f2053p = MjpegView.this.f2049l.getHeight();
+                        MjpegView.this.bitmapImage = MjpegView.this.f2042e.mo6140a();
+                        if (MjpegView.this.bitmapImage != null) {
+                            MjpegView.this.f2052o = MjpegView.this.bitmapImage.getWidth();
+                            MjpegView.this.f2053p = MjpegView.this.bitmapImage.getHeight();
                             if (MjpegView.this.f2054q == 1) {
                                 MjpegView.this.f2054q = 0;
-                                m2710a(MjpegView.this.f2049l);
+                                saveImage(MjpegView.this.bitmapImage);
                             }
                             if (!this.f2065c) {
                                 this.f2065c = true;
-                                this.f2066d = m2711b(MjpegView.this.f2049l.getWidth(), MjpegView.this.f2049l.getHeight());
+                                this.f2066d = m2711b(MjpegView.this.bitmapImage.getWidth(), MjpegView.this.bitmapImage.getHeight());
                             }
                             Canvas lockCanvas = this.f2064b.lockCanvas();
                             try {
                                 synchronized (this.f2064b) {
                                     lockCanvas.drawColor(-16777216);
-                                    lockCanvas.drawBitmap(MjpegView.this.f2049l, (Rect) null, this.f2066d, paint);
+                                    lockCanvas.drawBitmap(MjpegView.this.bitmapImage, (Rect) null, this.f2066d, paint);
                                     MjpegView.this.mo6049a(paint, this.f2066d, lockCanvas, MjpegView.this.f2037Q / ((float) MjpegView.this.f2052o), MjpegView.this.f2038R / ((float) MjpegView.this.f2053p));
                                 }
                                 if (lockCanvas != null) {
@@ -454,9 +453,9 @@ public class MjpegView extends SurfaceView implements SurfaceHolder.Callback {
     }
 
     /* renamed from: a */
-    public void mo6048a(int i, String str, String str2) {
+    public void setFilePath(int i, String str, String str2) {
         this.f2054q = i;
-        this.f2055r = str;
+        this.filePath = str;
     }
 
     /* JADX WARNING: Removed duplicated region for block: B:212:0x07c1  */
