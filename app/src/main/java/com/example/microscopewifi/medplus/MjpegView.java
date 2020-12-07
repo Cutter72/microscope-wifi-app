@@ -121,14 +121,8 @@ public class MjpegView extends SurfaceView implements SurfaceHolder.Callback {
     /* renamed from: v */
     public int f2059v = 2;
 
-    /* renamed from: w */
-    public int f2060w = -65536;
-
     /* renamed from: x */
     public int f2061x = 25;
-
-    /* renamed from: y */
-    public int f2062y = 1;
 
     /* renamed from: z */
     public int f2063z = 2;
@@ -519,7 +513,7 @@ public class MjpegView extends SurfaceView implements SurfaceHolder.Callback {
                     SharedPreferences.Editor edit = mjpegView.context.getSharedPreferences("HiviewPlus3Preferences", 0).edit();
                     edit.putString("nMagSet", f3 + "-" + mjpegView.f2024D);
                     edit.apply();
-                    jVar = new C0820j(1, mjpegView.f2058u, mjpegView.f2059v, mjpegView.f2063z, mjpegView.f2021A, mjpegView.f2061x, mjpegView.f2060w, mjpegView.f2062y);
+                    jVar = new C0820j(1, mjpegView.f2059v, mjpegView.f2063z, mjpegView.f2021A, mjpegView.f2061x);
                     jVar.f2267a.add(new Point(i67, i53));
                     jVar.f2267a.add(new Point(i54, i55));
                     arrayList = jVar.f2267a;
@@ -732,15 +726,12 @@ public class MjpegView extends SurfaceView implements SurfaceHolder.Callback {
             Point point31 = mjpegView.f2025E;
             int i80 = point31.x;
             if (!(i80 == 0 || (i45 = point31.y) == 0 || (i46 = (point15 = mjpegView.f2026F).x) == 0 || (i47 = point15.y) == 0 || (i48 = (point16 = mjpegView.f2027G).x) == 0 || (i49 = point16.y) == 0)) {
-                jVar = new C0820j(2, mjpegView.f2058u, mjpegView.f2059v, mjpegView.f2063z, mjpegView.f2021A, mjpegView.f2061x, mjpegView.f2060w, mjpegView.f2062y);
+                jVar = new C0820j(2, mjpegView.f2059v, mjpegView.f2063z, mjpegView.f2021A, mjpegView.f2061x);
                 jVar.f2267a.add(new Point(i80, i45));
                 jVar.f2267a.add(new Point(i46, i47));
                 arrayList = jVar.f2267a;
                 point = new Point(i48, i49);
             }
-            size = mjpegView.f2022B.size();
-//            while (i < size) {
-//            }
         } else {
             if (i60 == 3) {
                 paint3.setColor(mjpegView.f2021A);
@@ -775,7 +766,7 @@ public class MjpegView extends SurfaceView implements SurfaceHolder.Callback {
                 Point point38 = mjpegView.f2025E;
                 int i90 = point38.x;
                 if (!(i90 == 0 || (i35 = point38.y) == 0 || (i36 = (point12 = mjpegView.f2026F).x) == 0 || (i37 = point12.y) == 0 || (i38 = (point13 = mjpegView.f2027G).x) == 0 || (i39 = point13.y) == 0 || (i40 = (point14 = mjpegView.f2028H).x) == 0 || (i41 = point14.y) == 0)) {
-                    jVar2 = new C0820j(3, mjpegView.f2058u, mjpegView.f2059v, mjpegView.f2063z, mjpegView.f2021A, mjpegView.f2061x, mjpegView.f2060w, mjpegView.f2062y);
+                    jVar2 = new C0820j(3, mjpegView.f2059v, mjpegView.f2063z, mjpegView.f2021A, mjpegView.f2061x);
                     jVar2.f2267a.add(new Point(i90, i35));
                     jVar2.f2267a.add(new Point(i36, i37));
                     jVar2.f2267a.add(new Point(i38, i39));
@@ -819,16 +810,13 @@ public class MjpegView extends SurfaceView implements SurfaceHolder.Callback {
                 Point point45 = mjpegView.f2025E;
                 int i100 = point45.x;
                 if (!(i100 == 0 || (i25 = point45.y) == 0 || (i26 = (point9 = mjpegView.f2026F).x) == 0 || (i27 = point9.y) == 0 || (i28 = (point10 = mjpegView.f2027G).x) == 0 || (i29 = point10.y) == 0 || (i30 = (point11 = mjpegView.f2028H).x) == 0 || (i31 = point11.y) == 0)) {
-                    jVar2 = new C0820j(4, mjpegView.f2058u, mjpegView.f2059v, mjpegView.f2063z, mjpegView.f2021A, mjpegView.f2061x, mjpegView.f2060w, mjpegView.f2062y);
+                    jVar2 = new C0820j(4, mjpegView.f2059v, mjpegView.f2063z, mjpegView.f2021A, mjpegView.f2061x);
                     jVar2.f2267a.add(new Point(i100, i25));
                     jVar2.f2267a.add(new Point(i26, i27));
                     jVar2.f2267a.add(new Point(i28, i29));
                     arrayList2 = jVar2.f2267a;
                     point6 = new Point(i30, i31);
                 }
-                size = mjpegView.f2022B.size();
-//                while (i < size) {
-//                }
             } else {
                 if (i60 == 5) {
                     paint3 = paint;
@@ -855,7 +843,7 @@ public class MjpegView extends SurfaceView implements SurfaceHolder.Callback {
                     Point point50 = mjpegView.f2025E;
                     int i107 = point50.x;
                     if (!(i107 == 0 || (i18 = point50.y) == 0 || (i19 = (point7 = mjpegView.f2026F).x) == 0 || (i20 = point7.y) == 0 || (i21 = (point8 = mjpegView.f2027G).x) == 0 || (i22 = point8.y) == 0)) {
-                        jVar = new C0820j(5, mjpegView.f2058u, mjpegView.f2059v, mjpegView.f2063z, mjpegView.f2021A, mjpegView.f2061x, mjpegView.f2060w, mjpegView.f2062y);
+                        jVar = new C0820j(5, mjpegView.f2059v, mjpegView.f2063z, mjpegView.f2021A, mjpegView.f2061x);
                         jVar.f2267a.add(new Point(i107, i18));
                         jVar.f2267a.add(new Point(i19, i20));
                         arrayList = jVar.f2267a;
@@ -895,7 +883,7 @@ public class MjpegView extends SurfaceView implements SurfaceHolder.Callback {
                         Point point57 = mjpegView.f2025E;
                         int i117 = point57.x;
                         if (!(i117 == 0 || (i8 = point57.y) == 0 || (i9 = (point3 = mjpegView.f2026F).x) == 0 || (i10 = point3.y) == 0 || (i11 = (point4 = mjpegView.f2027G).x) == 0 || (i12 = point4.y) == 0 || (i13 = (point5 = mjpegView.f2028H).x) == 0 || (i14 = point5.y) == 0)) {
-                            jVar2 = new C0820j(8, mjpegView.f2058u, mjpegView.f2059v, mjpegView.f2063z, mjpegView.f2021A, mjpegView.f2061x, mjpegView.f2060w, mjpegView.f2062y);
+                            jVar2 = new C0820j(8, mjpegView.f2059v, mjpegView.f2063z, mjpegView.f2021A, mjpegView.f2061x);
                             jVar2.f2267a.add(new Point(i117, i8));
                             jVar2.f2267a.add(new Point(i9, i10));
                             jVar2.f2267a.add(new Point(i11, i12));
@@ -912,7 +900,7 @@ public class MjpegView extends SurfaceView implements SurfaceHolder.Callback {
                                     Point point60 = mjpegView.f2026F;
                                     int i118 = point60.x;
                                     int i119 = point60.y;
-                                    C0820j jVar4 = new C0820j(6, mjpegView.f2058u, mjpegView.f2059v, mjpegView.f2063z, mjpegView.f2021A, mjpegView.f2061x, mjpegView.f2060w, mjpegView.f2062y);
+                                    C0820j jVar4 = new C0820j(6, mjpegView.f2059v, mjpegView.f2063z, mjpegView.f2021A, mjpegView.f2061x);
                                     jVar4.f2267a.add(new Point(i118, i119));
                                     jVar4.f2273g = mjpegView.f2023C;
                                     mjpegView.f2022B.add(jVar4);
@@ -974,9 +962,6 @@ public class MjpegView extends SurfaceView implements SurfaceHolder.Callback {
             point2 = mjpegView.f2028H;
             point2.y = i6;
             point2.x = i6;
-            size = mjpegView.f2022B.size();
-//            while (i < size) {
-//            }
         }
         arrayList.add(point);
         mjpegView.f2022B.add(jVar);
@@ -989,9 +974,6 @@ public class MjpegView extends SurfaceView implements SurfaceHolder.Callback {
         Point point262 = mjpegView.f2027G;
         point262.y = 0;
         point262.x = 0;
-        size = mjpegView.f2022B.size();
-//        while (i < size) {
-//        }
     }
 
     /* renamed from: b */
@@ -1036,6 +1018,7 @@ public class MjpegView extends SurfaceView implements SurfaceHolder.Callback {
                     this.saveImageThread.join();
                     z = false;
                 } catch (InterruptedException unused) {
+                    unused.printStackTrace();
                 }
             }
             this.saveImageThread = null;
@@ -1045,6 +1028,7 @@ public class MjpegView extends SurfaceView implements SurfaceHolder.Callback {
             try {
                 fVar.close();
             } catch (IOException unused2) {
+                unused2.printStackTrace();
             }
             this.f2042e = null;
         }

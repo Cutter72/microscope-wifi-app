@@ -236,9 +236,6 @@ public class MjpegActivity extends Activity {
             MjpegView mjpegView;
             int i;
             MjpegActivity.this.mJpegViewInstance.setSource(fVar);
-            if (fVar != null) {
-                fVar.mo6141a(2);
-            }
             if (!MjpegActivity.this.f1964M) {
                 mjpegView = MjpegActivity.this.mJpegViewInstance;
                 i = 4;

@@ -144,8 +144,4 @@ public class C0815f extends DataInputStream {
             return null;
         }
     }
-
-    /* renamed from: a */
-    public void mo6141a(int i) {
-    }
 }

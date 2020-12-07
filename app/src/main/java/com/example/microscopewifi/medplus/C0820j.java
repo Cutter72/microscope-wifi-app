@@ -28,7 +28,7 @@ public class C0820j {
     /* renamed from: g */
     public String f2273g = "";
 
-    public C0820j(int i, String str, int i2, int i3, int i4, int i5, int i6, int i7) {
+    public C0820j(int i, int i2, int i3, int i4, int i5) {
         this.f2268b = i;
         this.f2269c = i2;
         this.f2270d = i4;
