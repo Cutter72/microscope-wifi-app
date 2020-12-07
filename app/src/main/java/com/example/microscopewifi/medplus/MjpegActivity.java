@@ -16,7 +16,6 @@ import org.apache.http.auth.UsernamePasswordCredentials;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.auth.BasicScheme;
 import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.util.EntityUtils;
 
 import java.io.File;
 import java.io.IOException;
@@ -82,6 +81,7 @@ public class MjpegActivity extends Activity {
         Toast.makeText(this, "Picture taken", Toast.LENGTH_SHORT).show();
     }
 
+    @SuppressWarnings("deprecation")
     @SuppressLint({"StaticFieldLeak"})
     /* renamed from: MjpegActivity$m */
     public class AsyncTaskC0774m extends AsyncTask<String, Void, C0815f> {
@@ -162,7 +162,7 @@ public class MjpegActivity extends Activity {
                                 }
                                 httpGet.addHeader(BasicScheme.authenticate(new UsernamePasswordCredentials("admin", "admin"), "UTF-8", false));
                                 try {
-                                    EntityUtils.toString(defaultHttpClient.execute(httpGet).getEntity());
+                                    defaultHttpClient.execute(httpGet);
                                 } catch (IOException e) {
                                     e.printStackTrace();
                                 }
@@ -176,7 +176,7 @@ public class MjpegActivity extends Activity {
                             }
                             httpGet.addHeader(BasicScheme.authenticate(new UsernamePasswordCredentials("admin", "admin"), "UTF-8", false));
                             try {
-                                EntityUtils.toString(defaultHttpClient.execute(httpGet).getEntity());
+                                defaultHttpClient.execute(httpGet);
                             } catch (IOException e2) {
                                 e2.printStackTrace();
                             }
@@ -190,7 +190,7 @@ public class MjpegActivity extends Activity {
                         }
                         httpGet.addHeader(BasicScheme.authenticate(new UsernamePasswordCredentials("admin", "admin"), "UTF-8", false));
                         try {
-                            EntityUtils.toString(defaultHttpClient.execute(httpGet).getEntity());
+                            defaultHttpClient.execute(httpGet);
                         } catch (IOException e4) {
                             e4.printStackTrace();
                         }
@@ -258,6 +258,7 @@ public class MjpegActivity extends Activity {
     }
 
     /* renamed from: c */
+    @SuppressWarnings("ResultOfMethodCallIgnored")
     public void createFilePath() {
         String filePath = getExternalFilesDir(Environment.DIRECTORY_DCIM).getAbsolutePath() + "/";
         File file = new File(filePath);
