@@ -1,20 +1,13 @@
 package com.example.microscopewifi.medplus;
 
 import android.annotation.SuppressLint;
-import android.annotation.TargetApi;
 import android.app.Activity;
-import android.content.SharedPreferences;
-import android.graphics.Point;
-import android.media.AudioAttributes;
-import android.media.SoundPool;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.SystemClock;
 import android.view.KeyEvent;
 import android.view.View;
-import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.example.microscopewifi.R;
@@ -35,7 +28,6 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 import java.util.Locale;
 
 @SuppressLint({"WrongConstant", "ResourceType"})
