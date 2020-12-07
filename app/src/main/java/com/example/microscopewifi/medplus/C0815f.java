@@ -29,7 +29,7 @@ public class C0815f extends DataInputStream {
     byte[] f2249f = null;
 
     /* renamed from: g */
-    int f2250g = -1;
+    final int f2250g = -1;
 
     /* renamed from: h */
     int f2251h = -1;

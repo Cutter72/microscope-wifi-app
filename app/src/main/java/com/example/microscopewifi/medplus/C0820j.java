@@ -8,22 +8,22 @@ import java.util.ArrayList;
 public class C0820j {
 
     /* renamed from: a */
-    public ArrayList<Point> f2267a = new ArrayList<>();
+    public final ArrayList<Point> f2267a = new ArrayList<>();
 
     /* renamed from: b */
-    public int f2268b;
+    public final int f2268b;
 
     /* renamed from: c */
-    public int f2269c;
+    public final int f2269c;
 
     /* renamed from: d */
-    public int f2270d;
+    public final int f2270d;
 
     /* renamed from: e */
-    public int f2271e;
+    public final int f2271e;
 
     /* renamed from: f */
-    public int f2272f;
+    public final int f2272f;
 
     /* renamed from: g */
     public String f2273g = "";

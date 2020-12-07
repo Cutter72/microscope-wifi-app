@@ -55,7 +55,7 @@ public class MjpegActivity extends Activity {
     private MjpegView mJpegViewInstance = null;
 
     /* renamed from: H */
-    String ipAdress = "http://10.10.1.1:8899/";
+    final String ipAdress = "http://10.10.1.1:8899/";
 
     /* renamed from: M */
     private final boolean f1964M = false;

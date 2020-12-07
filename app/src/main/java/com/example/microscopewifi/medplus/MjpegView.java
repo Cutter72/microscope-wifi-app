@@ -17,10 +17,10 @@ import java.util.ArrayList;
 public class MjpegView extends SurfaceView implements SurfaceHolder.Callback {
 
     /* renamed from: A */
-    public int f2021A = -65536;
+    public final int f2021A = -65536;
 
     /* renamed from: B */
-    ArrayList<C0820j> f2022B = new ArrayList<>();
+    final ArrayList<C0820j> f2022B = new ArrayList<>();
 
     /* renamed from: C */
     private String f2023C = "";
@@ -29,16 +29,16 @@ public class MjpegView extends SurfaceView implements SurfaceHolder.Callback {
     private float f2024D = 0.0f;
 
     /* renamed from: E */
-    Point f2025E = new Point(0, 0);
+    final Point f2025E = new Point(0, 0);
 
     /* renamed from: F */
-    Point f2026F = new Point(0, 0);
+    final Point f2026F = new Point(0, 0);
 
     /* renamed from: G */
-    Point f2027G = new Point(0, 0);
+    final Point f2027G = new Point(0, 0);
 
     /* renamed from: H */
-    Point f2028H = new Point(0, 0);
+    final Point f2028H = new Point(0, 0);
 
     /* renamed from: J */
     private int f2030J = 0;
@@ -110,22 +110,22 @@ public class MjpegView extends SurfaceView implements SurfaceHolder.Callback {
     public String filePath = null;
 
     /* renamed from: s */
-    double f2056s = 1.0d;
+    final double f2056s = 1.0d;
 
     /* renamed from: t */
-    int f2057t = 0;
+    final int f2057t = 0;
 
     /* renamed from: u */
-    public String f2058u = "mm";
+    public final String f2058u = "mm";
 
     /* renamed from: v */
-    public int f2059v = 2;
+    public final int f2059v = 2;
 
     /* renamed from: x */
-    public int f2061x = 25;
+    public final int f2061x = 25;
 
     /* renamed from: z */
-    public int f2063z = 2;
+    public final int f2063z = 2;
 
     /* renamed from: MjpegView$a */
     public class SaveImageThread extends Thread {
@@ -302,7 +302,7 @@ public class MjpegView extends SurfaceView implements SurfaceHolder.Callback {
         float f12 = f6 - f5;
         float f13 = f8 - f7;
         float f14 = f10 - f9;
-        int i9 = (f11 > 0.0f ? 1 : (f11 == 0.0f ? 0 : -1));
+        int i9 = (Float.compare(f11, 0.0f));
         if (i9 != 0 && f12 != 0.0f) {
             float f15 = f14 / f12;
             float f16 = f13 / f11;
