@@ -40,16 +40,16 @@ public class MjpegActivity extends Activity {
     private boolean f1953B = false;
 
     /* renamed from: C */
-    private int f1954C = 0;
+    private final int f1954C = 0;
 
     /* renamed from: D */
-    private int f1955D = 0;
+    private final int f1955D = 0;
 
     /* renamed from: E */
-    private int f1956E = 0;
+    private final int f1956E = 0;
 
     /* renamed from: F */
-    private int f1957F = 0;
+    private final int f1957F = 0;
 
     /* renamed from: G */
     private MjpegView mJpegViewInstance = null;
@@ -58,19 +58,19 @@ public class MjpegActivity extends Activity {
     String ipAdress = "http://10.10.1.1:8899/";
 
     /* renamed from: M */
-    private boolean f1964M = false;
+    private final boolean f1964M = false;
 
     /* renamed from: N */
     private boolean f1965N = false;
 
     /* renamed from: s */
-    private int f1995s = 0;
+    private final int f1995s = 0;
 
     /* renamed from: t */
-    private int f1996t = 0;
+    private final int f1996t = 0;
 
     /* renamed from: u */
-    private int f1997u = 0;
+    private final int f1997u = 0;
 
     public void onClickTakePicture(View view) {
         //todo implement picture save
@@ -121,16 +121,16 @@ public class MjpegActivity extends Activity {
                 if (MjpegActivity.this.f1995s == 1) {
                     sb2 = new StringBuilder();
                     sb2.append("http://10.10.1.1/apply.cgi?submit_button=wizardvideo&video_idx=");
-                    sb2.append(Integer.toString(MjpegActivity.this.f1996t));
+                    sb2.append(MjpegActivity.this.f1996t);
                     sb2.append("&video_frame=30&action=video_idx&video_idx_sel=");
-                    sb2.append(Integer.toString(MjpegActivity.this.f1996t));
+                    sb2.append(MjpegActivity.this.f1996t);
                     num = "&video_frame_sel=30";
                 } else if (MjpegActivity.this.f1995s == 2) {
                     sb2 = new StringBuilder();
                     sb2.append("http://10.10.1.1/apply.cgi?submit_button=wizardvideo&video_idx=&video_frame=");
-                    sb2.append(Integer.toString(MjpegActivity.this.f1997u));
+                    sb2.append(MjpegActivity.this.f1997u);
                     sb2.append("&action=video_frame&video_idx_sel=");
-                    sb2.append(Integer.toString(MjpegActivity.this.f1996t));
+                    sb2.append(MjpegActivity.this.f1996t);
                     sb2.append("&video_frame_sel=");
                     num = Integer.toString(MjpegActivity.this.f1997u);
                 } else {
@@ -144,14 +144,14 @@ public class MjpegActivity extends Activity {
                             if (i2 == 0) {
                                 sb = new StringBuilder();
                                 sb.append("http://10.10.1.1:8899/?action=command&dest=0&plugin=0&id=");
-                                sb.append(Integer.toString(MjpegActivity.this.f1954C));
+                                sb.append(MjpegActivity.this.f1954C);
                                 sb.append("&group=01&value=");
                                 i = MjpegActivity.this.f1955D;
                             } else {
                                 if (i2 == 1) {
                                     sb = new StringBuilder();
                                     sb.append("http://10.10.1.1:8899/?action=command&dest=0&plugin=0&id=");
-                                    sb.append(Integer.toString(MjpegActivity.this.f1956E));
+                                    sb.append(MjpegActivity.this.f1956E);
                                     sb.append("&group=01&value=");
                                     i = MjpegActivity.this.f1957F;
                                 }
@@ -167,7 +167,7 @@ public class MjpegActivity extends Activity {
                                     e.printStackTrace();
                                 }
                             }
-                            sb.append(Integer.toString(i));
+                            sb.append(i);
                             str = sb.toString();
                             try {
                                 httpGet.setURI(new URI(str));
@@ -199,10 +199,6 @@ public class MjpegActivity extends Activity {
                     return null;
                 }
                 sb2.append(num);
-                str = sb2.toString();
-                DefaultHttpClient defaultHttpClient2 = new DefaultHttpClient();
-                if (!MjpegActivity.this.f1953B) {
-                }
                 new C0775a().start();
                 return null;
             }
@@ -271,7 +267,7 @@ public class MjpegActivity extends Activity {
         if (!file.exists()) {
             file.mkdir();
         }
-        this.mJpegViewInstance.setFilePath(1, filePath, "");
+        this.mJpegViewInstance.setFilePath(1, filePath);
     }
 
     @SuppressLint({"ClickableViewAccessibility", "RtlHardcoded", "WrongConstant"})

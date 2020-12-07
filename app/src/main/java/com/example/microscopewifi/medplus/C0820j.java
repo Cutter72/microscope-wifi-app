@@ -11,7 +11,7 @@ public class C0820j {
     public ArrayList<Point> f2267a = new ArrayList<>();
 
     /* renamed from: b */
-    public int f2268b = 0;
+    public int f2268b;
 
     /* renamed from: c */
     public int f2269c;

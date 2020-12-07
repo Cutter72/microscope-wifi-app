@@ -40,14 +40,8 @@ public class MjpegView extends SurfaceView implements SurfaceHolder.Callback {
     /* renamed from: H */
     Point f2028H = new Point(0, 0);
 
-    /* renamed from: I */
-    private int f2029I = 0;
-
     /* renamed from: J */
     private int f2030J = 0;
-
-    /* renamed from: K */
-    private int f2031K = 0;
 
     /* renamed from: L */
     private int f2032L = 0;
@@ -66,9 +60,6 @@ public class MjpegView extends SurfaceView implements SurfaceHolder.Callback {
 
     /* renamed from: Q */
     private float f2037Q = 1280.0f;
-
-    /* renamed from: R */
-    private float f2038R = 1024.0f;
 
     /* renamed from: b */
     SurfaceHolder surfaceHolder;
@@ -112,9 +103,6 @@ public class MjpegView extends SurfaceView implements SurfaceHolder.Callback {
     /* renamed from: o */
     private int pixelWidth = 1280;
 
-    /* renamed from: p */
-    private int pixelHeight = 1024;
-
     /* renamed from: q */
     private int f2054q = 0;
 
@@ -157,26 +145,21 @@ public class MjpegView extends SurfaceView implements SurfaceHolder.Callback {
         /* renamed from: d */
         private Rect f2066d = null;
 
-        SaveImageThread(SurfaceHolder surfaceHolder, Context context) {
+        SaveImageThread(SurfaceHolder surfaceHolder) {
             this.f2064b = surfaceHolder;
         }
 
         /* renamed from: b */
         private Rect m2711b(int i, int i2) {
             Rect rect;
-            MjpegView mjpegView;
-            int width;
             if (MjpegView.this.f2047j == 1) {
                 MjpegView mjpegView2 = MjpegView.this;
                 mjpegView2.f2035O = (mjpegView2.f2045h / 2) - (i / 2);
                 MjpegView mjpegView3 = MjpegView.this;
                 mjpegView3.f2036P = (mjpegView3.f2046i / 2) - (i2 / 2);
                 MjpegView.this.f2037Q = (float) i;
-                MjpegView.this.f2038R = (float) i2;
                 Rect rect2 = new Rect(MjpegView.this.f2035O, MjpegView.this.f2036P, i + MjpegView.this.f2035O, i2 + MjpegView.this.f2036P);
-                MjpegView.this.f2029I = rect2.width() / 2;
                 MjpegView.this.f2030J = rect2.width() / 3;
-                MjpegView.this.f2031K = (rect2.width() * 2) / 3;
                 MjpegView.this.f2032L = rect2.height() / 2;
                 MjpegView.this.f2033M = rect2.height() / 3;
                 MjpegView.this.f2034N = (rect2.height() * 2) / 3;
@@ -195,14 +178,9 @@ public class MjpegView extends SurfaceView implements SurfaceHolder.Callback {
                 MjpegView mjpegView5 = MjpegView.this;
                 mjpegView5.f2036P = (mjpegView5.f2046i / 2) - (i4 / 2);
                 MjpegView.this.f2037Q = (float) i3;
-                MjpegView.this.f2038R = (float) i4;
                 rect = new Rect(MjpegView.this.f2035O, MjpegView.this.f2036P, i3 + MjpegView.this.f2035O, i4 + MjpegView.this.f2036P);
-                MjpegView mjpegView6 = MjpegView.this;
-                mjpegView6.f2029I = mjpegView6.f2035O + (rect.width() / 2);
                 MjpegView mjpegView7 = MjpegView.this;
                 mjpegView7.f2030J = mjpegView7.f2035O + (rect.width() / 3);
-                mjpegView = MjpegView.this;
-                width = mjpegView.f2035O + ((rect.width() * 2) / 3);
             } else if (MjpegView.this.f2047j != 8) {
                 return null;
             } else {
@@ -210,15 +188,9 @@ public class MjpegView extends SurfaceView implements SurfaceHolder.Callback {
                 MjpegView.this.f2036P = 0;
                 MjpegView mjpegView8 = MjpegView.this;
                 mjpegView8.f2037Q = (float) mjpegView8.f2045h;
-                MjpegView mjpegView9 = MjpegView.this;
-                mjpegView9.f2038R = (float) mjpegView9.f2046i;
                 rect = new Rect(0, 0, MjpegView.this.f2045h, MjpegView.this.f2046i);
-                MjpegView.this.f2029I = rect.width() / 2;
                 MjpegView.this.f2030J = rect.width() / 3;
-                mjpegView = MjpegView.this;
-                width = (rect.width() * 2) / 3;
             }
-            mjpegView.f2031K = width;
             MjpegView.this.f2032L = rect.height() / 2;
             MjpegView.this.f2033M = rect.height() / 3;
             MjpegView.this.f2034N = (rect.height() * 2) / 3;
@@ -249,7 +221,6 @@ public class MjpegView extends SurfaceView implements SurfaceHolder.Callback {
                         MjpegView.this.bitmapImage = MjpegView.this.f2042e.mo6140a();
                         if (MjpegView.this.bitmapImage != null) {
                             MjpegView.this.pixelWidth = MjpegView.this.bitmapImage.getWidth();
-                            MjpegView.this.pixelHeight = MjpegView.this.bitmapImage.getHeight();
                             if (MjpegView.this.f2054q == 1) {
                                 MjpegView.this.f2054q = 0;
 //                                saveImage(MjpegView.this.bitmapImage);
@@ -263,7 +234,7 @@ public class MjpegView extends SurfaceView implements SurfaceHolder.Callback {
                                 synchronized (this.f2064b) {
                                     lockCanvas.drawColor(-16777216);
                                     lockCanvas.drawBitmap(MjpegView.this.bitmapImage, (Rect) null, this.f2066d, paint);
-                                    MjpegView.this.mo6049a(paint, this.f2066d, lockCanvas, MjpegView.this.f2037Q / ((float) MjpegView.this.pixelWidth), MjpegView.this.f2038R / ((float) MjpegView.this.pixelHeight));
+                                    MjpegView.this.mo6049a(paint, this.f2066d, lockCanvas, MjpegView.this.f2037Q / ((float) MjpegView.this.pixelWidth));
                                 }
                                 if (lockCanvas != null) {
                                     this.f2064b.unlockCanvasAndPost(lockCanvas);
@@ -275,8 +246,6 @@ public class MjpegView extends SurfaceView implements SurfaceHolder.Callback {
                             } catch (Throwable th2) {
                                 th = th2;
                                 canvas = lockCanvas;
-                                if (canvas != null) {
-                                }
                                 throw th;
                             }
                         }
@@ -316,7 +285,7 @@ public class MjpegView extends SurfaceView implements SurfaceHolder.Callback {
         this.surfaceHolder = holder;
         this.context = context;
         holder.addCallback(this);
-        this.saveImageThread = new SaveImageThread(this.surfaceHolder, context);
+        this.saveImageThread = new SaveImageThread(this.surfaceHolder);
         setFocusable(true);
         this.f2047j = 1;
         this.f2045h = getWidth();
@@ -412,14 +381,14 @@ public class MjpegView extends SurfaceView implements SurfaceHolder.Callback {
     }
 
     /* renamed from: a */
-    public void setFilePath(int i, String str, String str2) {
+    public void setFilePath(int i, String str) {
         this.f2054q = i;
         this.filePath = str;
     }
 
     /* JADX WARNING: Removed duplicated region for block: B:212:0x07c1  */
     /* renamed from: a */
-    public final void mo6049a(Paint paint, Rect rect, Canvas canvas, float f, float f2) {
+    public final void mo6049a(Paint paint, Rect rect, Canvas canvas, float f) {
         int size;
         int i = 0;
         int i2;
@@ -439,8 +408,7 @@ public class MjpegView extends SurfaceView implements SurfaceHolder.Callback {
         ArrayList<Point> arrayList = null;
         int i6;
         Point point2;
-        Paint paint2 = null;
-        int i7 = 0;
+        Paint paint2;
         int i8;
         Point point3;
         int i9;
@@ -549,7 +517,7 @@ public class MjpegView extends SurfaceView implements SurfaceHolder.Callback {
                     float f4 = mjpegView.f2024D;
                     mjpegView.f2024D = (((float) (sqrt / ((double) f4))) / parseFloat) * f4;
                     SharedPreferences.Editor edit = mjpegView.context.getSharedPreferences("HiviewPlus3Preferences", 0).edit();
-                    edit.putString("nMagSet", String.valueOf(f3) + "-" + String.valueOf(mjpegView.f2024D));
+                    edit.putString("nMagSet", f3 + "-" + mjpegView.f2024D);
                     edit.apply();
                     jVar = new C0820j(1, mjpegView.f2058u, mjpegView.f2059v, mjpegView.f2063z, mjpegView.f2021A, mjpegView.f2061x, mjpegView.f2060w, mjpegView.f2062y);
                     jVar.f2267a.add(new Point(i67, i53));
@@ -608,7 +576,7 @@ public class MjpegView extends SurfaceView implements SurfaceHolder.Callback {
                     paint3.setTextSize(((float) jVar3.f2271e) * f);
                     double sqrt3 = (Math.sqrt(Math.pow(((double) (jVar3.f2267a.get(1).y - jVar3.f2267a.get(0).y)) * 1.0d, 2.0d) + Math.pow(((double) (jVar3.f2267a.get(1).x - jVar3.f2267a.get(0).x)) * 1.0d, 2.0d)) * mjpegView.f2056s) / ((double) mjpegView.f2024D);
                     int i70 = jVar3.f2269c;
-                    canvas.drawText(String.format("L:%s%s", Double.toString(i70 == 2 ? ((double) Math.round(sqrt3 * 100.0d)) / 100.0d : i70 == 3 ? ((double) Math.round(sqrt3 * 1000.0d)) / 1000.0d : i70 == 4 ? ((double) Math.round(sqrt3 * 10000.0d)) / 10000.0d : i70 == 5 ? ((double) Math.round(sqrt3 * 100000.0d)) / 100000.0d : 0.0d), mjpegView.f2058u), (float) jVar3.f2267a.get(2).x, (float) jVar3.f2267a.get(2).y, paint3);
+                    canvas.drawText(String.format("L:%s%s", i70 == 2 ? ((double) Math.round(sqrt3 * 100.0d)) / 100.0d : i70 == 3 ? ((double) Math.round(sqrt3 * 1000.0d)) / 1000.0d : i70 == 4 ? ((double) Math.round(sqrt3 * 10000.0d)) / 10000.0d : i70 == 5 ? ((double) Math.round(sqrt3 * 100000.0d)) / 100000.0d : 0.0d, mjpegView.f2058u), (float) jVar3.f2267a.get(2).x, (float) jVar3.f2267a.get(2).y, paint3);
                 } else if (i68 == 3) {
                     paint3.setColor(jVar3.f2270d);
                     paint3.setStrokeWidth(((float) jVar3.f2272f) * f);
@@ -645,9 +613,9 @@ public class MjpegView extends SurfaceView implements SurfaceHolder.Callback {
                         d6 = 0.0d;
                         d7 = 0.0d;
                     }
-                    String format = String.format("R:%s%s", Double.toString(d5), mjpegView.f2058u);
-                    String format2 = String.format("A:%s%s²", Double.toString(d6), mjpegView.f2058u);
-                    String format3 = String.format("C:%s%s", Double.toString(d7), mjpegView.f2058u);
+                    String format = String.format("R:%s%s", d5, mjpegView.f2058u);
+                    String format2 = String.format("A:%s%s²", d6, mjpegView.f2058u);
+                    String format3 = String.format("C:%s%s", d7, mjpegView.f2058u);
                     canvas.drawText(format, (float) jVar3.f2267a.get(3).x, (float) jVar3.f2267a.get(3).y, paint3);
                     canvas.drawText(format2, (float) jVar3.f2267a.get(3).x, ((float) jVar3.f2267a.get(3).y) + (((float) jVar3.f2271e) * f), paint3);
                     canvas.drawText(format3, (float) jVar3.f2267a.get(3).x, ((float) jVar3.f2267a.get(3).y) + (((float) (jVar3.f2271e * 2)) * f), paint3);
@@ -668,9 +636,8 @@ public class MjpegView extends SurfaceView implements SurfaceHolder.Callback {
                             i4 = 3;
                             d4 = i72 == 3 ? ((double) Math.round(a2 * 1000.0d)) / 1000.0d : i72 == 4 ? ((double) Math.round(a2 * 10000.0d)) / 10000.0d : i72 == 5 ? ((double) Math.round(a2 * 100000.0d)) / 100000.0d : 0.0d;
                         }
-                        canvas.drawText(Double.toString(d4) + "°", (float) jVar3.f2267a.get(i4).x, (float) jVar3.f2267a.get(i4).y, paint3);
+                        canvas.drawText(d4 + "°", (float) jVar3.f2267a.get(i4).x, (float) jVar3.f2267a.get(i4).y, paint3);
                         i2 = size;
-                        i3 = i;
                     } else if (i68 == 5) {
                         paint3.setColor(jVar3.f2270d);
                         paint3.setStrokeWidth(((float) jVar3.f2272f) * f);
@@ -682,7 +649,6 @@ public class MjpegView extends SurfaceView implements SurfaceHolder.Callback {
                         double d12 = mjpegView.f2056s;
                         float f5 = mjpegView.f2024D;
                         i2 = size;
-                        i3 = i;
                         double abs = (((double) Math.abs(jVar3.f2267a.get(1).x - jVar3.f2267a.get(0).x)) * d12) / ((double) f5);
                         double abs2 = (((double) Math.abs(jVar3.f2267a.get(1).y - jVar3.f2267a.get(0).y)) * d12) / ((double) f5);
                         double d13 = abs * abs2;
@@ -699,9 +665,9 @@ public class MjpegView extends SurfaceView implements SurfaceHolder.Callback {
                             d3 = ((double) Math.round(abs * 10000.0d)) / 10000.0d;
                             d2 = ((double) Math.round(abs2 * 10000.0d)) / 10000.0d;
                             d = ((double) Math.round(d13 * 10000.0d)) / 10000.0d;
-                            String format4 = String.format("W:%s%s", Double.toString(d3), mjpegView.f2058u);
-                            String format5 = String.format("H:%s%s", Double.toString(d2), mjpegView.f2058u);
-                            String format6 = String.format("A:%s%s²", Double.toString(d), mjpegView.f2058u);
+                            String format4 = String.format("W:%s%s", d3, mjpegView.f2058u);
+                            String format5 = String.format("H:%s%s", d2, mjpegView.f2058u);
+                            String format6 = String.format("A:%s%s²", d, mjpegView.f2058u);
                             canvas.drawText(format4, (float) jVar3.f2267a.get(2).x, (float) jVar3.f2267a.get(2).y, paint3);
                             canvas.drawText(format5, (float) jVar3.f2267a.get(2).x, ((float) jVar3.f2267a.get(2).y) + (((float) jVar3.f2271e) * f), paint3);
                             canvas.drawText(format6, (float) jVar3.f2267a.get(2).x, ((float) jVar3.f2267a.get(2).y) + (((float) (jVar3.f2271e * 2)) * f), paint3);
@@ -715,22 +681,21 @@ public class MjpegView extends SurfaceView implements SurfaceHolder.Callback {
                                 d2 = 0.0d;
                                 d = 0.0d;
                             }
-                            String format42 = String.format("W:%s%s", Double.toString(d3), mjpegView.f2058u);
-                            String format52 = String.format("H:%s%s", Double.toString(d2), mjpegView.f2058u);
-                            String format62 = String.format("A:%s%s²", Double.toString(d), mjpegView.f2058u);
+                            String format42 = String.format("W:%s%s", d3, mjpegView.f2058u);
+                            String format52 = String.format("H:%s%s", d2, mjpegView.f2058u);
+                            String format62 = String.format("A:%s%s²", d, mjpegView.f2058u);
                             canvas.drawText(format42, (float) jVar3.f2267a.get(2).x, (float) jVar3.f2267a.get(2).y, paint3);
                             canvas.drawText(format52, (float) jVar3.f2267a.get(2).x, ((float) jVar3.f2267a.get(2).y) + (((float) jVar3.f2271e) * f), paint3);
                             canvas.drawText(format62, (float) jVar3.f2267a.get(2).x, ((float) jVar3.f2267a.get(2).y) + (((float) (jVar3.f2271e * 2)) * f), paint3);
                         }
-                        String format422 = String.format("W:%s%s", Double.toString(d3), mjpegView.f2058u);
-                        String format522 = String.format("H:%s%s", Double.toString(d2), mjpegView.f2058u);
-                        String format622 = String.format("A:%s%s²", Double.toString(d), mjpegView.f2058u);
+                        String format422 = String.format("W:%s%s", d3, mjpegView.f2058u);
+                        String format522 = String.format("H:%s%s", d2, mjpegView.f2058u);
+                        String format622 = String.format("A:%s%s²", d, mjpegView.f2058u);
                         canvas.drawText(format422, (float) jVar3.f2267a.get(2).x, (float) jVar3.f2267a.get(2).y, paint3);
                         canvas.drawText(format522, (float) jVar3.f2267a.get(2).x, ((float) jVar3.f2267a.get(2).y) + (((float) jVar3.f2271e) * f), paint3);
                         canvas.drawText(format622, (float) jVar3.f2267a.get(2).x, ((float) jVar3.f2267a.get(2).y) + (((float) (jVar3.f2271e * 2)) * f), paint3);
                     } else {
                         i2 = size;
-                        i3 = i;
                         if (i68 == 6) {
                             paint3.setColor(jVar3.f2270d);
                             paint3.setTextSize(((float) jVar3.f2271e) * f);
@@ -774,8 +739,8 @@ public class MjpegView extends SurfaceView implements SurfaceHolder.Callback {
                 point = new Point(i48, i49);
             }
             size = mjpegView.f2022B.size();
-            while (i < size) {
-            }
+//            while (i < size) {
+//            }
         } else {
             if (i60 == 3) {
                 paint3.setColor(mjpegView.f2021A);
@@ -817,7 +782,6 @@ public class MjpegView extends SurfaceView implements SurfaceHolder.Callback {
                     arrayList2 = jVar2.f2267a;
                     point6 = new Point(i40, i41);
                 }
-                paint3 = paint;
                 size = mjpegView.f2022B.size();
                 while (i < size) {
                     i++;
@@ -862,10 +826,9 @@ public class MjpegView extends SurfaceView implements SurfaceHolder.Callback {
                     arrayList2 = jVar2.f2267a;
                     point6 = new Point(i30, i31);
                 }
-                paint3 = paint;
                 size = mjpegView.f2022B.size();
-                while (i < size) {
-                }
+//                while (i < size) {
+//                }
             } else {
                 if (i60 == 5) {
                     paint3 = paint;
@@ -973,7 +936,6 @@ public class MjpegView extends SurfaceView implements SurfaceHolder.Callback {
                             int i120 = mjpegView.f2032L;
                             paint2 = paint;
                             canvas.drawLine(f6, (float) i120, (float) rect.right, (float) i120, paint2);
-                            i7 = mjpegView.f2029I;
                         } else {
                             paint3 = paint;
                             if (i60 == 12) {
@@ -988,11 +950,9 @@ public class MjpegView extends SurfaceView implements SurfaceHolder.Callback {
                                 canvas.drawLine(f8, (float) i122, (float) rect.right, (float) i122, paint2);
                                 int i123 = mjpegView.f2030J;
                                 canvas.drawLine((float) i123, (float) rect.top, (float) i123, (float) rect.bottom, paint2);
-                                i7 = mjpegView.f2031K;
                             }
                         }
                     }
-                    paint3 = paint;
                 }
                 size = mjpegView.f2022B.size();
                 while (i < size) {
@@ -1014,10 +974,9 @@ public class MjpegView extends SurfaceView implements SurfaceHolder.Callback {
             point2 = mjpegView.f2028H;
             point2.y = i6;
             point2.x = i6;
-            paint3 = paint;
             size = mjpegView.f2022B.size();
-            while (i < size) {
-            }
+//            while (i < size) {
+//            }
         }
         arrayList.add(point);
         mjpegView.f2022B.add(jVar);
@@ -1031,8 +990,8 @@ public class MjpegView extends SurfaceView implements SurfaceHolder.Callback {
         point262.y = 0;
         point262.x = 0;
         size = mjpegView.f2022B.size();
-        while (i < size) {
-        }
+//        while (i < size) {
+//        }
     }
 
     /* renamed from: b */
@@ -1046,7 +1005,7 @@ public class MjpegView extends SurfaceView implements SurfaceHolder.Callback {
             this.f2043f = true;
             SurfaceHolder holder = getHolder();
             holder.addCallback(this);
-            SaveImageThread aVar = new SaveImageThread(holder, this.context);
+            SaveImageThread aVar = new SaveImageThread(holder);
             this.saveImageThread = aVar;
             aVar.start();
             this.f2048k = false;
@@ -1058,7 +1017,7 @@ public class MjpegView extends SurfaceView implements SurfaceHolder.Callback {
         if (this.f2042e != null) {
             this.f2043f = true;
             if (this.saveImageThread == null) {
-                this.saveImageThread = new SaveImageThread(this.surfaceHolder, this.context);
+                this.saveImageThread = new SaveImageThread(this.surfaceHolder);
             }
             this.saveImageThread.start();
         }
