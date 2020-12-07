@@ -71,10 +71,10 @@ public class MjpegView extends SurfaceView implements SurfaceHolder.Callback {
     private int f2036P = 0;
 
     /* renamed from: Q */
-    private float f2037Q = 640.0f;
+    private float f2037Q = 1280.0f;
 
     /* renamed from: R */
-    private float f2038R = 480.0f;
+    private float f2038R = 1024.0f;
 
     /* renamed from: b */
     SurfaceHolder surfaceHolder;
@@ -447,7 +447,7 @@ public class MjpegView extends SurfaceView implements SurfaceHolder.Callback {
 //    }
 
     /* renamed from: a */
-    public void mo6047a(int i, int i2) {
+    public void setResolution(int i, int i2) {
         this.pixelWidth2 = i;
         this.pixelHeight2 = i2;
     }

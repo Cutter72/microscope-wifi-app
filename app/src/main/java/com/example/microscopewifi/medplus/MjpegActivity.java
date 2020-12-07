@@ -902,7 +902,7 @@ public class MjpegActivity extends Activity {
         MjpegView mjpegView = (MjpegView) findViewById(R.id.MjpegV);
         this.mJpegViewInstance = mjpegView;
         if (mjpegView != null) {
-            mjpegView.mo6047a(640, 480);
+            mjpegView.setResolution(1280, 1024);
         }
         new AsyncTaskC0774m().execute(this.ipAdress);
     }
