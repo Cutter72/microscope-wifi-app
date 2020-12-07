@@ -77,13 +77,13 @@ public class MjpegView extends SurfaceView implements SurfaceHolder.Callback {
     private float f2038R = 480.0f;
 
     /* renamed from: b */
-    SurfaceHolder f2039b;
+    SurfaceHolder surfaceHolder;
 
     /* renamed from: c */
-    Context f2040c;
+    Context context;
 
     /* renamed from: d */
-    private C0779a f2041d;
+    private SaveImageThread saveImageThread;
 
     /* renamed from: e */
     private C0815f f2042e = null;
@@ -152,7 +152,7 @@ public class MjpegView extends SurfaceView implements SurfaceHolder.Callback {
     public int f2063z = 2;
 
     /* renamed from: MjpegView$a */
-    public class C0779a extends Thread {
+    public class SaveImageThread extends Thread {
 
         /* renamed from: b */
         private final SurfaceHolder f2064b;
@@ -163,7 +163,7 @@ public class MjpegView extends SurfaceView implements SurfaceHolder.Callback {
         /* renamed from: d */
         private Rect f2066d = null;
 
-        C0779a(SurfaceHolder surfaceHolder, Context context) {
+        SaveImageThread(SurfaceHolder surfaceHolder, Context context) {
             this.f2064b = surfaceHolder;
         }
 
@@ -190,7 +190,7 @@ public class MjpegView extends SurfaceView implements SurfaceHolder.Callback {
             ContentValues contentValues = new ContentValues();
             contentValues.put("mime_type", "image/jpeg");
             contentValues.put("_data", str);
-            MjpegView.this.f2040c.getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, contentValues);
+            MjpegView.this.context.getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, contentValues);
         }
 
         /* renamed from: b */
@@ -345,10 +345,10 @@ public class MjpegView extends SurfaceView implements SurfaceHolder.Callback {
     /* renamed from: a */
     private void m2668a(Context context) {
         SurfaceHolder holder = getHolder();
-        this.f2039b = holder;
-        this.f2040c = context;
+        this.surfaceHolder = holder;
+        this.context = context;
         holder.addCallback(this);
-        this.f2041d = new C0779a(this.f2039b, context);
+        this.saveImageThread = new SaveImageThread(this.surfaceHolder, context);
         setFocusable(true);
         this.f2047j = 1;
         this.f2045h = getWidth();
@@ -589,7 +589,7 @@ public class MjpegView extends SurfaceView implements SurfaceHolder.Callback {
                     double sqrt = Math.sqrt(Math.pow((double) (i55 - i53), 2.0d) + Math.pow((double) (i54 - i67), 2.0d)) * mjpegView.f2056s;
                     float f4 = mjpegView.f2024D;
                     mjpegView.f2024D = (((float) (sqrt / ((double) f4))) / parseFloat) * f4;
-                    SharedPreferences.Editor edit = mjpegView.f2040c.getSharedPreferences("HiviewPlus3Preferences", 0).edit();
+                    SharedPreferences.Editor edit = mjpegView.context.getSharedPreferences("HiviewPlus3Preferences", 0).edit();
                     edit.putString("nMagSet", String.valueOf(f3) + "-" + String.valueOf(mjpegView.f2024D));
                     edit.apply();
                     jVar = new C0820j(1, mjpegView.f2058u, mjpegView.f2059v, mjpegView.f2063z, mjpegView.f2021A, mjpegView.f2061x, mjpegView.f2060w, mjpegView.f2062y);
@@ -1339,8 +1339,8 @@ public class MjpegView extends SurfaceView implements SurfaceHolder.Callback {
             this.f2043f = true;
             SurfaceHolder holder = getHolder();
             holder.addCallback(this);
-            C0779a aVar = new C0779a(holder, this.f2040c);
-            this.f2041d = aVar;
+            SaveImageThread aVar = new SaveImageThread(holder, this.context);
+            this.saveImageThread = aVar;
             aVar.start();
             this.f2048k = false;
         }
@@ -1350,10 +1350,10 @@ public class MjpegView extends SurfaceView implements SurfaceHolder.Callback {
     public void mo6056e() {
         if (this.f2042e != null) {
             this.f2043f = true;
-            if (this.f2041d == null) {
-                this.f2041d = new C0779a(this.f2039b, this.f2040c);
+            if (this.saveImageThread == null) {
+                this.saveImageThread = new SaveImageThread(this.surfaceHolder, this.context);
             }
-            this.f2041d.start();
+            this.saveImageThread.start();
         }
     }
 
@@ -1364,15 +1364,15 @@ public class MjpegView extends SurfaceView implements SurfaceHolder.Callback {
             this.f2048k = true;
         }
         this.f2043f = false;
-        if (this.f2041d != null) {
+        if (this.saveImageThread != null) {
             while (z) {
                 try {
-                    this.f2041d.join();
+                    this.saveImageThread.join();
                     z = false;
                 } catch (InterruptedException unused) {
                 }
             }
-            this.f2041d = null;
+            this.saveImageThread = null;
         }
         C0815f fVar = this.f2042e;
         if (fVar != null) {
@@ -1406,7 +1406,7 @@ public class MjpegView extends SurfaceView implements SurfaceHolder.Callback {
     }
 
     public void surfaceChanged(SurfaceHolder surfaceHolder, int i, int i2, int i3) {
-        C0779a aVar = this.f2041d;
+        SaveImageThread aVar = this.saveImageThread;
         if (aVar != null) {
             aVar.mo6065a(i2, i3);
         }

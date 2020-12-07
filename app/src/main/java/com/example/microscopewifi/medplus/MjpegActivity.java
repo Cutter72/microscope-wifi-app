@@ -58,10 +58,10 @@ public class MjpegActivity extends Activity {
     private int f1957F = 0;
 
     /* renamed from: G */
-    private MjpegView f1958G = null;
+    private MjpegView mJpegViewInstance = null;
 
     /* renamed from: H */
-    String f1959H = "http://10.10.1.1:8899/";
+    String ipAdress = "http://10.10.1.1:8899/";
 
     /* renamed from: I */
     int f1960I = 0;
@@ -148,13 +148,13 @@ public class MjpegActivity extends Activity {
     int f1987k = 0;
 
     /* renamed from: l */
-    private ImageButton f1988l = null;
+    private ImageButton imageButton = null;
 
     /* renamed from: m */
     private boolean f1989m = false;
 
     /* renamed from: n */
-    SharedPreferences f1990n;
+    SharedPreferences sharedPreferences;
 
     /* renamed from: o */
     private String f1991o = "";
@@ -431,8 +431,8 @@ public class MjpegActivity extends Activity {
 
             public void run() {
                 SystemClock.sleep(5000);
-                if (MjpegActivity.this.f1958G != null && MjpegActivity.this.f1965N) {
-                    new AsyncTaskC0774m().execute(MjpegActivity.this.f1959H);
+                if (MjpegActivity.this.mJpegViewInstance != null && MjpegActivity.this.f1965N) {
+                    new AsyncTaskC0774m().execute(MjpegActivity.this.ipAdress);
                     MjpegActivity.this.f1965N = false;
                 }
             }
@@ -577,15 +577,15 @@ public class MjpegActivity extends Activity {
         public void onPostExecute(C0815f fVar) {
             MjpegView mjpegView;
             int i;
-            MjpegActivity.this.f1958G.setSource(fVar);
+            MjpegActivity.this.mJpegViewInstance.setSource(fVar);
             if (fVar != null) {
                 fVar.mo6141a(2);
             }
             if (!MjpegActivity.this.f1964M) {
-                mjpegView = MjpegActivity.this.f1958G;
+                mjpegView = MjpegActivity.this.mJpegViewInstance;
                 i = 4;
             } else {
-                mjpegView = MjpegActivity.this.f1958G;
+                mjpegView = MjpegActivity.this.mJpegViewInstance;
                 i = 8;
             }
             mjpegView.setDisplayMode(i);
@@ -893,11 +893,11 @@ public class MjpegActivity extends Activity {
     /* renamed from: a */
     public void mo6009a() {
         MjpegView mjpegView = (MjpegView) findViewById(R.id.MjpegV);
-        this.f1958G = mjpegView;
+        this.mJpegViewInstance = mjpegView;
         if (mjpegView != null) {
             mjpegView.mo6047a(640, 480);
         }
-        new AsyncTaskC0774m().execute(this.f1959H);
+        new AsyncTaskC0774m().execute(this.ipAdress);
     }
 
     /* renamed from: b */
@@ -941,7 +941,7 @@ public class MjpegActivity extends Activity {
             file.mkdir();
         }
 //        this.f1973V.play(this.f1972U, 1.0f, 1.0f, 0, 0, 1.0f);
-        this.f1958G.setFilePath(1, filePath, "");
+        this.mJpegViewInstance.setFilePath(1, filePath, "");
     }
 
     /* renamed from: d */
@@ -995,13 +995,13 @@ public class MjpegActivity extends Activity {
         setRequestedOrientation(0);
         setContentView(R.layout.activity_mjpeg);
         SharedPreferences sharedPreferences = getSharedPreferences("HiviewPlus3Preferences", 0);
-        this.f1990n = sharedPreferences;
+        this.sharedPreferences = sharedPreferences;
         this.f1993q = sharedPreferences.getInt("bRename", 0);
-        this.f1998v = this.f1990n.getString("currentunit", "mm");
-        this.f1999w = this.f1990n.getInt("currentdecimal", 2);
-        this.f2000x = this.f1990n.getInt("currentcolor", -65536);
-        this.f2001y = this.f1990n.getInt("currentfontsize", 25);
-        this.f2002z = this.f1990n.getInt("currentlinesize", 2);
+        this.f1998v = this.sharedPreferences.getString("currentunit", "mm");
+        this.f1999w = this.sharedPreferences.getInt("currentdecimal", 2);
+        this.f2000x = this.sharedPreferences.getInt("currentcolor", -65536);
+        this.f2001y = this.sharedPreferences.getInt("currentfontsize", 25);
+        this.f2002z = this.sharedPreferences.getInt("currentlinesize", 2);
         this.f1978b = getIntent().getIntExtra("userid", 0);
         this.f1979c = getIntent().getStringExtra("name");
         this.f1980d = getIntent().getStringExtra("age");
@@ -1083,9 +1083,9 @@ public class MjpegActivity extends Activity {
 
     public void onPause() {
         super.onPause();
-        MjpegView mjpegView = this.f1958G;
+        MjpegView mjpegView = this.mJpegViewInstance;
         if (mjpegView != null && mjpegView.mo6053b()) {
-            this.f1958G.mo6057f();
+            this.mJpegViewInstance.mo6057f();
             this.f1965N = true;
         }
     }
