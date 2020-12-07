@@ -108,13 +108,7 @@ public class C0815f extends DataInputStream {
             readFully(this.f2248e);
             try {
                 i = m2775a(this.f2248e);
-            } catch (NumberFormatException unused) {
-                i = m2776b(this, this.f2246c);
-                if (i < 0) {
-                    reset();
-                    i = m2774a(this, this.f2246c);
-                }
-            } catch (IllegalArgumentException unused2) {
+            } catch (IllegalArgumentException unused) {
                 i = m2776b(this, this.f2246c);
                 if (i < 0) {
                     reset();
