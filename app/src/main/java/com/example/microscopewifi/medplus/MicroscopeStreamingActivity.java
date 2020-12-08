@@ -2,6 +2,7 @@ package com.example.microscopewifi.medplus;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
@@ -29,7 +30,7 @@ import java.util.Date;
 import java.util.Locale;
 
 @SuppressLint({"WrongConstant", "ResourceType"})
-public class MjpegActivity extends Activity {
+public class MicroscopeStreamingActivity extends Activity {
 
     /* renamed from: A */
     private boolean f1952A = false;
@@ -80,21 +81,27 @@ public class MjpegActivity extends Activity {
         Toast.makeText(this, "Picture taken", Toast.LENGTH_SHORT).show();
     }
 
+    public void onClickMicroscopeSettings(View view) {
+        Intent intent = new Intent();
+        intent.setClass(this, MicroscopeSettingsActivity.class);
+        startActivity(intent);
+    }
+
     @SuppressWarnings("deprecation")
     @SuppressLint({"StaticFieldLeak"})
-    /* renamed from: MjpegActivity$m */
+    /* renamed from: MicroscopeStreamingActivity$m */
     public class AsyncTaskC0774m extends AsyncTask<String, Void, C0815f> {
 
-        /* renamed from: MjpegActivity$m$a */
+        /* renamed from: MicroscopeStreamingActivity$m$a */
         class C0775a extends Thread {
             C0775a() {
             }
 
             public void run() {
                 SystemClock.sleep(5000);
-                if (MjpegActivity.this.mJpegViewInstance != null && MjpegActivity.this.f1965N) {
-                    new AsyncTaskC0774m().execute(MjpegActivity.this.ipAdress);
-                    MjpegActivity.this.f1965N = false;
+                if (MicroscopeStreamingActivity.this.mJpegViewInstance != null && MicroscopeStreamingActivity.this.f1965N) {
+                    new AsyncTaskC0774m().execute(MicroscopeStreamingActivity.this.ipAdress);
+                    MicroscopeStreamingActivity.this.f1965N = false;
                 }
             }
         }
@@ -114,45 +121,45 @@ public class MjpegActivity extends Activity {
             StringBuilder sb2;
             String num;
             InputStream inputStream = null;
-            if (MjpegActivity.this.f1952A) {
-                MjpegActivity.this.f1952A = false;
+            if (MicroscopeStreamingActivity.this.f1952A) {
+                MicroscopeStreamingActivity.this.f1952A = false;
                 HttpGet httpGet = new HttpGet();
-                if (MjpegActivity.this.f1995s == 1) {
+                if (MicroscopeStreamingActivity.this.f1995s == 1) {
                     sb2 = new StringBuilder();
                     sb2.append("http://10.10.1.1/apply.cgi?submit_button=wizardvideo&video_idx=");
-                    sb2.append(MjpegActivity.this.f1996t);
+                    sb2.append(MicroscopeStreamingActivity.this.f1996t);
                     sb2.append("&video_frame=30&action=video_idx&video_idx_sel=");
-                    sb2.append(MjpegActivity.this.f1996t);
+                    sb2.append(MicroscopeStreamingActivity.this.f1996t);
                     num = "&video_frame_sel=30";
-                } else if (MjpegActivity.this.f1995s == 2) {
+                } else if (MicroscopeStreamingActivity.this.f1995s == 2) {
                     sb2 = new StringBuilder();
                     sb2.append("http://10.10.1.1/apply.cgi?submit_button=wizardvideo&video_idx=&video_frame=");
-                    sb2.append(MjpegActivity.this.f1997u);
+                    sb2.append(MicroscopeStreamingActivity.this.f1997u);
                     sb2.append("&action=video_frame&video_idx_sel=");
-                    sb2.append(MjpegActivity.this.f1996t);
+                    sb2.append(MicroscopeStreamingActivity.this.f1996t);
                     sb2.append("&video_frame_sel=");
-                    num = Integer.toString(MjpegActivity.this.f1997u);
+                    num = Integer.toString(MicroscopeStreamingActivity.this.f1997u);
                 } else {
-                    if (MjpegActivity.this.f1995s == 4) {
-                        MjpegActivity.this.f1953B = true;
+                    if (MicroscopeStreamingActivity.this.f1995s == 4) {
+                        MicroscopeStreamingActivity.this.f1953B = true;
                     }
                     str = null;
                     DefaultHttpClient defaultHttpClient = new DefaultHttpClient();
-                    if (!MjpegActivity.this.f1953B) {
+                    if (!MicroscopeStreamingActivity.this.f1953B) {
                         for (int i2 = 0; i2 < 2; i2++) {
                             if (i2 == 0) {
                                 sb = new StringBuilder();
                                 sb.append("http://10.10.1.1:8899/?action=command&dest=0&plugin=0&id=");
-                                sb.append(MjpegActivity.this.f1954C);
+                                sb.append(MicroscopeStreamingActivity.this.f1954C);
                                 sb.append("&group=01&value=");
-                                i = MjpegActivity.this.f1955D;
+                                i = MicroscopeStreamingActivity.this.f1955D;
                             } else {
                                 if (i2 == 1) {
                                     sb = new StringBuilder();
                                     sb.append("http://10.10.1.1:8899/?action=command&dest=0&plugin=0&id=");
-                                    sb.append(MjpegActivity.this.f1956E);
+                                    sb.append(MicroscopeStreamingActivity.this.f1956E);
                                     sb.append("&group=01&value=");
-                                    i = MjpegActivity.this.f1957F;
+                                    i = MicroscopeStreamingActivity.this.f1957F;
                                 }
                                 try {
                                     httpGet.setURI(new URI(str));
@@ -180,7 +187,7 @@ public class MjpegActivity extends Activity {
                                 e2.printStackTrace();
                             }
                         }
-                        MjpegActivity.this.f1953B = false;
+                        MicroscopeStreamingActivity.this.f1953B = false;
                     } else {
                         try {
                             httpGet.setURI(new URI(str));
@@ -234,12 +241,12 @@ public class MjpegActivity extends Activity {
         public void onPostExecute(C0815f fVar) {
             MjpegView mjpegView;
             int i;
-            MjpegActivity.this.mJpegViewInstance.setSource(fVar);
-            if (!MjpegActivity.this.f1964M) {
-                mjpegView = MjpegActivity.this.mJpegViewInstance;
+            MicroscopeStreamingActivity.this.mJpegViewInstance.setSource(fVar);
+            if (!MicroscopeStreamingActivity.this.f1964M) {
+                mjpegView = MicroscopeStreamingActivity.this.mJpegViewInstance;
                 i = 4;
             } else {
-                mjpegView = MjpegActivity.this.mJpegViewInstance;
+                mjpegView = MicroscopeStreamingActivity.this.mJpegViewInstance;
                 i = 8;
             }
             mjpegView.setDisplayMode(i);
@@ -270,7 +277,7 @@ public class MjpegActivity extends Activity {
     @SuppressLint({"ClickableViewAccessibility", "RtlHardcoded", "WrongConstant"})
     protected void onCreate(Bundle bundle) {
         super.onCreate(bundle);
-        setContentView(R.layout.activity_mjpeg);
+        setContentView(R.layout.activity_microscope_streaming);
         openMjpedViewStreaming();
     }
 

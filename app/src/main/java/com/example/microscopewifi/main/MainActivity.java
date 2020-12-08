@@ -1,7 +1,5 @@
 package com.example.microscopewifi.main;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Context;
 import android.content.Intent;
 import android.net.wifi.WifiManager;
@@ -9,8 +7,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.microscopewifi.R;
-import com.example.microscopewifi.medplus.MjpegActivity;
+import com.example.microscopewifi.medplus.MicroscopeStreamingActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -26,10 +26,10 @@ public class MainActivity extends AppCompatActivity {
         Context context;
         Class<?> cls;
         Intent intent;
-        if (b().contains("10.10.1.")) {
+        if (getWifiIpAdress().contains("10.10.1.")) {
             intent = new Intent();
             intent.putExtra("playmode", 0);
-            cls = MjpegActivity.class;
+            cls = MicroscopeStreamingActivity.class;
             intent.setClass(this, cls);
             startActivity(intent);
         } else {
@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private String b() {
+    private String getWifiIpAdress() {
         int ipAddress = ((WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE)).getConnectionInfo().getIpAddress();
         if (ipAddress == 0) {
             return "No connected wifi";
