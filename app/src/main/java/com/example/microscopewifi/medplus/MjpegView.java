@@ -14,6 +14,7 @@ import android.view.SurfaceView;
 import java.io.IOException;
 import java.util.ArrayList;
 
+@SuppressWarnings("SpellCheckingInspection")
 public class MjpegView extends SurfaceView implements SurfaceHolder.Callback {
 
     /* renamed from: A */
@@ -128,6 +129,7 @@ public class MjpegView extends SurfaceView implements SurfaceHolder.Callback {
     public final int f2063z = 2;
 
     /* renamed from: MjpegView$a */
+    @SuppressWarnings("SpellCheckingInspection")
     public class SaveImageThread extends Thread {
 
         /* renamed from: b */
@@ -916,8 +918,8 @@ public class MjpegView extends SurfaceView implements SurfaceHolder.Callback {
                             }
                         }
                     } else {
+                        paint3 = paint;
                         if (i60 == 11) {
-                            paint3 = paint;
                             paint3.setColor(mjpegView.f2021A);
                             paint3.setStrokeWidth(((float) mjpegView.f2063z) * f);
                             float f6 = (float) rect.left;
@@ -925,7 +927,6 @@ public class MjpegView extends SurfaceView implements SurfaceHolder.Callback {
                             paint2 = paint;
                             canvas.drawLine(f6, (float) i120, (float) rect.right, (float) i120, paint2);
                         } else {
-                            paint3 = paint;
                             if (i60 == 12) {
                                 paint3.setColor(mjpegView.f2021A);
                                 paint3.setStrokeWidth(((float) mjpegView.f2063z) * f);

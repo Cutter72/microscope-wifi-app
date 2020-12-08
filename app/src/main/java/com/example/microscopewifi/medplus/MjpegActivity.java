@@ -6,7 +6,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.SystemClock;
-import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Toast;
 
@@ -275,18 +274,6 @@ public class MjpegActivity extends Activity {
         openMjpedViewStreaming();
     }
 
-    public void onDestroy() {
-        super.onDestroy();
-    }
-
-    public boolean onKeyDown(int i, KeyEvent keyEvent) {
-        if (i != 4) {
-            return false;
-        }
-        finish();
-        return false;
-    }
-
     public void onPause() {
         super.onPause();
         MjpegView mjpegView = this.mJpegViewInstance;
@@ -299,17 +286,5 @@ public class MjpegActivity extends Activity {
     public void onRestart() {
         openMjpedViewStreaming();
         super.onRestart();
-    }
-
-    public void onResume() {
-        super.onResume();
-    }
-
-    public void onStart() {
-        super.onStart();
-    }
-
-    public void onStop() {
-        super.onStop();
     }
 }
