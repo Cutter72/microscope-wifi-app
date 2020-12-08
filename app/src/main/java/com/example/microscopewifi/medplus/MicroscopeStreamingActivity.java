@@ -74,7 +74,7 @@ public class MicroscopeStreamingActivity extends Activity {
     public void onClickTakePicture(View view) {
         //todo implement picture save
         createFilePath();
-        String fileName = new SimpleDateFormat("yyyyMMddhhmmss", Locale.getDefault()).format(new Date());
+        String fileName = new SimpleDateFormat("yyyyMMdd_hhmmss", Locale.getDefault()).format(new Date());
         System.out.println("filePath: " + mJpegViewInstance.filePath);
         System.out.println("fileName: " + fileName);
         FileCreation.saveImage(mJpegViewInstance.bitmapImage, mJpegViewInstance.filePath, fileName);
