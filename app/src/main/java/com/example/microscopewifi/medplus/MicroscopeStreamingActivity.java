@@ -90,7 +90,7 @@ public class MicroscopeStreamingActivity extends Activity {
     @SuppressWarnings("deprecation")
     @SuppressLint({"StaticFieldLeak"})
     /* renamed from: MicroscopeStreamingActivity$m */
-    public class AsyncTaskC0774m extends AsyncTask<String, Void, C0815f> {
+    public class AsyncTaskC0774m extends AsyncTask<String, Void, InputStreamHandler> {
 
         /* renamed from: MicroscopeStreamingActivity$m$a */
         class C0775a extends Thread {
@@ -113,7 +113,7 @@ public class MicroscopeStreamingActivity extends Activity {
         /* JADX WARNING: Removed duplicated region for block: B:15:0x00b2  */
         /* JADX WARNING: Removed duplicated region for block: B:34:0x013b A[SYNTHETIC, Splitter:B:34:0x013b] */
         /* renamed from: a */
-        public C0815f doInBackground(String... strArr) {
+        public InputStreamHandler doInBackground(String... strArr) {
             HttpURLConnection httpURLConnection;
             String str;
             StringBuilder sb = new StringBuilder();
@@ -233,12 +233,12 @@ public class MicroscopeStreamingActivity extends Activity {
             } catch (IOException e8) {
                 e8.printStackTrace();
             }
-            return new C0815f(inputStream);
+            return new InputStreamHandler(inputStream);
         }
 
         /* access modifiers changed from: protected */
         /* renamed from: a */
-        public void onPostExecute(C0815f fVar) {
+        public void onPostExecute(InputStreamHandler fVar) {
             MjpegView mjpegView;
             int i;
             MicroscopeStreamingActivity.this.mJpegViewInstance.setSource(fVar);

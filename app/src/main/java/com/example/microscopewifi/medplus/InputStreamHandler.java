@@ -11,7 +11,7 @@ import java.io.InputStream;
 import java.util.Properties;
 
 /* renamed from: com.italeco.micfimedplus.f */
-public class C0815f extends DataInputStream {
+public class InputStreamHandler extends DataInputStream {
 
     /* renamed from: b */
     private final byte[] f2245b = {-1, -40};
@@ -37,7 +37,7 @@ public class C0815f extends DataInputStream {
     /* renamed from: i */
     int f2252i = 0;
 
-    public C0815f(InputStream inputStream) {
+    public InputStreamHandler(InputStream inputStream) {
         super(new BufferedInputStream(inputStream, 40100));
     }
 

@@ -14,7 +14,6 @@ import android.view.SurfaceView;
 import java.io.IOException;
 import java.util.ArrayList;
 
-@SuppressWarnings("SpellCheckingInspection")
 public class MjpegView extends SurfaceView implements SurfaceHolder.Callback {
 
     /* renamed from: A */
@@ -72,7 +71,7 @@ public class MjpegView extends SurfaceView implements SurfaceHolder.Callback {
     private SaveImageThread saveImageThread;
 
     /* renamed from: e */
-    private C0815f f2042e = null;
+    private InputStreamHandler inputStreamHandler = null;
 
     /* renamed from: f */
     private boolean f2043f = false;
@@ -129,7 +128,6 @@ public class MjpegView extends SurfaceView implements SurfaceHolder.Callback {
     public final int f2063z = 2;
 
     /* renamed from: MjpegView$a */
-    @SuppressWarnings("SpellCheckingInspection")
     public class SaveImageThread extends Thread {
 
         /* renamed from: b */
@@ -214,7 +212,7 @@ public class MjpegView extends SurfaceView implements SurfaceHolder.Callback {
                         if (MjpegView.this.bitmapImage == null) {
                             MjpegView.this.bitmapImage = Bitmap.createBitmap(MjpegView.this.pixelWidth2, MjpegView.this.pixelHeight2, Bitmap.Config.ARGB_8888);
                         }
-                        MjpegView.this.bitmapImage = MjpegView.this.f2042e.mo6140a();
+                        MjpegView.this.bitmapImage = MjpegView.this.inputStreamHandler.mo6140a();
                         if (MjpegView.this.bitmapImage != null) {
                             MjpegView.this.pixelWidth = MjpegView.this.bitmapImage.getWidth();
                             if (MjpegView.this.f2054q == 1) {
@@ -230,7 +228,7 @@ public class MjpegView extends SurfaceView implements SurfaceHolder.Callback {
                                 synchronized (this.f2064b) {
                                     lockCanvas.drawColor(-16777216);
                                     lockCanvas.drawBitmap(MjpegView.this.bitmapImage, (Rect) null, this.f2066d, paint);
-                                    MjpegView.this.mo6049a(paint, this.f2066d, lockCanvas, MjpegView.this.f2037Q / ((float) MjpegView.this.pixelWidth));
+                                    MjpegView.this.painting(paint, this.f2066d, lockCanvas, MjpegView.this.f2037Q / ((float) MjpegView.this.pixelWidth));
                                 }
                                 if (lockCanvas != null) {
                                     this.f2064b.unlockCanvasAndPost(lockCanvas);
@@ -384,7 +382,7 @@ public class MjpegView extends SurfaceView implements SurfaceHolder.Callback {
 
     /* JADX WARNING: Removed duplicated region for block: B:212:0x07c1  */
     /* renamed from: a */
-    public final void mo6049a(Paint paint, Rect rect, Canvas canvas, float f) {
+    public final void painting(Paint paint, Rect rect, Canvas canvas, float f) {
         int size;
         int i = 0;
         int i2;
@@ -918,8 +916,8 @@ public class MjpegView extends SurfaceView implements SurfaceHolder.Callback {
                             }
                         }
                     } else {
-                        paint3 = paint;
                         if (i60 == 11) {
+                            paint3 = paint;
                             paint3.setColor(mjpegView.f2021A);
                             paint3.setStrokeWidth(((float) mjpegView.f2063z) * f);
                             float f6 = (float) rect.left;
@@ -927,6 +925,7 @@ public class MjpegView extends SurfaceView implements SurfaceHolder.Callback {
                             paint2 = paint;
                             canvas.drawLine(f6, (float) i120, (float) rect.right, (float) i120, paint2);
                         } else {
+                            paint3 = paint;
                             if (i60 == 12) {
                                 paint3.setColor(mjpegView.f2021A);
                                 paint3.setStrokeWidth(((float) mjpegView.f2063z) * f);
@@ -984,7 +983,7 @@ public class MjpegView extends SurfaceView implements SurfaceHolder.Callback {
 
     /* renamed from: d */
     public void mo6055d() {
-        if (this.f2048k && this.f2042e != null) {
+        if (this.f2048k && this.inputStreamHandler != null) {
             this.f2043f = true;
             SurfaceHolder holder = getHolder();
             holder.addCallback(this);
@@ -997,7 +996,7 @@ public class MjpegView extends SurfaceView implements SurfaceHolder.Callback {
 
     /* renamed from: e */
     public void mo6056e() {
-        if (this.f2042e != null) {
+        if (this.inputStreamHandler != null) {
             this.f2043f = true;
             if (this.saveImageThread == null) {
                 this.saveImageThread = new SaveImageThread(this.surfaceHolder);
@@ -1024,14 +1023,14 @@ public class MjpegView extends SurfaceView implements SurfaceHolder.Callback {
             }
             this.saveImageThread = null;
         }
-        C0815f fVar = this.f2042e;
+        InputStreamHandler fVar = this.inputStreamHandler;
         if (fVar != null) {
             try {
                 fVar.close();
             } catch (IOException unused2) {
                 unused2.printStackTrace();
             }
-            this.f2042e = null;
+            this.inputStreamHandler = null;
         }
     }
 
@@ -1039,8 +1038,8 @@ public class MjpegView extends SurfaceView implements SurfaceHolder.Callback {
         this.f2047j = i;
     }
 
-    public void setSource(C0815f fVar) {
-        this.f2042e = fVar;
+    public void setSource(InputStreamHandler fVar) {
+        this.inputStreamHandler = fVar;
         if (!this.f2048k) {
             mo6056e();
         } else {
