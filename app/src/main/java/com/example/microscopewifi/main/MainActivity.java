@@ -56,64 +56,66 @@ public class MainActivity extends AppCompatActivity {
         return (ipAddress & 255) + "." + ((ipAddress >> 8) & 255) + "." + ((ipAddress >> 16) & 255) + "." + ((ipAddress >> 24) & 255);
     }
 
-    private void changeResolution() {
+    private void changeCameraParams() {
         Runnable runnable = new Runnable() {
             @Override
             public void run() {
-                StringBuilder sb2 = new StringBuilder();
-                HttpGet httpGet = new HttpGet();
-                int resolutionId = 4;
-                sb2.append("http://10.10.1.1/apply.cgi?submit_button=wizardvideo&video_idx=");
-                sb2.append(resolutionId);
-                sb2.append("&action=video_idx&video_idx_sel=");
-                sb2.append(resolutionId);
-                DefaultHttpClient defaultHttpClient = new DefaultHttpClient();
-                try {
-                    httpGet.setURI(new URI(sb2.toString()));
-                } catch (URISyntaxException e) {
-                    e.printStackTrace();
-                }
-                httpGet.addHeader(BasicScheme.authenticate(new UsernamePasswordCredentials("admin", "admin"), "UTF-8", false));
-                try {
-                    defaultHttpClient.execute(httpGet);
-                } catch (IOException e2) {
-                    e2.printStackTrace();
-                }
+                changeResolution();
+                changeFps();
+                Intent intent = new Intent();
+                intent.setClass(MainActivity.this, MicroscopeStreamingActivity.class);
+                startActivity(intent);
             }
         };
         new Thread(runnable).start();
+    }
+
+    private void changeResolution() {
+        StringBuilder sb = new StringBuilder();
+        HttpGet httpGet = new HttpGet();
+        int resolutionId = 4; //4 = 1280x1024
+        sb.append("http://10.10.1.1/apply.cgi?submit_button=wizardvideo&video_idx=");
+        sb.append(resolutionId);
+        sb.append("&action=video_idx&video_idx_sel=");
+        sb.append(resolutionId);
+        DefaultHttpClient defaultHttpClient = new DefaultHttpClient();
+        try {
+            httpGet.setURI(new URI(sb.toString()));
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
+        httpGet.addHeader(BasicScheme.authenticate(new UsernamePasswordCredentials("admin", "admin"), "UTF-8", false));
+        try {
+            defaultHttpClient.execute(httpGet);
+        } catch (IOException e2) {
+            e2.printStackTrace();
+        }
     }
 
     private void changeFps() {
-        Runnable runnable = new Runnable() {
-            @Override
-            public void run() {
-                StringBuilder sb2 = new StringBuilder();
-                HttpGet httpGet = new HttpGet();
-                int fps = 7;
-                sb2.append("http://10.10.1.1/apply.cgi?submit_button=wizardvideo&video_frame=");
-                sb2.append(fps);
-                sb2.append("&action=video_frame&video_frame_sel=");
-                sb2.append(fps);
-                DefaultHttpClient defaultHttpClient = new DefaultHttpClient();
-                try {
-                    httpGet.setURI(new URI(sb2.toString()));
-                } catch (URISyntaxException e) {
-                    e.printStackTrace();
-                }
-                httpGet.addHeader(BasicScheme.authenticate(new UsernamePasswordCredentials("admin", "admin"), "UTF-8", false));
-                try {
-                    defaultHttpClient.execute(httpGet);
-                } catch (IOException e2) {
-                    e2.printStackTrace();
-                }
-            }
-        };
-        new Thread(runnable).start();
+        StringBuilder sb = new StringBuilder();
+        HttpGet httpGet = new HttpGet();
+        int fps = 7;
+        sb.append("http://10.10.1.1/apply.cgi?submit_button=wizardvideo&video_frame=");
+        sb.append(fps);
+        sb.append("&action=video_frame&video_frame_sel=");
+        sb.append(fps);
+        DefaultHttpClient defaultHttpClient = new DefaultHttpClient();
+        try {
+            httpGet.setURI(new URI(sb.toString()));
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
+        httpGet.addHeader(BasicScheme.authenticate(new UsernamePasswordCredentials("admin", "admin"), "UTF-8", false));
+        try {
+            defaultHttpClient.execute(httpGet);
+        } catch (IOException e2) {
+            e2.printStackTrace();
+        }
     }
 
     public void onClickChangeResolution(View view) {
-        changeResolution();
+        changeCameraParams();
     }
 
     public void onClickChangeFps(View view) {

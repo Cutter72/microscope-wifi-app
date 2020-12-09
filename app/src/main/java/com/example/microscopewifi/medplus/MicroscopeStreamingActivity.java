@@ -104,7 +104,7 @@ public class MicroscopeStreamingActivity extends Activity {
             HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
             httpURLConnection.setConnectTimeout(3000);
             if (httpURLConnection.getResponseCode() == 200) {
-                return streamToString(httpURLConnection.getInputStream());
+                return responseStreamToString(httpURLConnection.getInputStream());
             }
             return null;
         } catch (IOException e) {
@@ -113,7 +113,7 @@ public class MicroscopeStreamingActivity extends Activity {
         }
     }
 
-    private String streamToString(InputStream inputStream) {
+    private String responseStreamToString(InputStream inputStream) {
         Throwable th;
         IOException e;
         StringBuilder sb = new StringBuilder();
@@ -133,8 +133,8 @@ public class MicroscopeStreamingActivity extends Activity {
                     bufferedReader = bufferedReader2;
                     try {
                         e.printStackTrace();
-                        if (bufferedReader != null) {
-                        }
+//                        if (bufferedReader != null) {
+//                        }
                         return sb.toString();
                     } catch (Throwable th2) {
                         th = th2;
@@ -154,8 +154,8 @@ public class MicroscopeStreamingActivity extends Activity {
                 } catch (Throwable th3) {
                     th = th3;
                     bufferedReader = bufferedReader2;
-                    if (bufferedReader != null) {
-                    }
+//                    if (bufferedReader != null) {
+//                    }
                     try {
                         throw th;
                     } catch (Throwable throwable) {
@@ -412,7 +412,7 @@ public class MicroscopeStreamingActivity extends Activity {
 
     /* renamed from: a */
     public void openMjpedViewStreaming() {
-        MjpegView mjpegView = (MjpegView) findViewById(R.id.MjpegV);
+        MjpegView mjpegView = findViewById(R.id.MjpegV);
         this.mJpegViewInstance = mjpegView;
         if (mjpegView != null) {
             mjpegView.setResolution(1280, 1024);

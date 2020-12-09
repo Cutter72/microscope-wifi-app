@@ -148,7 +148,7 @@ public class MjpegView extends SurfaceView implements SurfaceHolder.Callback {
                             try {
                                 synchronized (this.f2064b) {
 //                                    lockCanvas.drawColor(-16777216);
-                                    lockCanvas.drawBitmap(MjpegView.this.bitmapImage, (Rect) null, this.f2066d, paint);
+                                    lockCanvas.drawBitmap(MjpegView.this.bitmapImage, null, this.f2066d, paint);
                                 }
                                 if (lockCanvas != null) {
                                     this.f2064b.unlockCanvasAndPost(lockCanvas);
