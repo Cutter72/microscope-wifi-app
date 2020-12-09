@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
         Context context;
         Class<?> cls;
         Intent intent;
-        if (getWifiIpAdress().contains("10.10.1.")) {
+        if (getWifiIpAddress().contains("10.10.1.")) {
             intent = new Intent();
             intent.putExtra("playmode", 0);
             cls = MicroscopeStreamingActivity.class;
@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private String getWifiIpAdress() {
+    private String getWifiIpAddress() {
         int ipAddress = ((WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE)).getConnectionInfo().getIpAddress();
         if (ipAddress == 0) {
             return "No connected wifi";
