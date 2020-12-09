@@ -161,7 +161,7 @@ public class MjpegView extends SurfaceView implements SurfaceHolder.Callback {
                         }
                     } catch (IOException unused2) {
                         if (canvas == null) {
-                            this.f2064b.unlockCanvasAndPost(canvas);
+//                            this.f2064b.unlockCanvasAndPost(canvas);
                         }
                     } catch (Throwable th3) {
                         th = th3;
