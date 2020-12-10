@@ -19,7 +19,7 @@ public class MicroscopeSettingsActivity extends AppCompatActivity {
         WebView webView = findViewById(R.id.webView);
         webView.getSettings().setJavaScriptEnabled(true);
         webView.setWebViewClient(new WebViewClient());
-//        webView.loadUrl("http://admin:admin@10.10.1.1/index.asp"); //main page with all microscope settings
+//        webView.loadUrl("http://admin:admin@10.10.1.1/index.asp"); //main page with all microscope and wifi settings
         webView.loadUrl("http://admin:admin@10.10.1.1/wizardvideo.asp"); //direct page for microscope camera settings
     }
 }

@@ -40,6 +40,26 @@ public class MicroscopeStreamingActivity extends Activity {
     /* renamed from: M */
     private final boolean f1964M = false;
 
+    @SuppressLint({"ClickableViewAccessibility", "RtlHardcoded", "WrongConstant"})
+    protected void onCreate(Bundle bundle) {
+        super.onCreate(bundle);
+        setContentView(R.layout.activity_microscope_streaming);
+        openMjpedViewStreaming();
+    }
+
+    public void onPause() {
+        super.onPause();
+        MjpegView mjpegView = this.mJpegViewInstance;
+        if (mjpegView != null && mjpegView.mo6053b()) {
+            this.mJpegViewInstance.mo6057f();
+        }
+    }
+
+    public void onRestart() {
+        openMjpedViewStreaming();
+        super.onRestart();
+    }
+
     public void onClickTakePicture(View view) {
         createFilePath();
         String fileName = new SimpleDateFormat("yyyyMMdd_hhmmss", Locale.getDefault()).format(new Date());
@@ -53,6 +73,10 @@ public class MicroscopeStreamingActivity extends Activity {
         Intent intent = new Intent();
         intent.setClass(this, MicroscopeSettingsActivity.class);
         startActivity(intent);
+    }
+
+    public void onClickSaveSettingContent(View view) {
+        getAndSaveToFileSettingsContent();
     }
 
     public String getSettingContent(String urlAdress) {
@@ -138,10 +162,6 @@ public class MicroscopeStreamingActivity extends Activity {
         return sb.toString();
     }
 
-    public void onClickTest(View view) {
-        getAndSaveToFileSettingsContent();
-    }
-
     private void getAndSaveToFileSettingsContent() {
         Runnable runnable = new Runnable() {
             @Override
@@ -163,17 +183,39 @@ public class MicroscopeStreamingActivity extends Activity {
         new Thread(runnable).start();
     }
 
+    /* renamed from: c */
+    @SuppressWarnings("ResultOfMethodCallIgnored")
+    public void createFilePath() {
+        String filePath = getExternalFilesDir(Environment.DIRECTORY_DCIM).getAbsolutePath() + "/";
+        File file = new File(filePath);
+        if (!file.exists()) {
+            file.mkdir();
+        }
+        this.mJpegViewInstance.setFilePath(1, filePath);
+    }
+
+    /* renamed from: a */
+    public void openMjpedViewStreaming() {
+        MjpegView mjpegView = findViewById(R.id.MjpegV);
+        this.mJpegViewInstance = mjpegView;
+        if (mjpegView != null) {
+            mjpegView.setResolution(1280, 1024);
+        }
+        new AsyncStreamConnect().execute(this.ipAddress);
+    }
+
     @SuppressLint({"StaticFieldLeak"})
     /* renamed from: MicroscopeStreamingActivity$m */
     public class AsyncStreamConnect extends AsyncTask<String, Void, InputStreamHandler> {
 
+
         public AsyncStreamConnect() {
         }
-
         /* access modifiers changed from: protected */
         /* JADX WARNING: Removed duplicated region for block: B:15:0x00b2  */
         /* JADX WARNING: Removed duplicated region for block: B:34:0x013b A[SYNTHETIC, Splitter:B:34:0x013b] */
         /* renamed from: a */
+
         public InputStreamHandler doInBackground(String... strArr) {
             HttpURLConnection httpURLConnection;
             InputStream inputStream = null;
@@ -204,7 +246,6 @@ public class MicroscopeStreamingActivity extends Activity {
             }
             return new InputStreamHandler(inputStream);
         }
-
         /* access modifiers changed from: protected */
         /* renamed from: a */
         public void onPostExecute(InputStreamHandler fVar) {
@@ -220,46 +261,6 @@ public class MicroscopeStreamingActivity extends Activity {
             }
             mjpegView.setDisplayMode(i);
         }
-    }
 
-    /* renamed from: a */
-    public void openMjpedViewStreaming() {
-        MjpegView mjpegView = findViewById(R.id.MjpegV);
-        this.mJpegViewInstance = mjpegView;
-        if (mjpegView != null) {
-            mjpegView.setResolution(1280, 1024);
-        }
-        new AsyncStreamConnect().execute(this.ipAddress);
-    }
-
-    /* renamed from: c */
-    @SuppressWarnings("ResultOfMethodCallIgnored")
-    public void createFilePath() {
-        String filePath = getExternalFilesDir(Environment.DIRECTORY_DCIM).getAbsolutePath() + "/";
-        File file = new File(filePath);
-        if (!file.exists()) {
-            file.mkdir();
-        }
-        this.mJpegViewInstance.setFilePath(1, filePath);
-    }
-
-    @SuppressLint({"ClickableViewAccessibility", "RtlHardcoded", "WrongConstant"})
-    protected void onCreate(Bundle bundle) {
-        super.onCreate(bundle);
-        setContentView(R.layout.activity_microscope_streaming);
-        openMjpedViewStreaming();
-    }
-
-    public void onPause() {
-        super.onPause();
-        MjpegView mjpegView = this.mJpegViewInstance;
-        if (mjpegView != null && mjpegView.mo6053b()) {
-            this.mJpegViewInstance.mo6057f();
-        }
-    }
-
-    public void onRestart() {
-        openMjpedViewStreaming();
-        super.onRestart();
     }
 }
