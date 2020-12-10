@@ -31,14 +31,9 @@ import java.util.Locale;
 @SuppressLint({"WrongConstant", "ResourceType"})
 public class MicroscopeStreamingActivity extends Activity {
 
-    /* renamed from: G */
     private MjpegView mJpegViewInstance = null;
 
-    /* renamed from: H */
     final String ipAddress = "http://10.10.1.1:8899/";
-
-    /* renamed from: M */
-    private final boolean f1964M = false;
 
     @SuppressLint({"ClickableViewAccessibility", "RtlHardcoded", "WrongConstant"})
     protected void onCreate(Bundle bundle) {
@@ -50,7 +45,7 @@ public class MicroscopeStreamingActivity extends Activity {
     public void onPause() {
         super.onPause();
         MjpegView mjpegView = this.mJpegViewInstance;
-        if (mjpegView != null && mjpegView.mo6053b()) {
+        if (mjpegView != null && mjpegView.isWhileThis()) {
             this.mJpegViewInstance.mo6057f();
         }
     }
@@ -183,7 +178,6 @@ public class MicroscopeStreamingActivity extends Activity {
         new Thread(runnable).start();
     }
 
-    /* renamed from: c */
     @SuppressWarnings("ResultOfMethodCallIgnored")
     public void createFilePath() {
         String filePath = getExternalFilesDir(Environment.DIRECTORY_DCIM).getAbsolutePath() + "/";
@@ -194,7 +188,6 @@ public class MicroscopeStreamingActivity extends Activity {
         this.mJpegViewInstance.setFilePath(1, filePath);
     }
 
-    /* renamed from: a */
     public void openMjpedViewStreaming() {
         MjpegView mjpegView = findViewById(R.id.MjpegV);
         this.mJpegViewInstance = mjpegView;
@@ -205,16 +198,11 @@ public class MicroscopeStreamingActivity extends Activity {
     }
 
     @SuppressLint({"StaticFieldLeak"})
-    /* renamed from: MicroscopeStreamingActivity$m */
-    public class AsyncStreamConnect extends AsyncTask<String, Void, InputStreamHandler> {
 
+    public class AsyncStreamConnect extends AsyncTask<String, Void, InputStreamHandler> {
 
         public AsyncStreamConnect() {
         }
-        /* access modifiers changed from: protected */
-        /* JADX WARNING: Removed duplicated region for block: B:15:0x00b2  */
-        /* JADX WARNING: Removed duplicated region for block: B:34:0x013b A[SYNTHETIC, Splitter:B:34:0x013b] */
-        /* renamed from: a */
 
         public InputStreamHandler doInBackground(String... strArr) {
             HttpURLConnection httpURLConnection;
@@ -247,8 +235,6 @@ public class MicroscopeStreamingActivity extends Activity {
             return new InputStreamHandler(inputStream);
         }
 
-        /* access modifiers changed from: protected */
-        /* renamed from: a */
         public void onPostExecute(InputStreamHandler inputStreamHandler) {
             MicroscopeStreamingActivity.this.mJpegViewInstance.setSource(inputStreamHandler);
         }

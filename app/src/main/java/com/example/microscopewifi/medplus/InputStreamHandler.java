@@ -10,38 +10,28 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
-/* renamed from: com.italeco.micfimedplus.f */
 public class InputStreamHandler extends DataInputStream {
 
-    /* renamed from: b */
     private final byte[] f2245b = {-1, -40};
 
-    /* renamed from: c */
     private final byte[] f2246c = {-1, -39};
 
-    /* renamed from: d */
     private int f2247d = -1;
 
-    /* renamed from: e */
     byte[] f2248e = null;
 
-    /* renamed from: f */
     byte[] f2249f = null;
 
-    /* renamed from: g */
     final int f2250g = -1;
 
-    /* renamed from: h */
     int f2251h = -1;
 
-    /* renamed from: i */
     int f2252i = 0;
 
     public InputStreamHandler(InputStream inputStream) {
         super(new BufferedInputStream(inputStream, 40100));
     }
 
-    /* renamed from: a */
     private int m2774a(DataInputStream dataInputStream, byte[] bArr) throws IOException {
         int i = 0;
         for (int i2 = 0; i2 < 40100; i2++) {
@@ -57,7 +47,6 @@ public class InputStreamHandler extends DataInputStream {
         return -1;
     }
 
-    /* renamed from: a */
     private int m2775a(byte[] bArr) throws IOException {
         ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(bArr);
         Properties properties = new Properties();
@@ -65,7 +54,6 @@ public class InputStreamHandler extends DataInputStream {
         return Integer.parseInt(properties.getProperty("Content-Length"));
     }
 
-    /* renamed from: b */
     private int m2776b(DataInputStream dataInputStream, byte[] bArr) throws IOException {
         int i = this.f2247d;
         int i2 = i / 2;
@@ -85,7 +73,6 @@ public class InputStreamHandler extends DataInputStream {
         return -1;
     }
 
-    /* renamed from: c */
     private int m2777c(DataInputStream dataInputStream, byte[] bArr) throws IOException {
         int a = m2774a(dataInputStream, bArr);
         if (a < 0) {
@@ -94,7 +81,6 @@ public class InputStreamHandler extends DataInputStream {
         return a - bArr.length;
     }
 
-    /* renamed from: a */
     public Bitmap decodeBitmapFromStream() throws IOException {
         int i;
         mark(40100);

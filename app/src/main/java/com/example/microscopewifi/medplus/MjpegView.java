@@ -13,84 +13,62 @@ import java.io.IOException;
 
 public class MjpegView extends SurfaceView implements SurfaceHolder.Callback {
 
-    /* renamed from: O */
     private int leftBorder = 0;
 
-    /* renamed from: P */
     private int topBorder = 0;
 
-    /* renamed from: b */
     SurfaceHolder surfaceHolder;
 
-    /* renamed from: c */
     Context context;
 
-    /* renamed from: d */
     private DrawImageThread drawImageThread;
 
-    /* renamed from: e */
     private InputStreamHandler inputStreamHandler = null;
 
-    /* renamed from: f */
     private boolean whileThis = false;
 
-    /* renamed from: g */
     private boolean surfaceCreated = false;
 
-    /* renamed from: h */
     private int rightBorder;
 
-    /* renamed from: i */
     private int bottomBorder;
 
-    /* renamed from: j */
     private int displayMode;
 
-    /* renamed from: k */
     private boolean f2048k = false;
 
-    /* renamed from: l */
     public Bitmap bitmapImage = null;
 
-    /* renamed from: m */
     public int pixelWidth = 1280;
 
-    /* renamed from: n */
     public int pixelHeight = 1024;
 
-    /* renamed from: q */
     private int filePathInt = 0;
 
-    /* renamed from: r */
     public String filePath = null;
 
-    /* renamed from: MjpegView$a */
     public class DrawImageThread extends Thread {
 
-        /* renamed from: b */
         private final SurfaceHolder surfaceHolder2;
 
-        /* renamed from: c */
         private boolean f2065c = false;
 
-        /* renamed from: d */
         private Rect rectangle = null;
 
         DrawImageThread(SurfaceHolder surfaceHolder) {
             this.surfaceHolder2 = surfaceHolder;
         }
 
-        /* renamed from: b */
         private Rect getRectangle(int width, int height) {
             Rect rect;
-            if (MjpegView.this.displayMode == 1) {
+            if (MjpegView.this.displayMode == 1) { // normal rectangle
                 MjpegView mjpegView2 = MjpegView.this;
                 mjpegView2.leftBorder = (mjpegView2.rightBorder / 2) - (width / 2);
                 MjpegView mjpegView3 = MjpegView.this;
                 mjpegView3.topBorder = (mjpegView3.bottomBorder / 2) - (height / 2);
                 return new Rect(MjpegView.this.leftBorder, MjpegView.this.topBorder, width + MjpegView.this.leftBorder, height + MjpegView.this.topBorder);
             }
-            if (MjpegView.this.displayMode == 4) {
+            if (MjpegView.this.displayMode == 4) { // normal rectangle
                 float f = ((float) width) / ((float) height);
                 int i3 = MjpegView.this.rightBorder;
                 int i4 = (int) (((float) MjpegView.this.rightBorder) / f);
@@ -103,9 +81,9 @@ public class MjpegView extends SurfaceView implements SurfaceHolder.Callback {
                 MjpegView mjpegView5 = MjpegView.this;
                 mjpegView5.topBorder = (mjpegView5.bottomBorder / 2) - (i4 / 2);
                 rect = new Rect(MjpegView.this.leftBorder, MjpegView.this.topBorder, i3 + MjpegView.this.leftBorder, i4 + MjpegView.this.topBorder);
-            } else if (MjpegView.this.displayMode != 8) {
+            } else if (MjpegView.this.displayMode != 8) { //error, wrong display mode
                 return null;
-            } else {
+            } else { // stretched rectangle for full area
                 MjpegView.this.leftBorder = 0;
                 MjpegView.this.topBorder = 0;
                 rect = new Rect(0, 0, MjpegView.this.rightBorder, MjpegView.this.bottomBorder);
@@ -113,7 +91,6 @@ public class MjpegView extends SurfaceView implements SurfaceHolder.Callback {
             return rect;
         }
 
-        /* renamed from: a */
         void setRightBottomBorders(int rightBorder, int bottomBorder) {
             synchronized (this.surfaceHolder2) {
                 MjpegView.this.rightBorder = rightBorder;
@@ -121,9 +98,6 @@ public class MjpegView extends SurfaceView implements SurfaceHolder.Callback {
             }
         }
 
-        /* JADX WARNING: Removed duplicated region for block: B:38:0x00f4  */
-        /* JADX WARNING: Removed duplicated region for block: B:42:0x00fd  */
-        /* JADX WARNING: Removed duplicated region for block: B:50:0x0005 A[SYNTHETIC] */
         public void run() {
             Throwable th;
             Paint paint = new Paint();
@@ -185,7 +159,6 @@ public class MjpegView extends SurfaceView implements SurfaceHolder.Callback {
         initializeFields(context);
     }
 
-    /* renamed from: a */
     private void initializeFields(Context context) {
         SurfaceHolder holder = getHolder();
         this.surfaceHolder = holder;
@@ -198,24 +171,20 @@ public class MjpegView extends SurfaceView implements SurfaceHolder.Callback {
         this.bottomBorder = getHeight();
     }
 
-    /* renamed from: a */
     public void setResolution(int width, int height) {
         this.pixelWidth = width;
         this.pixelHeight = height;
     }
 
-    /* renamed from: a */
     public void setFilePath(int filePathInt, String filePath) {
         this.filePathInt = filePathInt;
         this.filePath = filePath;
     }
 
-    /* renamed from: b */
-    public boolean mo6053b() {
+    public boolean isWhileThis() {
         return this.whileThis;
     }
 
-    /* renamed from: d */
     public void mo6055d() {
         if (this.f2048k && this.inputStreamHandler != null) {
             this.whileThis = true;
@@ -228,7 +197,6 @@ public class MjpegView extends SurfaceView implements SurfaceHolder.Callback {
         }
     }
 
-    /* renamed from: e */
     public void mo6056e() {
         if (this.inputStreamHandler != null) {
             this.whileThis = true;
@@ -239,7 +207,6 @@ public class MjpegView extends SurfaceView implements SurfaceHolder.Callback {
         }
     }
 
-    /* renamed from: f */
     public void mo6057f() {
         boolean z = true;
         if (this.whileThis) {
@@ -265,10 +232,6 @@ public class MjpegView extends SurfaceView implements SurfaceHolder.Callback {
             }
             this.inputStreamHandler = null;
         }
-    }
-
-    public void setDisplayMode(int i) {
-        this.displayMode = i; // 8 -> stretched to full area, 1, 4 -> normal
     }
 
     public void setSource(InputStreamHandler inputStreamHandler) {
