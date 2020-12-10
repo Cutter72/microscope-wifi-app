@@ -246,20 +246,11 @@ public class MicroscopeStreamingActivity extends Activity {
             }
             return new InputStreamHandler(inputStream);
         }
+
         /* access modifiers changed from: protected */
         /* renamed from: a */
-        public void onPostExecute(InputStreamHandler fVar) {
-            MjpegView mjpegView;
-            int i;
-            MicroscopeStreamingActivity.this.mJpegViewInstance.setSource(fVar);
-            if (!MicroscopeStreamingActivity.this.f1964M) {
-                mjpegView = MicroscopeStreamingActivity.this.mJpegViewInstance;
-                i = 4;
-            } else {
-                mjpegView = MicroscopeStreamingActivity.this.mJpegViewInstance;
-                i = 8;
-            }
-            mjpegView.setDisplayMode(i);
+        public void onPostExecute(InputStreamHandler inputStreamHandler) {
+            MicroscopeStreamingActivity.this.mJpegViewInstance.setSource(inputStreamHandler);
         }
 
     }

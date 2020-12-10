@@ -95,7 +95,7 @@ public class InputStreamHandler extends DataInputStream {
     }
 
     /* renamed from: a */
-    public Bitmap mo6140a() throws IOException {
+    public Bitmap decodeBitmapFromStream() throws IOException {
         int i;
         mark(40100);
         try {

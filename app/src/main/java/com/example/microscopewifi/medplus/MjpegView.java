@@ -14,10 +14,10 @@ import java.io.IOException;
 public class MjpegView extends SurfaceView implements SurfaceHolder.Callback {
 
     /* renamed from: O */
-    private int f2035O = 0;
+    private int leftBorder = 0;
 
     /* renamed from: P */
-    private int f2036P = 0;
+    private int topBorder = 0;
 
     /* renamed from: b */
     SurfaceHolder surfaceHolder;
@@ -26,7 +26,7 @@ public class MjpegView extends SurfaceView implements SurfaceHolder.Callback {
     Context context;
 
     /* renamed from: d */
-    private SaveImageThread saveImageThread;
+    private DrawImageThread drawImageThread;
 
     /* renamed from: e */
     private InputStreamHandler inputStreamHandler = null;
@@ -35,16 +35,16 @@ public class MjpegView extends SurfaceView implements SurfaceHolder.Callback {
     private boolean whileThis = false;
 
     /* renamed from: g */
-    private boolean f2044g = false;
+    private boolean surfaceCreated = false;
 
     /* renamed from: h */
-    private int f2045h;
+    private int rightBorder;
 
     /* renamed from: i */
-    private int f2046i;
+    private int bottomBorder;
 
     /* renamed from: j */
-    private int f2047j;
+    private int displayMode;
 
     /* renamed from: k */
     private boolean f2048k = false;
@@ -53,71 +53,71 @@ public class MjpegView extends SurfaceView implements SurfaceHolder.Callback {
     public Bitmap bitmapImage = null;
 
     /* renamed from: m */
-    public int pixelWidth2 = 1280;
+    public int pixelWidth = 1280;
 
     /* renamed from: n */
-    public int pixelHeight2 = 1024;
+    public int pixelHeight = 1024;
 
     /* renamed from: q */
-    private int f2054q = 0;
+    private int filePathInt = 0;
 
     /* renamed from: r */
     public String filePath = null;
 
     /* renamed from: MjpegView$a */
-    public class SaveImageThread extends Thread {
+    public class DrawImageThread extends Thread {
 
         /* renamed from: b */
-        private final SurfaceHolder f2064b;
+        private final SurfaceHolder surfaceHolder2;
 
         /* renamed from: c */
         private boolean f2065c = false;
 
         /* renamed from: d */
-        private Rect f2066d = null;
+        private Rect rectangle = null;
 
-        SaveImageThread(SurfaceHolder surfaceHolder) {
-            this.f2064b = surfaceHolder;
+        DrawImageThread(SurfaceHolder surfaceHolder) {
+            this.surfaceHolder2 = surfaceHolder;
         }
 
         /* renamed from: b */
-        private Rect m2711b(int i, int i2) {
+        private Rect getRectangle(int width, int height) {
             Rect rect;
-            if (MjpegView.this.f2047j == 1) {
+            if (MjpegView.this.displayMode == 1) {
                 MjpegView mjpegView2 = MjpegView.this;
-                mjpegView2.f2035O = (mjpegView2.f2045h / 2) - (i / 2);
+                mjpegView2.leftBorder = (mjpegView2.rightBorder / 2) - (width / 2);
                 MjpegView mjpegView3 = MjpegView.this;
-                mjpegView3.f2036P = (mjpegView3.f2046i / 2) - (i2 / 2);
-                return new Rect(MjpegView.this.f2035O, MjpegView.this.f2036P, i + MjpegView.this.f2035O, i2 + MjpegView.this.f2036P);
+                mjpegView3.topBorder = (mjpegView3.bottomBorder / 2) - (height / 2);
+                return new Rect(MjpegView.this.leftBorder, MjpegView.this.topBorder, width + MjpegView.this.leftBorder, height + MjpegView.this.topBorder);
             }
-            if (MjpegView.this.f2047j == 4) {
-                float f = ((float) i) / ((float) i2);
-                int i3 = MjpegView.this.f2045h;
-                int i4 = (int) (((float) MjpegView.this.f2045h) / f);
-                if (i4 > MjpegView.this.f2046i) {
-                    i4 = MjpegView.this.f2046i;
-                    i3 = (int) (((float) MjpegView.this.f2046i) * f);
+            if (MjpegView.this.displayMode == 4) {
+                float f = ((float) width) / ((float) height);
+                int i3 = MjpegView.this.rightBorder;
+                int i4 = (int) (((float) MjpegView.this.rightBorder) / f);
+                if (i4 > MjpegView.this.bottomBorder) {
+                    i4 = MjpegView.this.bottomBorder;
+                    i3 = (int) (((float) MjpegView.this.bottomBorder) * f);
                 }
                 MjpegView mjpegView4 = MjpegView.this;
-                mjpegView4.f2035O = (mjpegView4.f2045h / 2) - (i3 / 2);
+                mjpegView4.leftBorder = (mjpegView4.rightBorder / 2) - (i3 / 2);
                 MjpegView mjpegView5 = MjpegView.this;
-                mjpegView5.f2036P = (mjpegView5.f2046i / 2) - (i4 / 2);
-                rect = new Rect(MjpegView.this.f2035O, MjpegView.this.f2036P, i3 + MjpegView.this.f2035O, i4 + MjpegView.this.f2036P);
-            } else if (MjpegView.this.f2047j != 8) {
+                mjpegView5.topBorder = (mjpegView5.bottomBorder / 2) - (i4 / 2);
+                rect = new Rect(MjpegView.this.leftBorder, MjpegView.this.topBorder, i3 + MjpegView.this.leftBorder, i4 + MjpegView.this.topBorder);
+            } else if (MjpegView.this.displayMode != 8) {
                 return null;
             } else {
-                MjpegView.this.f2035O = 0;
-                MjpegView.this.f2036P = 0;
-                rect = new Rect(0, 0, MjpegView.this.f2045h, MjpegView.this.f2046i);
+                MjpegView.this.leftBorder = 0;
+                MjpegView.this.topBorder = 0;
+                rect = new Rect(0, 0, MjpegView.this.rightBorder, MjpegView.this.bottomBorder);
             }
             return rect;
         }
 
         /* renamed from: a */
-        void mo6065a(int i, int i2) {
-            synchronized (this.f2064b) {
-                MjpegView.this.f2045h = i;
-                MjpegView.this.f2046i = i2;
+        void setRightBottomBorders(int rightBorder, int bottomBorder) {
+            synchronized (this.surfaceHolder2) {
+                MjpegView.this.rightBorder = rightBorder;
+                MjpegView.this.bottomBorder = bottomBorder;
             }
         }
 
@@ -128,30 +128,28 @@ public class MjpegView extends SurfaceView implements SurfaceHolder.Callback {
             Throwable th;
             Paint paint = new Paint();
             while (MjpegView.this.whileThis) {
-                if (MjpegView.this.f2044g) {
+                if (MjpegView.this.surfaceCreated) {
                     Canvas canvas = null;
                     try {
                         if (MjpegView.this.bitmapImage == null) {
-                            MjpegView.this.bitmapImage = Bitmap.createBitmap(MjpegView.this.pixelWidth2, MjpegView.this.pixelHeight2, Bitmap.Config.ARGB_8888);
+                            MjpegView.this.bitmapImage = Bitmap.createBitmap(MjpegView.this.pixelWidth, MjpegView.this.pixelHeight, Bitmap.Config.ARGB_8888);
                         }
-                        MjpegView.this.bitmapImage = MjpegView.this.inputStreamHandler.mo6140a();
+                        MjpegView.this.bitmapImage = MjpegView.this.inputStreamHandler.decodeBitmapFromStream();
                         if (MjpegView.this.bitmapImage != null) {
-                            if (MjpegView.this.f2054q == 1) {
-                                MjpegView.this.f2054q = 0;
-//                                saveImage(MjpegView.this.bitmapImage);
+                            if (MjpegView.this.filePathInt == 1) {
+                                MjpegView.this.filePathInt = 0;
                             }
                             if (!this.f2065c) {
                                 this.f2065c = true;
-                                this.f2066d = m2711b(MjpegView.this.bitmapImage.getWidth(), MjpegView.this.bitmapImage.getHeight());
+                                this.rectangle = getRectangle(MjpegView.this.bitmapImage.getWidth(), MjpegView.this.bitmapImage.getHeight());
                             }
-                            Canvas lockCanvas = this.f2064b.lockCanvas();
+                            Canvas lockCanvas = this.surfaceHolder2.lockCanvas();
                             try {
-                                synchronized (this.f2064b) {
-//                                    lockCanvas.drawColor(-16777216);
-                                    lockCanvas.drawBitmap(MjpegView.this.bitmapImage, null, this.f2066d, paint);
+                                synchronized (this.surfaceHolder2) {
+                                    lockCanvas.drawBitmap(MjpegView.this.bitmapImage, null, this.rectangle, paint);
                                 }
                                 if (lockCanvas != null) {
-                                    this.f2064b.unlockCanvasAndPost(lockCanvas);
+                                    this.surfaceHolder2.unlockCanvasAndPost(lockCanvas);
                                 }
                             } catch (Throwable th2) {
                                 th = th2;
@@ -160,13 +158,11 @@ public class MjpegView extends SurfaceView implements SurfaceHolder.Callback {
                             }
                         }
                     } catch (IOException unused2) {
-                        if (canvas == null) {
-//                            this.f2064b.unlockCanvasAndPost(canvas);
-                        }
+                        unused2.printStackTrace();
                     } catch (Throwable th3) {
                         th = th3;
                         if (canvas != null) {
-                            this.f2064b.unlockCanvasAndPost(canvas);
+                            this.surfaceHolder2.unlockCanvasAndPost(canvas);
                         }
                         try {
                             throw th;
@@ -181,37 +177,37 @@ public class MjpegView extends SurfaceView implements SurfaceHolder.Callback {
 
     public MjpegView(Context context) {
         super(context);
-        m2668a(context);
+        initializeFields(context);
     }
 
     public MjpegView(Context context, AttributeSet attributeSet) {
         super(context, attributeSet);
-        m2668a(context);
+        initializeFields(context);
     }
 
     /* renamed from: a */
-    private void m2668a(Context context) {
+    private void initializeFields(Context context) {
         SurfaceHolder holder = getHolder();
         this.surfaceHolder = holder;
         this.context = context;
         holder.addCallback(this);
-        this.saveImageThread = new SaveImageThread(this.surfaceHolder);
+        this.drawImageThread = new DrawImageThread(this.surfaceHolder);
         setFocusable(true);
-        this.f2047j = 1;
-        this.f2045h = getWidth();
-        this.f2046i = getHeight();
+        this.displayMode = 1;
+        this.rightBorder = getWidth();
+        this.bottomBorder = getHeight();
     }
 
     /* renamed from: a */
-    public void setResolution(int i, int i2) {
-        this.pixelWidth2 = i;
-        this.pixelHeight2 = i2;
+    public void setResolution(int width, int height) {
+        this.pixelWidth = width;
+        this.pixelHeight = height;
     }
 
     /* renamed from: a */
-    public void setFilePath(int i, String str) {
-        this.f2054q = i;
-        this.filePath = str;
+    public void setFilePath(int filePathInt, String filePath) {
+        this.filePathInt = filePathInt;
+        this.filePath = filePath;
     }
 
     /* renamed from: b */
@@ -225,8 +221,8 @@ public class MjpegView extends SurfaceView implements SurfaceHolder.Callback {
             this.whileThis = true;
             SurfaceHolder holder = getHolder();
             holder.addCallback(this);
-            SaveImageThread aVar = new SaveImageThread(holder);
-            this.saveImageThread = aVar;
+            DrawImageThread aVar = new DrawImageThread(holder);
+            this.drawImageThread = aVar;
             aVar.start();
             this.f2048k = false;
         }
@@ -236,10 +232,10 @@ public class MjpegView extends SurfaceView implements SurfaceHolder.Callback {
     public void mo6056e() {
         if (this.inputStreamHandler != null) {
             this.whileThis = true;
-            if (this.saveImageThread == null) {
-                this.saveImageThread = new SaveImageThread(this.surfaceHolder);
+            if (this.drawImageThread == null) {
+                this.drawImageThread = new DrawImageThread(this.surfaceHolder);
             }
-            this.saveImageThread.start();
+            this.drawImageThread.start();
         }
     }
 
@@ -250,21 +246,20 @@ public class MjpegView extends SurfaceView implements SurfaceHolder.Callback {
             this.f2048k = true;
         }
         this.whileThis = false;
-        if (this.saveImageThread != null) {
+        if (this.drawImageThread != null) {
             while (z) {
                 try {
-                    this.saveImageThread.join();
+                    this.drawImageThread.join();
                     z = false;
                 } catch (InterruptedException unused) {
                     unused.printStackTrace();
                 }
             }
-            this.saveImageThread = null;
+            this.drawImageThread = null;
         }
-        InputStreamHandler fVar = this.inputStreamHandler;
-        if (fVar != null) {
+        if (this.inputStreamHandler != null) {
             try {
-                fVar.close();
+                this.inputStreamHandler.close();
             } catch (IOException unused2) {
                 unused2.printStackTrace();
             }
@@ -273,11 +268,11 @@ public class MjpegView extends SurfaceView implements SurfaceHolder.Callback {
     }
 
     public void setDisplayMode(int i) {
-        this.f2047j = i;
+        this.displayMode = i; // 8 -> stretched to full area, 1, 4 -> normal
     }
 
-    public void setSource(InputStreamHandler fVar) {
-        this.inputStreamHandler = fVar;
+    public void setSource(InputStreamHandler inputStreamHandler) {
+        this.inputStreamHandler = inputStreamHandler;
         if (!this.f2048k) {
             mo6056e();
         } else {
@@ -285,19 +280,19 @@ public class MjpegView extends SurfaceView implements SurfaceHolder.Callback {
         }
     }
 
-    public void surfaceChanged(SurfaceHolder surfaceHolder, int i, int i2, int i3) {
-        SaveImageThread aVar = this.saveImageThread;
-        if (aVar != null) {
-            aVar.mo6065a(i2, i3);
+    public void surfaceChanged(SurfaceHolder surfaceHolder, int i, int rightBorder, int bottomBorder) {
+        DrawImageThread drawImageThread = this.drawImageThread;
+        if (drawImageThread != null) {
+            drawImageThread.setRightBottomBorders(rightBorder, bottomBorder);
         }
     }
 
     public void surfaceCreated(SurfaceHolder surfaceHolder) {
-        this.f2044g = true;
+        this.surfaceCreated = true;
     }
 
     public void surfaceDestroyed(SurfaceHolder surfaceHolder) {
-        this.f2044g = false;
+        this.surfaceCreated = false;
         mo6057f();
     }
 }
