@@ -28,14 +28,12 @@ import java.util.Date;
 import java.util.Locale;
 
 @SuppressWarnings("Convert2Lambda")
-@SuppressLint({"WrongConstant", "ResourceType"})
 public class MicroscopeStreamingActivity extends Activity {
 
     private MjpegView mJpegViewInstance = null;
 
     final String ipAddress = "http://10.10.1.1:8899/";
 
-    @SuppressLint({"ClickableViewAccessibility", "RtlHardcoded", "WrongConstant"})
     protected void onCreate(Bundle bundle) {
         super.onCreate(bundle);
         setContentView(R.layout.activity_microscope_streaming);
@@ -198,7 +196,6 @@ public class MicroscopeStreamingActivity extends Activity {
     }
 
     @SuppressLint({"StaticFieldLeak"})
-
     public class AsyncStreamConnect extends AsyncTask<String, Void, InputStreamHandler> {
 
         public AsyncStreamConnect() {
@@ -238,6 +235,5 @@ public class MicroscopeStreamingActivity extends Activity {
         public void onPostExecute(InputStreamHandler inputStreamHandler) {
             MicroscopeStreamingActivity.this.mJpegViewInstance.setSource(inputStreamHandler);
         }
-
     }
 }
