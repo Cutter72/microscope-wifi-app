@@ -185,7 +185,7 @@ public class MicroscopeStreamingActivity extends Activity {
         if (!file.exists()) {
             file.mkdir();
         }
-        this.mJpegViewInstance.setFilePath(1, filePath);
+        this.mJpegViewInstance.setFilePath(filePath);
     }
 
     public void openMjpedViewStreaming() {

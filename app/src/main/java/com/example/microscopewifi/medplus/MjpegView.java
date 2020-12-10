@@ -43,8 +43,6 @@ public class MjpegView extends SurfaceView implements SurfaceHolder.Callback {
 
     public int pixelHeight = 1024;
 
-    private int filePathInt = 0;
-
     public String filePath = null;
 
     public class DrawImageThread extends Thread {
@@ -62,25 +60,21 @@ public class MjpegView extends SurfaceView implements SurfaceHolder.Callback {
         private Rect getRectangle(int width, int height) {
             Rect rect;
             if (MjpegView.this.displayMode == 1) { // normal rectangle
-                MjpegView mjpegView2 = MjpegView.this;
-                mjpegView2.leftBorder = (mjpegView2.rightBorder / 2) - (width / 2);
-                MjpegView mjpegView3 = MjpegView.this;
-                mjpegView3.topBorder = (mjpegView3.bottomBorder / 2) - (height / 2);
+                MjpegView.this.leftBorder = (MjpegView.this.rightBorder / 2) - (width / 2);
+                MjpegView.this.topBorder = (MjpegView.this.bottomBorder / 2) - (height / 2);
                 return new Rect(MjpegView.this.leftBorder, MjpegView.this.topBorder, width + MjpegView.this.leftBorder, height + MjpegView.this.topBorder);
             }
             if (MjpegView.this.displayMode == 4) { // normal rectangle
                 float f = ((float) width) / ((float) height);
-                int i3 = MjpegView.this.rightBorder;
+                int rightBorder = MjpegView.this.rightBorder;
                 int i4 = (int) (((float) MjpegView.this.rightBorder) / f);
                 if (i4 > MjpegView.this.bottomBorder) {
                     i4 = MjpegView.this.bottomBorder;
-                    i3 = (int) (((float) MjpegView.this.bottomBorder) * f);
+                    rightBorder = (int) (((float) MjpegView.this.bottomBorder) * f);
                 }
-                MjpegView mjpegView4 = MjpegView.this;
-                mjpegView4.leftBorder = (mjpegView4.rightBorder / 2) - (i3 / 2);
-                MjpegView mjpegView5 = MjpegView.this;
-                mjpegView5.topBorder = (mjpegView5.bottomBorder / 2) - (i4 / 2);
-                rect = new Rect(MjpegView.this.leftBorder, MjpegView.this.topBorder, i3 + MjpegView.this.leftBorder, i4 + MjpegView.this.topBorder);
+                MjpegView.this.leftBorder = (MjpegView.this.rightBorder / 2) - (rightBorder / 2);
+                MjpegView.this.topBorder = (MjpegView.this.bottomBorder / 2) - (i4 / 2);
+                rect = new Rect(MjpegView.this.leftBorder, MjpegView.this.topBorder, rightBorder + MjpegView.this.leftBorder, i4 + MjpegView.this.topBorder);
             } else if (MjpegView.this.displayMode != 8) { //error, wrong display mode
                 return null;
             } else { // stretched rectangle for full area
@@ -99,7 +93,6 @@ public class MjpegView extends SurfaceView implements SurfaceHolder.Callback {
         }
 
         public void run() {
-            Throwable th;
             Paint paint = new Paint();
             while (MjpegView.this.whileThis) {
                 if (MjpegView.this.surfaceCreated) {
@@ -110,9 +103,6 @@ public class MjpegView extends SurfaceView implements SurfaceHolder.Callback {
                         }
                         MjpegView.this.bitmapImage = MjpegView.this.inputStreamHandler.decodeBitmapFromStream();
                         if (MjpegView.this.bitmapImage != null) {
-                            if (MjpegView.this.filePathInt == 1) {
-                                MjpegView.this.filePathInt = 0;
-                            }
                             if (!this.f2065c) {
                                 this.f2065c = true;
                                 this.rectangle = getRectangle(MjpegView.this.bitmapImage.getWidth(), MjpegView.this.bitmapImage.getHeight());
@@ -126,23 +116,17 @@ public class MjpegView extends SurfaceView implements SurfaceHolder.Callback {
                                     this.surfaceHolder2.unlockCanvasAndPost(lockCanvas);
                                 }
                             } catch (Throwable th2) {
-                                th = th2;
                                 canvas = lockCanvas;
-                                throw th;
+                                th2.printStackTrace();
                             }
                         }
                     } catch (IOException unused2) {
                         unused2.printStackTrace();
                     } catch (Throwable th3) {
-                        th = th3;
                         if (canvas != null) {
                             this.surfaceHolder2.unlockCanvasAndPost(canvas);
                         }
-                        try {
-                            throw th;
-                        } catch (Throwable throwable) {
-                            throwable.printStackTrace();
-                        }
+                        th3.printStackTrace();
                     }
                 }
             }
@@ -160,10 +144,9 @@ public class MjpegView extends SurfaceView implements SurfaceHolder.Callback {
     }
 
     private void initializeFields(Context context) {
-        SurfaceHolder holder = getHolder();
-        this.surfaceHolder = holder;
+        this.surfaceHolder = getHolder();
         this.context = context;
-        holder.addCallback(this);
+        this.surfaceHolder.addCallback(this);
         this.drawImageThread = new DrawImageThread(this.surfaceHolder);
         setFocusable(true);
         this.displayMode = 1;
@@ -176,8 +159,7 @@ public class MjpegView extends SurfaceView implements SurfaceHolder.Callback {
         this.pixelHeight = height;
     }
 
-    public void setFilePath(int filePathInt, String filePath) {
-        this.filePathInt = filePathInt;
+    public void setFilePath(String filePath) {
         this.filePath = filePath;
     }
 
@@ -190,9 +172,8 @@ public class MjpegView extends SurfaceView implements SurfaceHolder.Callback {
             this.whileThis = true;
             SurfaceHolder holder = getHolder();
             holder.addCallback(this);
-            DrawImageThread aVar = new DrawImageThread(holder);
-            this.drawImageThread = aVar;
-            aVar.start();
+            this.drawImageThread = new DrawImageThread(holder);
+            this.drawImageThread.start();
             this.f2048k = false;
         }
     }
