@@ -12,31 +12,20 @@
         android:layout_height="wrap_content"
         android:onClick="onClickGoToMedPlus"
         android:text="go to med plus"
-        app:layout_constraintBottom_toTopOf="@+id/btnChangeResolution"
+        app:layout_constraintBottom_toTopOf="@+id/btnChangeResolutionAndFps"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/btnChangeResolution"
+        android:id="@+id/btnChangeResolutionAndFps"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:onClick="onClickChangeResolution"
-        android:text="change resolution"
-        app:layout_constraintBottom_toTopOf="@+id/btnChangeChangeFps"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnGoToMedPlus" />
-
-    <Button
-        android:id="@+id/btnChangeChangeFps"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="onClickChangeFps"
-        android:text="change fps"
+        android:onClick="onClickChangeResolutionAndFps"
+        android:text="change resolution and fps"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnChangeResolution" />
+        app:layout_constraintTop_toBottomOf="@+id/btnGoToMedPlus" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

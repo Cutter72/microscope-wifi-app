@@ -40,14 +40,6 @@
             android:layout_weight="0"
             android:onClick="onClickTest"
             android:text="Save Setting Content" />
-
-        <Button
-            android:id="@+id/btnChangeResolution"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="0"
-            android:onClick="onClickChangeResolution"
-            android:text="Change resolution" />
     </LinearLayout>
 
 </LinearLayout>

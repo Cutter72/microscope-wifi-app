@@ -31,20 +31,12 @@ public class MainActivity extends AppCompatActivity {
 
     public void onClickGoToMedPlus(View view) {
         //go to med plus
-        String str;
-        Context context;
-        Class<?> cls;
-        Intent intent;
         if (getWifiIpAddress().contains("10.10.1.")) {
-            intent = new Intent();
-            intent.putExtra("playmode", 0);
-            cls = MicroscopeStreamingActivity.class;
-            intent.setClass(this, cls);
+            Intent intent = new Intent();
+            intent.setClass(this, MicroscopeStreamingActivity.class);
             startActivity(intent);
         } else {
-            context = getApplicationContext();
-            str = "Please connect wifi microscope";
-            Toast.makeText(context, str, Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Please connect wifi microscope", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -56,12 +48,21 @@ public class MainActivity extends AppCompatActivity {
         return (ipAddress & 255) + "." + ((ipAddress >> 8) & 255) + "." + ((ipAddress >> 16) & 255) + "." + ((ipAddress >> 24) & 255);
     }
 
+    public void onClickChangeResolutionAndFps(View view) {
+        changeCameraParams();
+    }
+
     private void changeCameraParams() {
+        //todo disable all buttons to prevent user to change anything
         Runnable runnable = new Runnable() {
             @Override
             public void run() {
+                //todo get available resolutions from SettingContent
+                //todo find highest resolution
+                //todo set highest resolution and 7 fps
                 changeResolution();
                 changeFps();
+                //todo enable buttons when camera is ready after resolution and fps change
                 Intent intent = new Intent();
                 intent.setClass(MainActivity.this, MicroscopeStreamingActivity.class);
                 startActivity(intent);
@@ -112,13 +113,5 @@ public class MainActivity extends AppCompatActivity {
         } catch (IOException e2) {
             e2.printStackTrace();
         }
-    }
-
-    public void onClickChangeResolution(View view) {
-        changeCameraParams();
-    }
-
-    public void onClickChangeFps(View view) {
-        changeFps();
     }
 }
