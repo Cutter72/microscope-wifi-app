@@ -27,6 +27,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
+@SuppressWarnings("Convert2Lambda")
 @SuppressLint({"WrongConstant", "ResourceType"})
 public class MicroscopeStreamingActivity extends Activity {
 
@@ -40,7 +41,6 @@ public class MicroscopeStreamingActivity extends Activity {
     private final boolean f1964M = false;
 
     public void onClickTakePicture(View view) {
-        //todo implement picture save
         createFilePath();
         String fileName = new SimpleDateFormat("yyyyMMdd_hhmmss", Locale.getDefault()).format(new Date());
         System.out.println("filePath: " + mJpegViewInstance.filePath);
@@ -165,9 +165,9 @@ public class MicroscopeStreamingActivity extends Activity {
 
     @SuppressLint({"StaticFieldLeak"})
     /* renamed from: MicroscopeStreamingActivity$m */
-    public class AsyncTaskC0774m extends AsyncTask<String, Void, InputStreamHandler> {
+    public class AsyncStreamConnect extends AsyncTask<String, Void, InputStreamHandler> {
 
-        public AsyncTaskC0774m() {
+        public AsyncStreamConnect() {
         }
 
         /* access modifiers changed from: protected */
@@ -229,7 +229,7 @@ public class MicroscopeStreamingActivity extends Activity {
         if (mjpegView != null) {
             mjpegView.setResolution(1280, 1024);
         }
-        new AsyncTaskC0774m().execute(this.ipAddress);
+        new AsyncStreamConnect().execute(this.ipAddress);
     }
 
     /* renamed from: c */
