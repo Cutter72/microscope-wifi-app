@@ -11,28 +11,19 @@ import android.widget.Toast;
 
 import com.example.microscopewifi.R;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.Authenticator;
 import java.net.HttpURLConnection;
-import java.net.PasswordAuthentication;
 import java.net.ProtocolException;
 import java.net.URL;
-import java.nio.charset.StandardCharsets;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
-@SuppressWarnings("Convert2Lambda")
 public class MicroscopeStreamingActivity extends Activity {
 
     private MjpegView mJpegViewInstance = null;
-
-    final String ipAddress = "http://10.10.1.1:8899/";
 
     protected void onCreate(Bundle bundle) {
         super.onCreate(bundle);
@@ -43,8 +34,8 @@ public class MicroscopeStreamingActivity extends Activity {
     public void onPause() {
         super.onPause();
         MjpegView mjpegView = this.mJpegViewInstance;
-        if (mjpegView != null && mjpegView.isWhileThis()) {
-            this.mJpegViewInstance.mo6057f();
+        if (mjpegView != null && mjpegView.isStreamRunning()) {
+            this.mJpegViewInstance.closeImageStreamingThread();
         }
     }
 
@@ -68,114 +59,6 @@ public class MicroscopeStreamingActivity extends Activity {
         startActivity(intent);
     }
 
-    public void onClickSaveSettingContent(View view) {
-        getAndSaveToFileSettingsContent();
-    }
-
-    public String getSettingContent(String urlAdress) {
-        try {
-            URL url = new URL(urlAdress);
-            Authenticator.setDefault(new Authenticator() {
-                @Override
-                protected PasswordAuthentication getPasswordAuthentication() {
-                    return new PasswordAuthentication("admin", "admin".toCharArray());
-                }
-            });
-            HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
-            httpURLConnection.setConnectTimeout(3000);
-            if (httpURLConnection.getResponseCode() == 200) {
-                return responseStreamToString(httpURLConnection.getInputStream());
-            }
-            return null;
-        } catch (IOException e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
-
-    private String responseStreamToString(InputStream inputStream) {
-        Throwable th;
-        IOException e;
-        StringBuilder sb = new StringBuilder();
-        BufferedReader bufferedReader = null;
-        try {
-            BufferedReader bufferedReader2 = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8));
-            while (true) {
-                try {
-                    String readLine = bufferedReader2.readLine();
-                    if (readLine != null) {
-                        sb.append(readLine);
-                    } else {
-                        break;
-                    }
-                } catch (IOException e3) {
-                    e = e3;
-                    bufferedReader = bufferedReader2;
-                    try {
-                        e.printStackTrace();
-                        return sb.toString();
-                    } catch (Throwable th2) {
-                        th = th2;
-                        if (bufferedReader != null) {
-                            try {
-                                bufferedReader.close();
-                            } catch (IOException e4) {
-                                e4.printStackTrace();
-                            }
-                        }
-                        try {
-                            throw th;
-                        } catch (Throwable throwable) {
-                            throwable.printStackTrace();
-                        }
-                    }
-                } catch (Throwable th3) {
-                    th = th3;
-                    bufferedReader = bufferedReader2;
-                    try {
-                        throw th;
-                    } catch (Throwable throwable) {
-                        throwable.printStackTrace();
-                    }
-                }
-            }
-            bufferedReader2.close();
-        } catch (IOException e5) {
-            e = e5;
-            e.printStackTrace();
-            if (bufferedReader != null) {
-                try {
-                    bufferedReader.close();
-                } catch (IOException ioException) {
-                    ioException.printStackTrace();
-                }
-            }
-            return sb.toString();
-        }
-        return sb.toString();
-    }
-
-    private void getAndSaveToFileSettingsContent() {
-        Runnable runnable = new Runnable() {
-            @Override
-            public void run() {
-                String settingContent = getSettingContent("http://10.10.1.1/wizardvideo.asp");
-                File file = new File(getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS).getAbsolutePath() + "/fileSettingContent.txt");
-                System.out.println("fileSettingContent: " + file.getAbsolutePath());
-                try {
-                    if (file.createNewFile()) {
-                        FileOutputStream fileOutputStream = new FileOutputStream(file.getAbsolutePath());
-                        fileOutputStream.write(settingContent.getBytes());
-                        fileOutputStream.close();
-                    }
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        };
-        new Thread(runnable).start();
-    }
-
     @SuppressWarnings("ResultOfMethodCallIgnored")
     public void createFilePath() {
         String filePath = getExternalFilesDir(Environment.DIRECTORY_DCIM).getAbsolutePath() + "/";
@@ -192,7 +75,7 @@ public class MicroscopeStreamingActivity extends Activity {
         if (mjpegView != null) {
             mjpegView.setResolution(1280, 1024);
         }
-        new AsyncStreamConnect().execute(this.ipAddress);
+        new AsyncStreamConnect().execute("http://10.10.1.1:8899/");
     }
 
     @SuppressLint({"StaticFieldLeak"})

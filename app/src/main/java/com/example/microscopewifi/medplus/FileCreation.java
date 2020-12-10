@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
+@SuppressWarnings("ResultOfMethodCallIgnored")
 public class FileCreation {
 
     public static void saveImage(Bitmap bitmap, String filePath, String fileName) {

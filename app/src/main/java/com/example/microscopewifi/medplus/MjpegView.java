@@ -25,7 +25,7 @@ public class MjpegView extends SurfaceView implements SurfaceHolder.Callback {
 
     private InputStreamHandler inputStreamHandler = null;
 
-    private boolean whileThis = false;
+    private boolean isStreamRunning = false;
 
     private boolean surfaceCreated = false;
 
@@ -59,12 +59,12 @@ public class MjpegView extends SurfaceView implements SurfaceHolder.Callback {
 
         private Rect getRectangle(int width, int height) {
             Rect rect;
-            if (MjpegView.this.displayMode == 1) { // normal rectangle
+            if (MjpegView.this.displayMode == 1) { // picture sized rectangle => resolution dependent
                 MjpegView.this.leftBorder = (MjpegView.this.rightBorder / 2) - (width / 2);
                 MjpegView.this.topBorder = (MjpegView.this.bottomBorder / 2) - (height / 2);
                 return new Rect(MjpegView.this.leftBorder, MjpegView.this.topBorder, width + MjpegView.this.leftBorder, height + MjpegView.this.topBorder);
             }
-            if (MjpegView.this.displayMode == 4) { // normal rectangle
+            if (MjpegView.this.displayMode == 4) { // aspect ratio preserved and image stretched to maximum area
                 float f = ((float) width) / ((float) height);
                 int rightBorder = MjpegView.this.rightBorder;
                 int i4 = (int) (((float) MjpegView.this.rightBorder) / f);
@@ -77,7 +77,7 @@ public class MjpegView extends SurfaceView implements SurfaceHolder.Callback {
                 rect = new Rect(MjpegView.this.leftBorder, MjpegView.this.topBorder, rightBorder + MjpegView.this.leftBorder, i4 + MjpegView.this.topBorder);
             } else if (MjpegView.this.displayMode != 8) { //error, wrong display mode
                 return null;
-            } else { // stretched rectangle for full area
+            } else { //aspect ratio damaged, stretched rectangle for full area
                 MjpegView.this.leftBorder = 0;
                 MjpegView.this.topBorder = 0;
                 rect = new Rect(0, 0, MjpegView.this.rightBorder, MjpegView.this.bottomBorder);
@@ -94,7 +94,7 @@ public class MjpegView extends SurfaceView implements SurfaceHolder.Callback {
 
         public void run() {
             Paint paint = new Paint();
-            while (MjpegView.this.whileThis) {
+            while (MjpegView.this.isStreamRunning) {
                 if (MjpegView.this.surfaceCreated) {
                     Canvas canvas = null;
                     try {
@@ -149,7 +149,7 @@ public class MjpegView extends SurfaceView implements SurfaceHolder.Callback {
         this.surfaceHolder.addCallback(this);
         this.drawImageThread = new DrawImageThread(this.surfaceHolder);
         setFocusable(true);
-        this.displayMode = 1;
+        this.displayMode = 4;
         this.rightBorder = getWidth();
         this.bottomBorder = getHeight();
     }
@@ -163,13 +163,13 @@ public class MjpegView extends SurfaceView implements SurfaceHolder.Callback {
         this.filePath = filePath;
     }
 
-    public boolean isWhileThis() {
-        return this.whileThis;
+    public boolean isStreamRunning() {
+        return this.isStreamRunning;
     }
 
     public void mo6055d() {
         if (this.f2048k && this.inputStreamHandler != null) {
-            this.whileThis = true;
+            this.isStreamRunning = true;
             SurfaceHolder holder = getHolder();
             holder.addCallback(this);
             this.drawImageThread = new DrawImageThread(holder);
@@ -180,7 +180,7 @@ public class MjpegView extends SurfaceView implements SurfaceHolder.Callback {
 
     public void mo6056e() {
         if (this.inputStreamHandler != null) {
-            this.whileThis = true;
+            this.isStreamRunning = true;
             if (this.drawImageThread == null) {
                 this.drawImageThread = new DrawImageThread(this.surfaceHolder);
             }
@@ -188,12 +188,12 @@ public class MjpegView extends SurfaceView implements SurfaceHolder.Callback {
         }
     }
 
-    public void mo6057f() {
+    public void closeImageStreamingThread() {
         boolean z = true;
-        if (this.whileThis) {
+        if (this.isStreamRunning) {
             this.f2048k = true;
         }
-        this.whileThis = false;
+        this.isStreamRunning = false;
         if (this.drawImageThread != null) {
             while (z) {
                 try {
@@ -237,6 +237,6 @@ public class MjpegView extends SurfaceView implements SurfaceHolder.Callback {
 
     public void surfaceDestroyed(SurfaceHolder surfaceHolder) {
         this.surfaceCreated = false;
-        mo6057f();
+        closeImageStreamingThread();
     }
 }
