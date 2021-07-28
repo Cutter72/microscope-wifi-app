@@ -49,16 +49,20 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    public void onClickChangeResolutionAndFps(View view) {
+        if (getWifiIpAddress().contains("10.10.1.")) {
+            changeCameraParams();
+        } else {
+            Toast.makeText(this, "Please connect wifi microscope", Toast.LENGTH_SHORT).show();
+        }
+    }
+
     private String getWifiIpAddress() {
         int ipAddress = ((WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE)).getConnectionInfo().getIpAddress();
         if (ipAddress == 0) {
             return "No connected wifi";
         }
         return (ipAddress & 255) + "." + ((ipAddress >> 8) & 255) + "." + ((ipAddress >> 16) & 255) + "." + ((ipAddress >> 24) & 255);
-    }
-
-    public void onClickChangeResolutionAndFps(View view) {
-        changeCameraParams();
     }
 
     private void changeCameraParams() {
