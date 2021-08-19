@@ -8,7 +8,7 @@ ustawień.
 
 ### EN
 
-Android app for use with Mic-Fi. App can receive realtime image from microscope. You can take a
+Android app for use with Mic-Fi microscope. App can receive realtime image from microscope. You can take a
 picture from it and access built-in microscope settings.
 
 ### Technologie/Technologies:
